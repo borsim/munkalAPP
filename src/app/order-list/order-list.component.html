@@ -1,0 +1,52 @@
+<div class="parent flex-parent">
+  <div class="child flex-child">
+    <h2>Munkalapok</h2>
+  </div>
+  <div class="child flex-child">
+    <button (click)="orderFormIsOpen = !orderFormIsOpen" type="button">
+      {{ orderFormIsOpen ? 'Lista' : '+' }}
+    </button>
+  </div>
+</div>
+
+<div [hidden]="!orderFormIsOpen"><order-form></order-form>></div>
+<div [hidden]="orderFormIsOpen">
+  <div *ngFor="let order of orders | filter: searchText">
+    <h3>
+      <a [title]="order.name + ' details'" [routerLink]="['/orders', order.id]">
+        {{ order.name }}
+      </a>
+    </h3>
+
+    <p *ngIf="order.description">Description: {{ order.description }}</p>
+
+    <mat-label>Státusz</mat-label>
+    <select [(ngModel)]="order.orderStatus">
+      <option></option>
+      <option [value]="o.value" *ngFor="let o of oss">
+        {{ o.viewValue }}
+      </option>
+    </select>
+
+    <p>You selected: {{ order.orderStatus }}</p>
+    <!--
+      <button
+      type="button"
+      [iconPicker]="order.icon"
+      [ipIconPack]="['mat', 'fa5']"
+      [ipIconSize]="'32px'"
+      [ipButtonStyleClass]="'button is-link is-light'"
+      (iconPickerSelect)="onIconSelect($event, order)"
+    >
+      <i *ngIf="order.icon.includes('fa-'); else Else" [class]="order.icon"></i>
+
+      <ng-template #Else>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">{{
+          order.icon
+        }}</mat-icon>
+      </ng-template>
+    </button> -->
+    <mat-divider></mat-divider>
+    <!-- <button type="button" (click)="share()">Done</button> -->
+  </div>
+</div>

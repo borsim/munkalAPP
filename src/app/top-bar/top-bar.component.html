@@ -1,0 +1,50 @@
+<div
+  class="eaton mat-typography"
+  style="overflow-x:hidden;"
+  fxFlexFill
+  cdkScrollable
+>
+  <mat-toolbar
+    color="primary"
+    class="main-header mat-elevation-z4"
+    [class.hidden]="toggleSearch"
+  >
+    <mat-toolbar-row style="padding: 0 5px;">
+      <div style="padding:8px 0 0 10px; flex:1;">
+        <a [routerLink]="['/']">
+          <div class="mat-title" style="margin-bottom:2px;color:white;">
+            Borsi és Hoblyák
+          </div>
+          <div class="mat-subheading-2" style="line-height:.6rem;color:white;">
+            Óraszerviz
+          </div>
+        </a>
+      </div>
+
+      <button mat-icon-button (click)="openSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-toolbar
+    class="search-block mat-elevation-z4"
+    [class.active]="toggleSearch"
+  >
+    <mat-toolbar-row style="padding: 0 5px;">
+      <button class="search-icon" mat-icon-button disabled>
+        <mat-icon>search</mat-icon>
+      </button>
+      <input
+        class="search-control"
+        type="text"
+        placeholder="Keresés"
+        [(ngModel)]="searchText"
+        #searchbar
+      />
+      <button mat-button mat-icon-button (click)="searchClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
