@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { SearchbarService } from '../services/searchbar.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,7 +11,7 @@ export class TopBarComponent {
   searchText: string = '';
   toggleSearch: boolean = false;
 
-  constructor() {}
+  constructor(private searchbarService: SearchbarService) {}
 
   openSearch() {
     this.toggleSearch = true;
@@ -19,6 +20,10 @@ export class TopBarComponent {
   searchClose() {
     this.searchText = '';
     this.toggleSearch = false;
+    this.searchbarService.clearSearchString();
+  }
+  updateSBServiceData() {
+    this.searchbarService.setSearchString(this.searchText);
   }
 }
 

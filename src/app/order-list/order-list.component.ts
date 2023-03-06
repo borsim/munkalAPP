@@ -8,6 +8,7 @@ import {
   orderStatusSelection,
 } from '../orders';
 import { OrderFormComponent } from '../order-form/order-form.component';
+import { SearchbarService } from '../services/searchbar.service';
 
 @Component({
   selector: 'app-order-list',
@@ -15,15 +16,12 @@ import { OrderFormComponent } from '../order-form/order-form.component';
   styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent {
+  constructor(private searchbarService: SearchbarService) {}
   orders = orders;
   oss = orderStatusSelection;
-  @Input() searchText: string = '';
+  searchText = this.searchbarService.getSearchString();
   orderFormIsOpen = false;
   orderFormComponent = new OrderFormComponent();
-
-  share() {
-    window.alert('The order has been completed!');
-  }
 
   onIconSelect(icon: string, order: Order) {
     console.log(icon);
