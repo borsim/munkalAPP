@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IconPickerModule } from 'ngx-icon-picker';
 import {
-  orders,
   Order,
   statusToIcon,
   iconToStatus,
@@ -18,7 +17,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent {
-  orders = orders;
+  orders: Order[] = [];
   oss = orderStatusSelection;
   orderFormIsOpen = false;
   stringifiedData: string = '';
@@ -29,20 +28,37 @@ export class OrderListComponent {
     public searchbarService: SearchbarService,
     public databaseService: DatabaseService
   ) {
-    this.orders = this.databaseService.orders;
-    /*this.databaseService.databaseOrders.subscribe((dbOrders) => {
+    this.databaseService.databaseOrders.subscribe((dbOrders) => {
       dbOrders.forEach((dbOrder) => {
-        console.log(dbOrder);
-        this.orders.push(new Order(1));
+        this.orders = [];
+        this.orders.push(
+          new Order(
+            dbOrder.id,
+            dbOrder.name,
+            dbOrder.price,
+            dbOrder.description,
+            dbOrder.orderStatus,
+            dbOrder.icon,
+            dbOrder.customerName,
+            dbOrder.telephoneNumber,
+            dbOrder.email,
+            dbOrder.task,
+            dbOrder.deadline,
+            dbOrder.creationTime,
+            dbOrder.lastUpdatedTime,
+            dbOrder.returnedTime,
+            dbOrder.advancePayment,
+            dbOrder.notes,
+            dbOrder.doneTasks,
+            dbOrder.guarantee
+          )
+        );
       });
-      //this.orders = dbOrders;
-      //this.testF();
-    });*/
+    });
   }
 
   testF() {
-    alert(JSON.stringify(this.databaseService.orders));
-    console.log(this.databaseService.orders);
+    //alert(JSON.stringify(this.databaseService.orders));
   }
 
   onIconSelect(icon: string, order: Order) {

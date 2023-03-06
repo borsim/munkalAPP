@@ -17,36 +17,9 @@ export class DatabaseService {
   constructor(private store: AngularFirestore) {
     this.ordersCollection = store.collection<Order>('Orders');
     this.databaseOrders = this.ordersCollection.valueChanges({ idField: 'id' });
-    this.databaseOrders.subscribe((dbOrders) => {
-      dbOrders.forEach((dbOrder) => {
-        this.orders.push(
-          new Order(
-            dbOrder.id,
-            dbOrder.name,
-            dbOrder.price,
-            dbOrder.description,
-            dbOrder.orderStatus,
-            dbOrder.icon,
-            dbOrder.customerName,
-            dbOrder.telephoneNumber,
-            dbOrder.email,
-            dbOrder.task,
-            dbOrder.deadline,
-            dbOrder.creationTime,
-            dbOrder.lastUpdatedTime,
-            dbOrder.returnedTime,
-            dbOrder.advancePayment,
-            dbOrder.notes,
-            dbOrder.doneTasks,
-            dbOrder.guarantee
-          )
-        );
-        //alert(dbOrder.guarantee)
-        //alert(JSON.stringify(dbOrder));
-      });
-      //this.orders = dbOrders;
-    });
   }
+
+  async dbToArray() {}
 
   addOrderToDb(newOrder: Order) {
     this.ordersCollection.add(newOrder);

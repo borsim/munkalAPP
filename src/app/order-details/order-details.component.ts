@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Order, orders } from '../orders';
+import { DatabaseService } from '../services/database.service';
+import { Order } from '../orders';
 
 @Component({
   selector: 'app-order-details',
@@ -9,8 +10,53 @@ import { Order, orders } from '../orders';
 })
 export class OrderDetailsComponent implements OnInit {
   order: Order | undefined;
+  orders: Order[] = [];
   openTab = 0;
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private databaseService: DatabaseService
+  ) {
+    import { doc, getDoc } from "firebase/firestore";
+
+const docRef = doc(db, "cities", "SF");
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+
+
+    this.databaseService.databaseOrders.subscribe((dbOrders) => {
+      dbOrders.forEach((dbOrder) => {
+        this.orders = [];
+        this.orders.push(
+          new Order(
+            dbOrder.id,
+            dbOrder.name,
+            dbOrder.price,
+            dbOrder.description,
+            dbOrder.orderStatus,
+            dbOrder.icon,
+            dbOrder.customerName,
+            dbOrder.telephoneNumber,
+            dbOrder.email,
+            dbOrder.task,
+            dbOrder.deadline,
+            dbOrder.creationTime,
+            dbOrder.lastUpdatedTime,
+            dbOrder.returnedTime,
+            dbOrder.advancePayment,
+            dbOrder.notes,
+            dbOrder.doneTasks,
+            dbOrder.guarantee
+          )
+        );
+      });
+    });
+  }
 
   ngOnInit() {
     // First get the order id from the current route.
@@ -18,6 +64,6 @@ export class OrderDetailsComponent implements OnInit {
     const orderIdFromRoute = Number(routeParams.get('orderId'));
 
     // Find the order that correspond with the id provided in route.
-    this.order = orders.find((order) => order.id === orderIdFromRoute);
+    this.order = this.orders.find((order) => order.id === orderIdFromRoute);
   }
 }

@@ -1,7 +1,6 @@
 <div class="parent flex-parent">
   <div class="child flex-child">
     <h2>Munkalapok</h2>
-    {{ databaseService.databaseOrders }}
     <button (click)="testF()" type="button">Teszt</button>
   </div>
   <div class="child flex-child">
@@ -15,7 +14,7 @@
 <div [hidden]="orderFormIsOpen">
   <div
     *ngFor="
-      let order of databaseService.orders
+      let order of orders
         | filter: searchbarService.getSearchString()
     "
   >
