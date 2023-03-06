@@ -16,13 +16,14 @@ import { SearchbarService } from '../services/searchbar.service';
   styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent {
-  constructor(private searchbarService: SearchbarService) {}
   orders = orders;
   oss = orderStatusSelection;
   searchText = this.searchbarService.getSearchString();
   orderFormIsOpen = false;
 
   orderFormComponent = new OrderFormComponent();
+
+  constructor(private searchbarService: SearchbarService) {}
 
   onIconSelect(icon: string, order: Order) {
     console.log(icon);

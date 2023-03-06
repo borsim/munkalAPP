@@ -8,11 +8,9 @@ export class SearchbarService {
 
   setSearchString(sbtxt: string) {
     this.searchbarText = sbtxt;
-    console.log(sbtxt);
   }
 
   getSearchString() {
-    console.log(this.searchbarText);
     return this.searchbarText;
   }
 
