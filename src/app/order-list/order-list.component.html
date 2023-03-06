@@ -11,7 +11,9 @@
 
 <div [hidden]="!orderFormIsOpen"><order-form></order-form>></div>
 <div [hidden]="orderFormIsOpen">
-  <div *ngFor="let order of orders | filter: searchText">
+  <div
+    *ngFor="let order of orders | filter: searchbarService.getSearchString()"
+  >
     <h3>
       <a [title]="order.name + ' details'" [routerLink]="['/orders', order.id]">
         {{ order.name }}

@@ -24,7 +24,6 @@ export class TopBarComponent {
   }
   updateSBServiceData() {
     this.searchbarService.setSearchString(this.searchText);
-    console.log(this.searchbarService.getSearchString());
   }
 }
 
