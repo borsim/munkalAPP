@@ -9,6 +9,7 @@ import {
 } from '../orders';
 import { OrderFormComponent } from '../order-form/order-form.component';
 import { SearchbarService } from '../services/searchbar.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-order-list',
@@ -22,7 +23,12 @@ export class OrderListComponent {
 
   orderFormComponent = new OrderFormComponent();
 
-  constructor(public searchbarService: SearchbarService) {}
+  constructor(
+    public searchbarService: SearchbarService,
+    private databaseService: DatabaseService
+  ) {
+    getOrdersFromDatabase();
+  }
 
   onIconSelect(icon: string, order: Order) {
     console.log(icon);
@@ -36,5 +42,8 @@ export class OrderListComponent {
       default:
         'complete';
     }
+  }
+  async getOrdersFromDatabase() {
+    this.orders = await this.databaseService.downloadOrdersFromDb();
   }
 }
