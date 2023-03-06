@@ -21,6 +21,7 @@ export class OrderListComponent {
   oss = orderStatusSelection;
   searchText = this.searchbarService.getSearchString();
   orderFormIsOpen = false;
+
   orderFormComponent = new OrderFormComponent();
 
   onIconSelect(icon: string, order: Order) {

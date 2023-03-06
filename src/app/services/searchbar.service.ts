@@ -12,6 +12,7 @@ export class SearchbarService {
   }
 
   getSearchString() {
+    console.log(this.searchbarText);
     return this.searchbarText;
   }
 
