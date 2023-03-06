@@ -1,44 +1,60 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Order } from '../orders';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+import { Order, OrderInterface } from '../orders';
+import { Observable } from 'rxjs';
 /* . . . */
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
+  private ordersCollection: AngularFirestoreCollection<OrderInterface>;
+  public databaseOrders: Observable<OrderInterface[]>;
+  public orders: Order[] = [];
+
   constructor(private store: AngularFirestore) {
-    this.databaseOrders = this.asyncDownloadOrders();
-  }
-
-  databaseOrders: Order[] = [];
-  setDatabaseOrders(newOrders: Order[]) {
-    this.databaseOrders = newOrders;
-    this.uploadOrdersToDb();
-  }
-
-  getDatabaseOrders(refreshFromDb: boolean) {
-    if (refreshFromDb) {
-      this.databaseOrders = this.asyncDownloadOrders();
-    }
-    return this.databaseOrders;
-  }
-
-  downloadOrdersFromDb() {
-    return new Promise<any>((resolve) => {
-      this.store
-        .collection('Orders')
-        .valueChanges({ idField: 'id' })
-        .subscribe((databaseOrders) => resolve(databaseOrders));
+    this.ordersCollection = store.collection<Order>('Orders');
+    this.databaseOrders = this.ordersCollection.valueChanges({ idField: 'id' });
+    this.databaseOrders.subscribe((dbOrders) => {
+      dbOrders.forEach((dbOrder) => {
+        this.orders.push(
+          new Order(
+            dbOrder.id,
+            dbOrder.name,
+            dbOrder.price,
+            dbOrder.description,
+            dbOrder.orderStatus,
+            dbOrder.icon,
+            dbOrder.customerName,
+            dbOrder.telephoneNumber,
+            dbOrder.email,
+            dbOrder.task,
+            dbOrder.deadline,
+            dbOrder.creationTime,
+            dbOrder.lastUpdatedTime,
+            dbOrder.returnedTime,
+            dbOrder.advancePayment,
+            dbOrder.notes,
+            dbOrder.doneTasks,
+            dbOrder.guarantee
+          )
+        );
+        //alert(dbOrder.guarantee)
+        //alert(JSON.stringify(dbOrder));
+      });
+      //this.orders = dbOrders;
     });
   }
 
-  async asyncDownloadOrders() {
-    let downloadedOrders: Order[] = [];
-    downloadedOrders = await this.downloadOrdersFromDb();
-    return downloadedOrders;
+  addOrderToDb(newOrder: Order) {
+    this.ordersCollection.add(newOrder);
   }
 
-  uploadOrdersToDb() {}
+  getOrders() {
+    return this.orders;
+  }
 
   /*clearDatabaseOrders() {
     this.databaseOrders = [];

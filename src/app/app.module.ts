@@ -22,7 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 
 import { FilterPipe } from './shared/filter.pipe';
-import { environment } from './environments/environment';
+import { environment } from '../../src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 

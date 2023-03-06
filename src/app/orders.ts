@@ -1,24 +1,45 @@
-export class Order {
+export class Order implements OrderInterface {
   constructor(
     public id: number,
-    public name: string,
-    public price: number,
-    public description: string,
-    public orderStatus: string,
-    public icon: string,
-    public customerName: string,
-    public telephoneNumber: string,
-    public email: string,
-    public task: string,
-    public deadline: number,
-    public creationTime: number,
-    public lastUpdatedTime: number,
-    public returnedTime: number,
-    public advancePayment: number,
-    public notes: string,
-    public doneTasks: string,
-    public guarantee: string
+    public name: string = '',
+    public price: number = 0,
+    public description: string = '',
+    public orderStatus: string = '',
+    public icon: string = '',
+    public customerName: string = '',
+    public telephoneNumber: string = '',
+    public email: string = '',
+    public task: string = '',
+    public deadline: number = 0,
+    public creationTime: number = 0,
+    public lastUpdatedTime: number = 0,
+    public returnedTime: number = 0,
+    public advancePayment: number = 0,
+    public notes: string = '',
+    public doneTasks: string = '',
+    public guarantee: string = ''
   ) {}
+}
+
+export interface OrderInterface {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  orderStatus: string;
+  icon: string;
+  customerName: string;
+  telephoneNumber: string;
+  email: string;
+  task: string;
+  deadline: number;
+  creationTime: number;
+  lastUpdatedTime: number;
+  returnedTime: number;
+  advancePayment: number;
+  notes: string;
+  doneTasks: string;
+  guarantee: string;
 }
 
 export var orders = [

@@ -1,6 +1,8 @@
 <div class="parent flex-parent">
   <div class="child flex-child">
     <h2>Munkalapok</h2>
+    {{ databaseService.databaseOrders }}
+    <button (click)="testF()" type="button">Teszt</button>
   </div>
   <div class="child flex-child">
     <button (click)="orderFormIsOpen = !orderFormIsOpen" type="button">
@@ -12,7 +14,10 @@
 <div [hidden]="!orderFormIsOpen"><order-form></order-form>></div>
 <div [hidden]="orderFormIsOpen">
   <div
-    *ngFor="let order of orders | filter: searchbarService.getSearchString()"
+    *ngFor="
+      let order of databaseService.orders
+        | filter: searchbarService.getSearchString()
+    "
   >
     <h3>
       <a [title]="order.name + ' details'" [routerLink]="['/orders', order.id]">
