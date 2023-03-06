@@ -43,7 +43,4 @@ export class OrderListComponent {
         'complete';
     }
   }
-  async getOrdersFromDatabase() {
-    this.orders = await this.databaseService.downloadOrdersFromDb();
-  }
 }
