@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Order } from '../orders';
 /* . . . */
 @Injectable({
@@ -19,7 +19,7 @@ export class DatabaseService {
 
   downloadOrdersFromDb() {
     return new Promise<any>((resolve) => {
-      this.db
+      this.store
         .collection('Orders')
         .valueChanges({ idField: 'id' })
         .subscribe((databaseOrders) => resolve(databaseOrders));

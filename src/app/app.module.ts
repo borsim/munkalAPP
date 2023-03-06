@@ -22,19 +22,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 
 import { FilterPipe } from './shared/filter.pipe';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-//import { MatNativeDateModule } from '@angular/material/core';
+import { environment } from './environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyD3p6xJROowWv9ZBfvVkIG1jVcyxmNIG5w',
-  authDomain: 'oraszerviz-munkalap.firebaseapp.com',
-  projectId: 'oraszerviz-munkalap',
-  storageBucket: 'oraszerviz-munkalap.appspot.com',
-  messagingSenderId: '2130836140',
-  appId: '1:2130836140:web:1fb76877d4c195602efd09',
-  measurementId: 'G-55ZRJL2CJN',
-};
+//import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -51,7 +43,7 @@ const firebaseConfig = {
     MatPaginatorModule,
     MatSortModule,
     MatToolbarModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },

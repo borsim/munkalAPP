@@ -27,7 +27,7 @@ export class OrderListComponent {
     public searchbarService: SearchbarService,
     private databaseService: DatabaseService
   ) {
-    getOrdersFromDatabase();
+    this.getOrdersFromDatabase();
   }
 
   onIconSelect(icon: string, order: Order) {
