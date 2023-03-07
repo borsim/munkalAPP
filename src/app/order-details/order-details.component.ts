@@ -20,7 +20,9 @@ export class OrderDetailsComponent implements OnInit {
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const orderIdFromRoute = Number(routeParams.get('orderId'));
-
+    const oid: string =
+      routeParams.get('orderId') !== null ? routeParams.get('orderId') : '';
+    this.getDocument(oid);
     /*this.databaseService.databaseOrders.subscribe((dbOrders) => {
       dbOrders.forEach((dbOrder) => {
         this.orders = [];
@@ -53,9 +55,29 @@ export class OrderDetailsComponent implements OnInit {
   async getDocument(docId: string) {
     const docRef = doc(this.store, 'Orders', docId);
     const docSnap = await getDoc(docRef);
-    // TODO construct Order from data
-
-    return docSnap.data();
+    const docData = docSnap.data();
+    const newOrder = new Order(
+      docData.id,
+      docData.name,
+      docData.price,
+      docData.description,
+      docData.orderStatus,
+      docData.icon,
+      docData.customerName,
+      docData.telephoneNumber,
+      docData.email,
+      docData.task,
+      docData.deadline,
+      docData.creationTime,
+      docData.lastUpdatedTime,
+      docData.returnedTime,
+      docData.advancePayment,
+      docData.notes,
+      docData.doneTasks,
+      docData.guarantee
+    );
+    this.order = newOrder;
+    return newOrder;
   }
 
   ngOnInit() {
@@ -64,6 +86,6 @@ export class OrderDetailsComponent implements OnInit {
     //const orderIdFromRoute = Number(routeParams.get('orderId'));
 
     // Find the order that correspond with the id provided in route.
-    this.order = this.getDocument(routeParams.get('orderId')); //this.orders.find((order) => order.id === orderIdFromRoute);
+    //this.order = this.getDocument(routeParams.get('orderId')); //this.orders.find((order) => order.id === orderIdFromRoute);
   }
 }
