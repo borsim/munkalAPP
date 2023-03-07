@@ -15,6 +15,7 @@ import {
 export class OrderDetailsComponent implements OnInit {
   order: Order | undefined;
   orders: Order[] = [];
+  orderObs: any;
   openTab = 0;
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class OrderDetailsComponent implements OnInit {
 
     let orderDoc = store.doc<OrderInterface>('Orders/' + oid);
     let orderVC = orderDoc.valueChanges(); //{idField: 'id'});
+    this.orderObs = orderVC;
 
     orderVC.subscribe((dbOrder) => {
       const nonNullOrder: Order =
