@@ -20,9 +20,6 @@ export class OrderDetailsComponent implements OnInit {
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const orderIdFromRoute = Number(routeParams.get('orderId'));
-    const oid: string =
-      routeParams.get('orderId') !== null ? routeParams.get('orderId') : '';
-    this.getDocument(oid);
     /*this.databaseService.databaseOrders.subscribe((dbOrders) => {
       dbOrders.forEach((dbOrder) => {
         this.orders = [];
@@ -83,6 +80,9 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit() {
     // First get the order id from the current route.
     const routeParams = this.route.snapshot.paramMap;
+    const oid: string = routeParams.get('orderId') ?? '';
+    alert(oid);
+    this.getDocument(oid);
     //const orderIdFromRoute = Number(routeParams.get('orderId'));
 
     // Find the order that correspond with the id provided in route.
