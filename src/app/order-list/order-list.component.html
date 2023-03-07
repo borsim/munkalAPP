@@ -12,30 +12,31 @@
 
 <div [hidden]="!orderFormIsOpen"><order-form></order-form>></div>
 <div [hidden]="orderFormIsOpen">
-  <div
-    *ngFor="
-      let order of orders
-        | filter: searchbarService.getSearchString()
-    "
-  >
-    <h3>
-      <a [title]="order.name + ' details'" [routerLink]="['/orders', order.id]">
-        {{ order.name }}
-      </a>
-    </h3>
+  <div *ngIf="databaseService.databaseOrders | async">
+    <div
+      *ngFor="let order of orders | filter: searchbarService.getSearchString()"
+    >
+      <h3>
+        <a
+          [title]="order.name + ' details'"
+          [routerLink]="['/orders', order.id]"
+        >
+          {{ order.name }}
+        </a>
+      </h3>
 
-    <p *ngIf="order.description">Description: {{ order.description }}</p>
+      <p *ngIf="order.description">Description: {{ order.description }}</p>
 
-    <mat-label>Státusz</mat-label>
-    <select [(ngModel)]="order.orderStatus">
-      <option></option>
-      <option [value]="o.value" *ngFor="let o of oss">
-        {{ o.viewValue }}
-      </option>
-    </select>
+      <mat-label>Státusz</mat-label>
+      <select [(ngModel)]="order.orderStatus">
+        <option></option>
+        <option [value]="o.value" *ngFor="let o of oss">
+          {{ o.viewValue }}
+        </option>
+      </select>
 
-    <p>You selected: {{ order.orderStatus }}</p>
-    <!--
+      <p>You selected: {{ order.orderStatus }}</p>
+      <!--
       <button
       type="button"
       [iconPicker]="order.icon"
@@ -52,7 +53,8 @@
         }}</mat-icon>
       </ng-template>
     </button> -->
-    <mat-divider></mat-divider>
-    <!-- <button type="button" (click)="share()">Done</button> -->
+      <mat-divider></mat-divider>
+      <!-- <button type="button" (click)="share()">Done</button> -->
+    </div>
   </div>
 </div>
