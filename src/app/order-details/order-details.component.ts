@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../services/database.service';
 import { Order } from '../orders';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-order-details',
@@ -14,22 +15,13 @@ export class OrderDetailsComponent implements OnInit {
   openTab = 0;
   constructor(
     private route: ActivatedRoute,
+    private store: Firestore,
     private databaseService: DatabaseService
   ) {
-    import { doc, getDoc } from "firebase/firestore";
+    const routeParams = this.route.snapshot.paramMap;
+    const orderIdFromRoute = Number(routeParams.get('orderId'));
 
-const docRef = doc(db, "cities", "SF");
-const docSnap = await getDoc(docRef);
-
-if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
-} else {
-  // doc.data() will be undefined in this case
-  console.log("No such document!");
-}
-
-
-    this.databaseService.databaseOrders.subscribe((dbOrders) => {
+    /*this.databaseService.databaseOrders.subscribe((dbOrders) => {
       dbOrders.forEach((dbOrder) => {
         this.orders = [];
         this.orders.push(
@@ -55,15 +47,23 @@ if (docSnap.exists()) {
           )
         );
       });
-    });
+    });*/
+  }
+
+  async getDocument(docId: string) {
+    const docRef = doc(this.store, 'Orders', docId);
+    const docSnap = await getDoc(docRef);
+    // TODO construct Order from data
+
+    return docSnap.data();
   }
 
   ngOnInit() {
     // First get the order id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const orderIdFromRoute = Number(routeParams.get('orderId'));
+    //const orderIdFromRoute = Number(routeParams.get('orderId'));
 
     // Find the order that correspond with the id provided in route.
-    this.order = this.orders.find((order) => order.id === orderIdFromRoute);
+    this.order = this.getDocument(routeParams.get('orderId')); //this.orders.find((order) => order.id === orderIdFromRoute);
   }
 }
