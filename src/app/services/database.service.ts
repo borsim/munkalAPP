@@ -5,6 +5,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Order, OrderInterface } from '../orders';
 import { Observable } from 'rxjs';
+import moment from 'moment';
 /* . . . */
 @Injectable({
   providedIn: 'root',
@@ -25,8 +26,30 @@ export class DatabaseService {
     let dbid = this.store.createId();
     alert(dbid);
     newOrder.id = dbid;
-    alert(newOrder);
-    this.ordersCollection.add(newOrder);
+    newOrder.creationTime = moment().valueOf();
+    newOrder.lastUpdatedTime = newOrder.creationTime;
+    let newIOrder: OrderInterface = {
+      id: dbid,
+      name: newOrder.name,
+      price: newOrder.price,
+      description: newOrder.description,
+      orderStatus: newOrder.orderStatus,
+      icon: newOrder.icon,
+      customerName: newOrder.customerName,
+      telephoneNumber: newOrder.telephoneNumber,
+      email: newOrder.email,
+      task: newOrder.task,
+      deadline: newOrder.deadline,
+      creationTime: newOrder.creationTime,
+      lastUpdatedTime: newOrder.lastUpdatedTime,
+      returnedTime: newOrder.returnedTime,
+      advancePayment: newOrder.advancePayment,
+      notes: newOrder.notes,
+      doneTasks: newOrder.doneTasks,
+      guarantee: newOrder.guarantee,
+    };
+    alert(JSON.stringify(newIOrder));
+    this.ordersCollection.add(newIOrder);
   }
 
   getOrders() {

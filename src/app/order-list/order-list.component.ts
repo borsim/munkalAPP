@@ -29,8 +29,8 @@ export class OrderListComponent {
     public databaseService: DatabaseService
   ) {
     this.databaseService.databaseOrders.subscribe((dbOrders) => {
+      this.orders = [];
       dbOrders.forEach((dbOrder) => {
-        this.orders = [];
         this.orders.push(
           new Order(
             dbOrder.id,

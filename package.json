@@ -31,7 +31,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "angular-in-memory-web-api": "~0.14.0",
     "firebase-tools": "^9.9.0 || ^10.0.0 || ^11.0.0",
-    "moment": "2.29.1",
+    "moment": "^2.29.4",
     "ngx-icon-picker": "^1.10.0",
     "primeicons": "^5.0.0",
     "rxjs": "~7.5.0",
