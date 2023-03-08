@@ -19,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 
 import { FilterPipe } from './shared/filter.pipe';
@@ -45,6 +46,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     MatToolbarModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    MatDatepickerModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },
       { path: 'orders/:orderId', component: OrderDetailsComponent },

@@ -36,7 +36,29 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="description">Részletek</label>
+            <label for="description">Telefon</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telephoneNumber"
+              [(ngModel)]="model.telephoneNumber"
+              name="telephoneNumber"
+              readonly="readonly"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              [(ngModel)]="model.email"
+              name="email"
+              readonly="readonly"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Hibaleírás</label>
             <input
               type="text"
               class="form-control"
@@ -46,6 +68,51 @@
               readonly="readonly"
             />
           </div>
+          <div class="form-group">
+            <label for="description">Feladatok</label>
+            <input
+              type="text"
+              class="form-control"
+              id="task"
+              [(ngModel)]="model.task"
+              name="task"
+              readonly="readonly"
+            />
+          </div>
+          
+          <mat-form-field appearance="fill">
+            <label for="deadline">Határidő</label>
+            <!--
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+             <mat-datepicker #picker></mat-datepicker> -->
+          </mat-form-field>
+
+          <div class="form-group">
+            <label for="description">Ár</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              [(ngModel)]="model.price"
+              name="price"
+              readonly="readonly"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Előleg</label>
+            <input
+              type="number"
+              class="form-control"
+              id="advancePayment"
+              [(ngModel)]="model.advancePayment"
+              name="advancePayment"
+              readonly="readonly"
+            />
+          </div>
+        </div>
+        <div [hidden]="!(openTab == 1)">
           <div class="form-group">
             <label for="orderStatus">Státusz</label>
             <select
@@ -67,8 +134,40 @@
               Státusz megadása kötelező
             </div>
           </div>
+          <div class="form-group">
+            <label for="description">Megjegyzések</label>
+            <input
+              type="text"
+              class="form-control"
+              id="task"
+              [(ngModel)]="model.task"
+              name="task"
+              readonly="readonly"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Elvégzett munkák</label>
+            <input
+              type="text"
+              class="form-control"
+              id="task"
+              [(ngModel)]="model.task"
+              name="task"
+              readonly="readonly"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Garancia</label>
+            <input
+              type="text"
+              class="form-control"
+              id="task"
+              [(ngModel)]="model.task"
+              name="task"
+              readonly="readonly"
+            />
+          </div>
         </div>
-        <div [hidden]="!(openTab == 1)"></div>
         <div [hidden]="!(openTab == 2)"></div>
         <button
           type="submit"

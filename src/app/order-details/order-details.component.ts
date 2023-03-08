@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../services/database.service';
 import { Order, OrderInterface } from '../orders';
+import { OrderFormComponent } from '../order-form/order-form.component';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+import moment from 'moment';
 
 @Component({
   selector: 'app-order-details',
@@ -16,9 +18,12 @@ export class OrderDetailsComponent implements OnInit {
   order: Order | undefined;
   orders: Order[] = [];
   orderObs: any;
+  currentOrderId: string = '';
   orderDoc;
   openTab = 0;
   editing = false;
+
+  orderFormComponent = new OrderFormComponent(this.databaseService);
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +33,7 @@ export class OrderDetailsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const orderIdFromRoute = Number(routeParams.get('orderId')); // ?? routeParams.get('orderId') : ''
     const oid: string = routeParams.get('orderId')!;
+    this.currentOrderId = oid;
 
     this.orderDoc = store.doc<OrderInterface>('Orders/' + oid);
     let orderVC = this.orderDoc.valueChanges(); //{idField: 'id'});
@@ -62,15 +68,41 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   updateOrder(newOrder: Order) {
-    this.orderDoc.update(newOrder); //TODO does this work or do I need to convert the data?
+    newOrder.lastUpdatedTime = moment().valueOf();
+    let newIOrder: OrderInterface = {
+      id: this.currentOrderId,
+      name: newOrder.name,
+      price: newOrder.price,
+      description: newOrder.description,
+      orderStatus: newOrder.orderStatus,
+      icon: newOrder.icon,
+      customerName: newOrder.customerName,
+      telephoneNumber: newOrder.telephoneNumber,
+      email: newOrder.email,
+      task: newOrder.task,
+      deadline: newOrder.deadline,
+      creationTime: newOrder.creationTime,
+      lastUpdatedTime: newOrder.lastUpdatedTime,
+      returnedTime: newOrder.returnedTime,
+      advancePayment: newOrder.advancePayment,
+      notes: newOrder.notes,
+      doneTasks: newOrder.doneTasks,
+      guarantee: newOrder.guarantee,
+    };
+    this.orderDoc.update(newIOrder);
   }
 
-  toggleEditing() {}
+  toggleEditing() {
+    if (!this.editing) {
+      this.updateOrder(new Order());
+    }
+  }
 
   ngOnInit() {
     // First get the order id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     const oid: string = routeParams.get('orderId') ?? '';
+    this.currentOrderId = oid;
     //const orderIdFromRoute = Number(routeParams.get('orderId'));
 
     // Find the order that correspond with the id provided in route.

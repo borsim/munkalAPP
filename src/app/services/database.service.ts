@@ -24,7 +24,6 @@ export class DatabaseService {
 
   addOrderToDb(newOrder: Order) {
     let dbid = this.store.createId();
-    alert(dbid);
     newOrder.id = dbid;
     newOrder.creationTime = moment().valueOf();
     newOrder.lastUpdatedTime = newOrder.creationTime;
@@ -48,7 +47,6 @@ export class DatabaseService {
       doneTasks: newOrder.doneTasks,
       guarantee: newOrder.guarantee,
     };
-    alert(JSON.stringify(newIOrder));
     this.ordersCollection.add(newIOrder);
   }
 
