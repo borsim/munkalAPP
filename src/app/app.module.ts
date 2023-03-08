@@ -14,6 +14,7 @@ import { IconPickerModule } from 'ngx-icon-picker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -26,6 +27,10 @@ import { FilterPipe } from './shared/filter.pipe';
 import { environment } from '../../src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import {
+  MatMomentDateModule,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 
@@ -44,6 +49,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     MatPaginatorModule,
     MatSortModule,
     MatToolbarModule,
+    MatFormFieldModule,
+    MatMomentDateModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     MatDatepickerModule,
@@ -51,6 +58,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
       { path: '', component: OrderListComponent },
       { path: 'orders/:orderId', component: OrderDetailsComponent },
     ]),
+  ],
+  providers: [
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
   ],
   declarations: [
     AppComponent,

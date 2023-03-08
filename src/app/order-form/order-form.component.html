@@ -79,14 +79,17 @@
               readonly="readonly"
             />
           </div>
-          
+
           <mat-form-field appearance="fill">
             <label for="deadline">Határidő</label>
-            <!--
-            <input matInput [matDatepicker]="picker">
+
+            <input matInput [matDatepicker]="picker" />
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-             <mat-datepicker #picker></mat-datepicker> -->
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <div class="form-group">
