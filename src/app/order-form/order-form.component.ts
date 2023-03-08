@@ -40,13 +40,13 @@ export class OrderFormComponent {
   submitted = false;
 
   onSubmit() {
-    this.submitted = true;
-    this.dbs.addOrderToDb(this.model);
+    alert(this.readonly);
+    //this.submitted = true;
+    //this.dbs.addOrderToDb(this.model);
     //orders.push(this.model);
   }
 
   newOrder() {
-    alert(this.readonly);
     this.model = new Order(
       '1',
       'Új',
