@@ -46,6 +46,7 @@ export class OrderFormComponent {
   }
 
   newOrder() {
+    alert(this.readonly);
     this.model = new Order(
       '1',
       'Új',

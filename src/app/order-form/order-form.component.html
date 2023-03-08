@@ -183,7 +183,7 @@
         <button
           type="button"
           class="btn btn-default"
-          (click)="newOrder(); orderForm.reset()"
+          (click)="newOrder(); orderForm.reset(); readonly = false"
         >
           Mezők visszaállítása
         </button>
