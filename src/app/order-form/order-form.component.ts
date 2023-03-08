@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Order, orders, orderStatusSelection } from '../orders';
+import { Order, orderStatusSelection } from '../orders';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'order-form',
@@ -8,9 +9,13 @@ import { Order, orders, orderStatusSelection } from '../orders';
 })
 export class OrderFormComponent {
   orderStatusValues = orderStatusSelection;
+  openTab: number = 0;
+  readonly: boolean = false;
+
+  constructor(private dbs: DatabaseService) {}
 
   model = new Order(
-    123456789,
+    '123456789',
     'Megrendelés neve',
     0,
     'Leírás',
@@ -34,12 +39,13 @@ export class OrderFormComponent {
 
   onSubmit() {
     this.submitted = true;
-    orders.push(this.model);
+    this.dbs.addOrderToDb(this.model);
+    //orders.push(this.model);
   }
 
   newOrder() {
     this.model = new Order(
-      1,
+      '1',
       'Új',
       0,
       'Leírás',

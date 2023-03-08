@@ -1,6 +1,6 @@
 export class Order implements OrderInterface {
   constructor(
-    public id: number,
+    public id: string = '0',
     public name: string = '',
     public price: number = 0,
     public description: string = '',
@@ -22,7 +22,7 @@ export class Order implements OrderInterface {
 }
 
 export interface OrderInterface {
-  id: number;
+  id: string;
   name: string;
   price: number;
   description: string;
@@ -44,7 +44,7 @@ export interface OrderInterface {
 
 export var orders = [
   {
-    id: 1,
+    id: '1',
     name: 'Omega123',
     price: 799,
     description: 'Törött üveg',

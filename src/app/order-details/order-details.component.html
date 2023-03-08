@@ -42,6 +42,9 @@
   </div>
 </div>
 
+<button (click)="editing = !editing; toggleEditing()" type="button" [hidden]="!editing">
+  {{ editing ? 'Mentés' : 'Szerkesztés' }}
+</button>
 <h3>
   <a [routerLink]="['/']"> Vissza </a>
 </h3>

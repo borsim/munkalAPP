@@ -22,7 +22,7 @@ export class OrderListComponent {
   orderFormIsOpen = false;
   stringifiedData: string = '';
 
-  orderFormComponent = new OrderFormComponent();
+  orderFormComponent = new OrderFormComponent(this.databaseService);
 
   constructor(
     public searchbarService: SearchbarService,

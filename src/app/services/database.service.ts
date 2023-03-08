@@ -22,6 +22,10 @@ export class DatabaseService {
   async dbToArray() {}
 
   addOrderToDb(newOrder: Order) {
+    let dbid = this.store.createId();
+    alert(dbid);
+    newOrder.id = dbid;
+    alert(newOrder);
     this.ordersCollection.add(newOrder);
   }
 

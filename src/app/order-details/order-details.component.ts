@@ -16,7 +16,10 @@ export class OrderDetailsComponent implements OnInit {
   order: Order | undefined;
   orders: Order[] = [];
   orderObs: any;
+  orderDoc;
   openTab = 0;
+  editing = false;
+
   constructor(
     private route: ActivatedRoute,
     private store: AngularFirestore,
@@ -26,15 +29,15 @@ export class OrderDetailsComponent implements OnInit {
     const orderIdFromRoute = Number(routeParams.get('orderId')); // ?? routeParams.get('orderId') : ''
     const oid: string = routeParams.get('orderId')!;
 
-    let orderDoc = store.doc<OrderInterface>('Orders/' + oid);
-    let orderVC = orderDoc.valueChanges(); //{idField: 'id'});
+    this.orderDoc = store.doc<OrderInterface>('Orders/' + oid);
+    let orderVC = this.orderDoc.valueChanges(); //{idField: 'id'});
     this.orderObs = orderVC;
 
     orderVC.subscribe((dbOrder) => {
       const nonNullOrder: Order =
         dbOrder !== null
           ? new Order(
-              Number(oid),
+              oid,
               dbOrder!.name,
               dbOrder!.price,
               dbOrder!.description,
@@ -53,10 +56,16 @@ export class OrderDetailsComponent implements OnInit {
               dbOrder!.doneTasks,
               dbOrder!.guarantee
             )
-          : new Order(0);
+          : new Order('0');
       this.order = nonNullOrder;
     });
   }
+
+  updateOrder(newOrder: Order) {
+    this.orderDoc.update(newOrder); //TODO does this work or do I need to convert the data?
+  }
+
+  toggleEditing() {}
 
   ngOnInit() {
     // First get the order id from the current route.
