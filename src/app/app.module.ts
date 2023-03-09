@@ -33,7 +33,15 @@ import {
 } from '@angular/material-moment-adapter';
 
 //import { MatNativeDateModule } from '@angular/material/core';
-
+const firebaseConfig = {
+  apiKey: 'AIzaSyD3p6xJROowWv9ZBfvVkIG1jVcyxmNIG5w',
+  authDomain: 'oraszerviz-munkalap.firebaseapp.com',
+  projectId: 'oraszerviz-munkalap',
+  storageBucket: 'oraszerviz-munkalap.appspot.com',
+  messagingSenderId: '2130836140',
+  appId: '1:2130836140:web:1fb76877d4c195602efd09',
+  measurementId: 'G-55ZRJL2CJN',
+};
 @NgModule({
   imports: [
     BrowserModule,
@@ -51,7 +59,7 @@ import {
     MatToolbarModule,
     MatFormFieldModule,
     MatMomentDateModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     MatDatepickerModule,
     RouterModule.forRoot([
