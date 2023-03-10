@@ -16,9 +16,10 @@
       </div>
       <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
         <div [hidden]="!(openTab == 0)">
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="name">Név</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="name"
@@ -35,9 +36,12 @@
               Név megadása kötelező
             </div>
           </div>
+        </mat-form-field>
+        <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Telefon</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="telephoneNumber"
@@ -46,9 +50,12 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
+        <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Email</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="email"
@@ -57,9 +64,12 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
+        <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Hibaleírás</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="description"
@@ -68,9 +78,12 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
+        <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Feladatok</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="task"
@@ -79,22 +92,25 @@
               ng-disabled="readonly"
             />
           </div>
-
+          </mat-form-field>
+          <br>
           <mat-form-field appearance="fill">
             <label for="deadline">Határidő</label>
 
-            <input matInput [matDatepicker]="picker" />
-            <mat-hint>MM/DD/YYYY</mat-hint>
+            <input matInput [matDatepicker]="picker" (dateChange)="deadlineChanged($event.value)" placeholder="DD/MM/YYYY"/>
+            <!-- <mat-hint>DD/MM/YYYY</mat-hint> -->
             <mat-datepicker-toggle
-              matIconSuffix
+              matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
+          <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Ár</label>
-            <input
+            <input matInput
               type="number"
               class="form-control"
               id="price"
@@ -103,9 +119,12 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Előleg</label>
-            <input
+            <input matInput
               type="number"
               class="form-control"
               id="advancePayment"
@@ -114,11 +133,13 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
         </div>
         <div [hidden]="!(openTab == 1)">
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="orderStatus">Státusz</label>
-            <select
+            <mat-select
               class="form-control"
               id="orderStatus"
               required
@@ -126,10 +147,10 @@
               name="orderStatus"
               #orderStatus="ngModel"
             >
-              <option *ngFor="let os of orderStatusValues" [value]="os.value">
+              <mat-option *ngFor="let os of orderStatusValues" [value]="os.value">
                 {{ os.viewValue }}
-              </option>
-            </select>
+              </mat-option>
+            </mat-select>
             <div
               [hidden]="orderStatus.valid || orderStatus.pristine"
               class="alert alert-danger"
@@ -137,9 +158,12 @@
               Státusz megadása kötelező
             </div>
           </div>
+        </mat-form-field>
+        <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Megjegyzések</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="notes"
@@ -148,9 +172,12 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Elvégzett munkák</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="doneTasks"
@@ -159,9 +186,12 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
+        <br>
+          <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Garancia</label>
-            <input
+            <input matInput
               type="text"
               class="form-control"
               id="guarantee"
@@ -170,6 +200,7 @@
               ng-disabled="readonly"
             />
           </div>
+        </mat-form-field>
         </div>
         <div [hidden]="!(openTab == 2)"></div>
         <button

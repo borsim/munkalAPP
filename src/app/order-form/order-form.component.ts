@@ -40,10 +40,14 @@ export class OrderFormComponent {
   submitted = false;
 
   onSubmit() {
-    alert(this.readonly);
+    alert(this.model.deadline);
     //this.submitted = true;
     //this.dbs.addOrderToDb(this.model);
     //orders.push(this.model);
+  }
+
+  deadlineChanged(dl: any) {
+    this.model.deadline = dl.valueOf();
   }
 
   newOrder() {

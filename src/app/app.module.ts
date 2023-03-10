@@ -30,6 +30,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {
   MatMomentDateModule,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS
 } from '@angular/material-moment-adapter';
 
 //import { MatNativeDateModule } from '@angular/material/core';
@@ -69,6 +70,7 @@ const firebaseConfig = {
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    { provide:   MAT_MOMENT_DATE_FORMATS, useValue: {parse:{dateInput: 'DD.MM.YYYY'} } }
   ],
   declarations: [
     AppComponent,
