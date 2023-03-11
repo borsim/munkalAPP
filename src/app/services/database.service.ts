@@ -50,6 +50,13 @@ export class DatabaseService {
     this.ordersCollection.add(newIOrder);
   }
 
+  updateOrderInDb(newOrder: Order) {
+    let orderDoc = this.store.doc<OrderInterface>('Orders/' + newOrder.id);
+    let orderVC = orderDoc.valueChanges();
+    let newIOrder = newOrder.toInterface();
+    orderDoc.update(newIOrder);
+  }
+
   getOrders() {
     return this.orders;
   }

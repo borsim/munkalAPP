@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../services/database.service';
 import { Order, OrderInterface } from '../orders';
@@ -16,14 +16,14 @@ import moment from 'moment';
 })
 export class OrderDetailsComponent implements OnInit {
   order: Order | undefined;
-  orders: Order[] = [];
   orderObs: any;
   currentOrderId: string = '';
   orderDoc;
   openTab = 0;
-  editing = false;
+  disableEditing: boolean = true;
+  submitBehaviour: string = 'update';
 
-  orderFormComponent = new OrderFormComponent(this.databaseService);
+  @ViewChild(OrderFormComponent) orderFormComponent!: OrderFormComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +31,6 @@ export class OrderDetailsComponent implements OnInit {
     private databaseService: DatabaseService
   ) {
     const routeParams = this.route.snapshot.paramMap;
-    const orderIdFromRoute = Number(routeParams.get('orderId')); // ?? routeParams.get('orderId') : ''
     const oid: string = routeParams.get('orderId')!;
     this.currentOrderId = oid;
 
@@ -67,34 +66,9 @@ export class OrderDetailsComponent implements OnInit {
     });
   }
 
-  updateOrder(newOrder: Order) {
-    newOrder.lastUpdatedTime = moment().valueOf();
-    let newIOrder: OrderInterface = {
-      id: this.currentOrderId,
-      name: newOrder.name,
-      price: newOrder.price,
-      description: newOrder.description,
-      orderStatus: newOrder.orderStatus,
-      icon: newOrder.icon,
-      customerName: newOrder.customerName,
-      telephoneNumber: newOrder.telephoneNumber,
-      email: newOrder.email,
-      task: newOrder.task,
-      deadline: newOrder.deadline,
-      creationTime: newOrder.creationTime,
-      lastUpdatedTime: newOrder.lastUpdatedTime,
-      returnedTime: newOrder.returnedTime,
-      advancePayment: newOrder.advancePayment,
-      notes: newOrder.notes,
-      doneTasks: newOrder.doneTasks,
-      guarantee: newOrder.guarantee,
-    };
-    this.orderDoc.update(newIOrder);
-  }
-
   toggleEditing() {
-    if (!this.editing) {
-      this.updateOrder(new Order());
+    if (this.disableEditing) {
+      this.orderFormComponent.onSubmit();
     }
   }
 

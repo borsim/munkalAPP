@@ -1,7 +1,8 @@
 <div *ngIf="orderObs | async">
   <div *ngIf="order">
     <h3>{{ order.name }}</h3>
-    <!-- <h4>{{ order.deadline | time }}</h4>-->
+    <order-form [order]="order" [readonly]="disableEditing" [confirmButtonsHidden]="true" [submitBehaviour]="submitBehaviour" id="orderForm"> </order-form>
+    <!-- <h4>{{ order.deadline | time }}</h4>
     <div class="child flex-parent">
       <div class="child flex-child">
         <button (click)="openTab = 0" type="button">Adatok</button>
@@ -38,16 +39,16 @@
         <h4>Garancia: {{ order.guarantee }}</h4>
       </div>
     </div>
-    <div [hidden]="!(openTab == 2)"><h2>Fotók</h2></div>
+    <div [hidden]="!(openTab == 2)"><h2>Fotók</h2></div>-->
   </div>
 </div>
 
 <button
-  (click)="editing = !editing; toggleEditing()"
+  (click)="disableEditing = !disableEditing; toggleEditing()"
   type="button"
-  [hidden]="!editing"
+  [hidden]="!disableEditing"
 >
-  {{ editing ? 'Mentés' : 'Szerkesztés' }}
+  {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
 </button>
 <h3>
   <a [routerLink]="['/']"> Vissza </a>

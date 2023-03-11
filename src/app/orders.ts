@@ -1,10 +1,13 @@
+import { ThisReceiver } from "@angular/compiler";
+import { throwToolbarMixedModesError } from "@angular/material/toolbar";
+
 export class Order implements OrderInterface {
   constructor(
     public id: string = '0',
     public name: string = '',
     public price: number = 0,
     public description: string = '',
-    public orderStatus: string = '',
+    public orderStatus: string = 'registered',
     public icon: string = '',
     public customerName: string = '',
     public telephoneNumber: string = '',
@@ -19,6 +22,13 @@ export class Order implements OrderInterface {
     public doneTasks: string = '',
     public guarantee: string = ''
   ) {}
+  toInterface() {
+    let oi: OrderInterface = {id: this.id, name: this.name, price: this.price, description: this.description, orderStatus: this.orderStatus,
+      icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
+      task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
+      returnedTime: this.returnedTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks, guarantee: this.guarantee}
+    return oi;
+  }
 }
 
 export interface OrderInterface {

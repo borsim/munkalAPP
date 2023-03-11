@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div [hidden]="!orderFormIsOpen"><order-form></order-form>></div>
+<div [hidden]="!orderFormIsOpen"><order-form></order-form></div>
 <div [hidden]="orderFormIsOpen">
   <div *ngIf="databaseService.databaseOrders | async">
     <div
