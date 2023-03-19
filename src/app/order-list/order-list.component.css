@@ -4,3 +4,77 @@
 .flex-child {
   flex: 1;
 }
+.orders-header {
+  text-decoration: underline;
+}
+
+.order-list-viewport {
+  height: 800px;
+  width: 1200px;
+  
+}
+
+.nothing-in-particular {
+  border: 10px solid rgb(0, 167, 209);
+}
+
+.order-list-virtual-scroll-item {
+  height: 100px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 2px solid grey;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.order-title {
+  margin-top: 0;
+  margin-bottom: 5px;
+  padding-left: 25px;
+}
+.order-title-flexbox {
+  display: flex;
+  margin-bottom: 5px;
+  height: 50px;
+}
+.order-details-flexbox {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+}
+
+.order-description-text {
+  text-align: left;
+  margin-top: auto;
+  margin-left: 0;
+  font-size: large;
+}
+.order-deadline-text {
+  margin-top: auto;
+  text-align: right;
+  margin-right: 0;
+  flex-grow: 1;
+  font-size: large;
+}
+
+
+.order-list-header {
+  margin: auto;
+  fill: rgb(0, 167, 209);
+  text-align: center;
+}
+
+.new-order-button {
+  height: 50px;
+  width: 20%;
+  font-size: 16px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+}

@@ -2,7 +2,7 @@
   <div class="container">
     <div [hidden]="submitted">
       <div [hidden]="confirmButtonsHidden">
-      <h1>Új munkalap</h1>
+      <h1 class="order-title">Új munkalap</h1>
     </div>
 
       <div class="child flex-parent">
@@ -31,12 +31,12 @@
               #name="ngModel"
               [disabled]="readonly"
             />
-            <div
+            <!-- <div
               [hidden]="name.valid || name.pristine"
               class="alert alert-danger"
             >
             Munkalap név megadása kötelező
-            </div>
+            </div> -->
           </div>
         </mat-form-field>
         <br>

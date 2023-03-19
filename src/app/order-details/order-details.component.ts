@@ -69,6 +69,7 @@ export class OrderDetailsComponent implements OnInit {
   toggleEditing() {
     if (this.disableEditing) {
       this.orderFormComponent.onSubmit();
+      this.orderFormComponent.submitted = false;
     }
   }
 

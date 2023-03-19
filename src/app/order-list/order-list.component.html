@@ -1,60 +1,72 @@
 <div class="parent flex-parent">
   <div class="child flex-child">
-    <h2>Munkalapok</h2>
+    <h1>Munkalapok</h1>
     <!-- <button (click)="testF()" type="button">Teszt</button> -->
   </div>
   <div class="child flex-child">
-    <button (click)="orderFormIsOpen = !orderFormIsOpen" type="button">
-      {{ orderFormIsOpen ? 'Lista' : '+' }}
-    </button>
+    
   </div>
 </div>
 
-<div [hidden]="!orderFormIsOpen"><order-form></order-form></div>
-<div [hidden]="orderFormIsOpen">
-  <div *ngIf="databaseService.databaseOrders | async">
-    <div
-      *ngFor="let order of orders | filter: searchbarService.getSearchString()"
-    >
-      <h3>
-        <a
-          [title]="order.name + ' details'"
-          [routerLink]="['/orders', order.id]"
-        >
-          {{ order.name }}
-        </a>
-      </h3>
-
-      <p *ngIf="order.description">Description: {{ order.description }}</p>
-
-      <mat-label>Státusz</mat-label>
-      <select [(ngModel)]="order.orderStatus">
-        <option></option>
-        <option [value]="o.value" *ngFor="let o of oss">
-          {{ o.viewValue }}
-        </option>
-      </select>
-
-      <p>You selected: {{ order.orderStatus }}</p>
-      <!--
-      <button
-      type="button"
-      [iconPicker]="order.icon"
-      [ipIconPack]="['mat', 'fa5']"
-      [ipIconSize]="'32px'"
-      [ipButtonStyleClass]="'button is-link is-light'"
-      (iconPickerSelect)="onIconSelect($event, order)"
-    >
-      <i *ngIf="order.icon.includes('fa-'); else Else" [class]="order.icon"></i>
-
-      <ng-template #Else>
-        <mat-icon aria-hidden="false" aria-label="Example home icon">{{
-          order.icon
-        }}</mat-icon>
-      </ng-template>
-    </button> -->
-      <mat-divider></mat-divider>
-      <!-- <button type="button" (click)="share()">Done</button> -->
-    </div>
+<div class="order-list-viewport" cdkVirtualScrollingElement>
+  <div class="order-list-header">
+    <button (click)="orderFormIsOpen = !orderFormIsOpen" type="button" class="new-order-button">
+      {{ orderFormIsOpen ? 'Lista' : '+' }}
+    </button>
   </div>
+    <div [hidden]="orderFormIsOpen">
+      <ng-container *ngIf="databaseService.databaseOrders | async">
+        <cdk-virtual-scroll-viewport class="order-list-items" itemSize="50">
+          <div
+              *cdkVirtualFor="let order of orders | filter: searchbarService.getSearchString()"
+             class="order-list-virtual-scroll-item">
+             <div class="order-title-flexbox">
+              <!-- <mat-label>Státusz</mat-label> -->
+                <select [(ngModel)]="order.orderStatus">
+                  <option></option>
+                  <option [value]="o.value" *ngFor="let o of oss">
+                    {{ o.viewValue }}
+                  </option>
+                </select>
+
+              <div class="order-title">
+                <h3>
+                  <a
+                    [title]="order.name + ' details'"
+                    [routerLink]="['/orders', order.id]"
+                  >
+                    {{ order.name }}
+                  </a>
+                </h3>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="order-details-flexbox">
+              <p *ngIf="order.description" class="order-description-text">{{ order.description }}</p>
+              <p *ngIf="order.deadline" class="order-deadline-text">Határidő: {{order.deadline | date: 'dd-MM-yyyy'}}</p>
+            </div>
+
+              <!--
+              <button
+              type="button"
+              [iconPicker]="order.icon"
+              [ipIconPack]="['mat', 'fa5']"
+              [ipIconSize]="'32px'"
+              [ipButtonStyleClass]="'button is-link is-light'"
+              (iconPickerSelect)="onIconSelect($event, order)"
+            >
+              <i *ngIf="order.icon.includes('fa-'); else Else" [class]="order.icon"></i>
+
+              <ng-template #Else>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">{{
+                  order.icon
+                }}</mat-icon>
+              </ng-template>
+            </button> -->
+              <!-- <button type="button" (click)="share()">Done</button> -->
+            </div>
+        </cdk-virtual-scroll-viewport>
+      </ng-container>
+    </div>
+    <div [hidden]="!orderFormIsOpen" class="order-list-form"><order-form></order-form></div>
 </div>

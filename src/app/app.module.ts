@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule } from '@angular/forms';
 
 import { FilterPipe } from './shared/filter.pipe';
@@ -63,6 +64,7 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     MatDatepickerModule,
+    ScrollingModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },
       { path: 'orders/:orderId', component: OrderDetailsComponent },

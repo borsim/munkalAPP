@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IconPickerModule } from 'ngx-icon-picker';
 import {
   Order,
@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListComponent {
   orders: Order[] = [];
