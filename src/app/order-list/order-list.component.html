@@ -1,10 +1,9 @@
 <div class="parent flex-parent">
-  <div class="child flex-child">
+  <div class="orders-header">
     <h1>Munkalapok</h1>
     <!-- <button (click)="testF()" type="button">Teszt</button> -->
   </div>
   <div class="child flex-child">
-    
   </div>
 </div>
 
@@ -18,7 +17,7 @@
       <ng-container *ngIf="databaseService.databaseOrders | async">
         <cdk-virtual-scroll-viewport class="order-list-items" itemSize="50">
           <div
-              *cdkVirtualFor="let order of orders | filter: searchbarService.getSearchString()"
+              *cdkVirtualFor="let order of orders | filter: searchbarService.getSearchString() | sort:searchbarService.getSortField() : searchbarService.getAscending() "
              class="order-list-virtual-scroll-item">
              <div class="order-title-flexbox">
               <!-- <mat-label>Státusz</mat-label> -->

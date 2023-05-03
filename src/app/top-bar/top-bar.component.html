@@ -1,5 +1,5 @@
 <div
-  class="eaton mat-typography"
+  class="top-bar-left"
   style="overflow-x:hidden;"
   fxFlexFill
   cdkScrollable
@@ -7,10 +7,9 @@
   <mat-toolbar
     color="primary"
     class="main-header mat-elevation-z4"
-    [class.hidden]="toggleSearch"
   >
     <mat-toolbar-row style="padding: 0 5px;">
-      <div style="padding:8px 0 0 10px; flex:1;">
+      <div style="padding:8px 0 0 10px;">
         <a [routerLink]="['/']">
           <div class="mat-title" style="margin-bottom:2px;color:white;">
             Borsi és Hoblyák
@@ -20,14 +19,33 @@
           </div>
         </a>
       </div>
+      <label id="sorting-radio-group" class="sorting-radio-group"><h2 class="sorting-radio-label">Rendezés:</h2></label>
+      <mat-radio-group
+        aria-labelledby="Rendezés"
+        class="sorting-radio"
+        [(ngModel)]="selectedSorting">
+        <mat-radio-button class="sorting-radio-button" *ngFor="let sortOption of statusSelection" [value]="sortOption.value" (change)="changeRadioValue($event)">
+          <div class="sorting-radio-button" >{{sortOption.viewValue}}</div>  
+        </mat-radio-button>
+      </mat-radio-group>
+      <button mat-icon-button class="sort-ascending-button" (click)="sortAscending = !sortAscending; changeSortValue(sortAscending)">
+        <div [hidden]="sortAscending">
+          <mat-icon class="sort-arrow">arrow_upward</mat-icon>
+        </div>
+        <div [hidden]="!sortAscending">
+          <mat-icon class="sort-arrow">arrow_downward</mat-icon>
+        </div>
+      </button>
 
-      <button mat-icon-button (click)="openSearch()">
+
+
+      <button mat-icon-button class="open-search-button" (click)="openSearch()">
         <mat-icon>search</mat-icon>
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <mat-toolbar
+  <div
     class="search-block mat-elevation-z4"
     [class.active]="toggleSearch"
   >
@@ -47,5 +65,5 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-toolbar-row>
-  </mat-toolbar>
+  </div>
 </div>

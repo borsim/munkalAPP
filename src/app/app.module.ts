@@ -21,18 +21,21 @@ import { MatSortModule } from '@angular/material/sort';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio'
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule } from '@angular/forms';
 
 import { FilterPipe } from './shared/filter.pipe';
 import { environment } from '../../src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {
   MatMomentDateModule,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MAT_MOMENT_DATE_FORMATS
 } from '@angular/material-moment-adapter';
+import { ArraySortPipe } from './shared/sort.pipe';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -62,8 +65,10 @@ const firebaseConfig = {
     MatFormFieldModule,
     MatMomentDateModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
     AngularFirestoreModule,
     MatDatepickerModule,
+    MatRadioModule,
     ScrollingModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },
@@ -81,6 +86,7 @@ const firebaseConfig = {
     OrderDetailsComponent,
     OrderFormComponent,
     FilterPipe,
+    ArraySortPipe,
   ],
   bootstrap: [AppComponent],
 })

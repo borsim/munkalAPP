@@ -4,14 +4,17 @@ header {
   z-index: 11;
   transition: all 250ms ease-in-out;
 }
+
 .main-header {
   @extend header;
   &.hidden {
     opacity: 0;
   }
+  justify-content: left;
 }
 .search-block {
   width: 0%;
+  max-width: 350px;
   right: 0;
   @extend header;
   background: #fff;
@@ -25,4 +28,42 @@ header {
     outline: none;
     padding-left: 10px;
   }
+}
+.sorting-radio-group {
+  padding-left: 10px;
+  color: #fff;
+  justify-content: left;
+}
+.sorting-radio-label {
+  padding-left: 80px;
+  color: #fff;
+  justify-content: left;
+  text-transform: capitalize;
+}
+.sorting-radio {
+  padding-left: 20px;
+  color: #fff;
+  justify-content: left;
+}
+.sorting-radio-button {
+  padding-left: 2px;
+  padding-right: 20px;
+  color: #fff;
+  justify-content: left;
+  text-transform: capitalize;
+}
+
+.sort-ascending-button {
+  width: 40px;
+  align-content: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.sort-arrow {
+  color: white;
+}
+.open-search-button {
+  margin-left: auto;
+  margin-right: 30px;
 }

@@ -1,5 +1,7 @@
 /* Global Styles */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+@import '~firebaseui/dist/firebaseui.css';
 * {
   font-family: 'Roboto', Arial, sans-serif;
   color: #616161;
@@ -126,7 +128,7 @@ app-top-bar h1 {
   margin: 0;
 }
 
-@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

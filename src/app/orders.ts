@@ -88,6 +88,18 @@ export const orderStatusSelection: OrderStatusInterface[] = [
   { value: 'waiting for part', viewValue: 'Darabra vár' },
 ];
 
+export interface OrderSortingInterface {
+  value: string;
+  viewValue: string;
+}
+
+export const sortingStatusSelection: OrderSortingInterface[] = [
+  { value: 'name', viewValue: 'ABC' },
+  { value: 'creationTime', viewValue: 'Felvétel ideje' },
+  { value: 'lastUpdatedTime', viewValue: 'Legutóbb módosítva' },
+  { value: 'deadline', viewValue: 'Határidő' },
+];
+
 export const statusToIcon = {
   home: 'done',
   search: 'incomplete',

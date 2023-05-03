@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SearchbarService } from '../services/searchbar.service';
+import { OrderSortingInterface, sortingStatusSelection } from '../orders';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,6 +11,9 @@ export class TopBarComponent {
   @ViewChild('searchbar') searchbar!: ElementRef;
   searchText: string = '';
   toggleSearch: boolean = false;
+  selectedSorting: string = "abc";
+  sortAscending: boolean = false;
+  statusSelection: OrderSortingInterface[] = sortingStatusSelection;
 
   constructor(private searchbarService: SearchbarService) {}
 
@@ -24,6 +28,12 @@ export class TopBarComponent {
   }
   updateSBServiceData() {
     this.searchbarService.setSearchString(this.searchText);
+  }
+  changeRadioValue(radioValue: any) {
+    this.searchbarService.setSortField(radioValue.value);
+  }
+  changeSortValue(sortValue: any) {
+    this.searchbarService.setAscending(sortValue);
   }
 }
 

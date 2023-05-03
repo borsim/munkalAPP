@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class SearchbarService {
   searchbarText: string = '';
+  sortField: string = '';
+  sortAscending: boolean = false;
 
   setSearchString(sbtxt: string) {
     this.searchbarText = sbtxt;
@@ -18,4 +20,21 @@ export class SearchbarService {
     this.searchbarText = '';
     return this.searchbarText;
   }
+
+  setSortField(sortField: string) {
+    this.sortField = sortField;
+    console.log(this.sortField);
+  }
+  getSortField() {
+    return this.sortField;
+  }
+
+  setAscending(ascending: boolean) {
+    this.sortAscending = ascending;
+    console.log(this.sortAscending);
+  }
+  getAscending() {
+    return this.sortAscending;
+  }
+
 }

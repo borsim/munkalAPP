@@ -22,6 +22,7 @@ export class OrderListComponent {
   oss = orderStatusSelection;
   orderFormIsOpen = false;
   stringifiedData: string = '';
+  //alreadyLoggedIn: boolean = false;
 
   orderFormComponent = new OrderFormComponent(this.databaseService);
 
