@@ -77,7 +77,9 @@ const firebaseConfig = {
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
-    { provide:   MAT_MOMENT_DATE_FORMATS, useValue: {parse:{dateInput: 'DD.MM.YYYY'} } }
+    { provide:   MAT_MOMENT_DATE_FORMATS, useValue: {parse:{dateInput: 'DD.MM.YYYY'} } },
+    FilterPipe,
+    ArraySortPipe
   ],
   declarations: [
     AppComponent,

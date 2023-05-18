@@ -9,7 +9,9 @@ import {
 import { OrderFormComponent } from '../order-form/order-form.component';
 import { SearchbarService } from '../services/searchbar.service';
 import { DatabaseService } from '../services/database.service';
-import { Observable } from 'rxjs';
+import { FilterPipe } from './../shared/filter.pipe';
+import { ArraySortPipe } from './../shared/sort.pipe';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -19,6 +21,10 @@ import { Observable } from 'rxjs';
 })
 export class OrderListComponent {
   orders: Order[] = [];
+  filteredOrders: Order[] = [];
+  sortedOrdersSubject: BehaviorSubject<Order[]> = new BehaviorSubject([] as Order[]);
+  filterString: string = '';
+  sortTuple: [string, boolean] = ['', false];
   oss = orderStatusSelection;
   orderFormIsOpen = false;
   stringifiedData: string = '';
@@ -28,9 +34,12 @@ export class OrderListComponent {
 
   constructor(
     public searchbarService: SearchbarService,
-    public databaseService: DatabaseService
+    public databaseService: DatabaseService,
+    public filterPipe: FilterPipe,
+    public sortPipe: ArraySortPipe
   ) {
     this.databaseService.databaseOrders.subscribe((dbOrders) => {
+       
       this.orders = [];
       dbOrders.forEach((dbOrder) => {
         this.orders.push(
@@ -56,6 +65,19 @@ export class OrderListComponent {
           )
         );
       });
+    });
+    this.filteredOrders = this.orders;
+    this.sortedOrdersSubject.next(this.filteredOrders);
+    this.searchbarService.sbtSubject.subscribe((newSbString) => {
+      this.filterString = newSbString;
+      this.filteredOrders = this.filterPipe.transform(this.orders, newSbString);
+      this.sortedOrdersSubject.next(this.filteredOrders);
+    });
+    this.searchbarService.sortSubject.subscribe((newSortTuple) => {
+      this.sortTuple = newSortTuple;
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString);
+      if (!this.filterString) this.filteredOrders = this.filteredOrders.slice();
+      this.sortedOrdersSubject.next(this.filteredOrders);
     });
   }
 

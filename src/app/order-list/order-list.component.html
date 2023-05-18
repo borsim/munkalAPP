@@ -14,10 +14,10 @@
     </button>
   </div>
     <div [hidden]="orderFormIsOpen">
-      <ng-container *ngIf="databaseService.databaseOrders | async">
+      <ng-container *ngIf="sortedOrdersSubject | async">
         <cdk-virtual-scroll-viewport class="order-list-items" itemSize="50">
           <div
-              *cdkVirtualFor="let order of orders | filter: searchbarService.getSearchString() | sort:searchbarService.getSortField() : searchbarService.getAscending() "
+              *cdkVirtualFor="let order of (sortedOrdersSubject.asObservable() | async) | sort:sortTuple[0] : sortTuple[1]"
              class="order-list-virtual-scroll-item">
              <div class="order-title-flexbox">
               <!-- <mat-label>Státusz</mat-label> -->
