@@ -25,7 +25,7 @@ export class OrderListComponent {
   sortedOrdersSubject: BehaviorSubject<Order[]> = new BehaviorSubject([] as Order[]);
   filterString: string = '';
   filterDone: boolean = true;
-  sortTuple: [string, boolean] = ['', false];
+  sortTuple: [string, boolean] = ['creationTime', false];
   oss = orderStatusSelection;
   orderFormIsOpen = false;
   stringifiedData: string = '';
@@ -66,6 +66,8 @@ export class OrderListComponent {
           )
         );
       });
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
+      this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.filteredOrders = this.orders;
     this.sortedOrdersSubject.next(this.filteredOrders);
@@ -76,15 +78,13 @@ export class OrderListComponent {
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.searchbarService.sortSubject.subscribe((newSortTuple) => {
+      var oldSortTuple: [string, boolean] = this.sortTuple;
       this.sortTuple = newSortTuple;
       this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
       if (!this.filterString) this.filteredOrders = this.filteredOrders.slice();
+      if (oldSortTuple[1] !== newSortTuple[1] || oldSortTuple[0] !== newSortTuple[0]) this.filteredOrders = this.filteredOrders.slice();
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
-  }
-
-  testF() {
-    //alert(JSON.stringify(this.databaseService.orders));
   }
 
   onIconSelect(icon: string, order: Order) {
@@ -99,5 +99,9 @@ export class OrderListComponent {
       default:
         'complete';
     }
+  }
+  updateOrderStatus(incomingOrder: any) {
+    this.databaseService.updateOrderInDb(incomingOrder);
+    console.log(this.sortTuple);
   }
 }

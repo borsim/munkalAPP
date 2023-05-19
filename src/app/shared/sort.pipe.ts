@@ -5,11 +5,13 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class ArraySortPipe  implements PipeTransform {
   transform(array: any[] | null, field: string | null, sortAscending: boolean | null): any[] | null {
-    if (array === null || field === null || sortAscending === null) return null;
+    if (array === null) return null;
+    if (field === null) field = 'creationTime';
+    if (sortAscending === null) sortAscending = false;
     if (field === '') return array;
     array.sort((a: any, b: any) => {
-      var _a = a[field];
-      var _b = b[field];
+      var _a = a[field!];
+      var _b = b[field!];
       if (typeof(_a) === 'string') {
         _a = (_a as string).toLocaleLowerCase();
         _b = (_b as string).toLocaleLowerCase();

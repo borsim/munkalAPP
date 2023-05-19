@@ -6,12 +6,12 @@ import { BehaviorSubject  } from 'rxjs';
 })
 export class SearchbarService {
   private searchbarText: string = '';
-  private sortField: string = '';
+  private sortField: string = 'creationTime';
   private sortAscending: boolean = false;
   private filterDone: boolean = true;
 
   public sbtSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['', false] as [string, boolean]);
-  public sortSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['', false] as [string, boolean]);
+  public sortSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['creationTime', false] as [string, boolean]);
 
 
   setSearchString(sbtxt: string) {

@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipe implements PipeTransform {
   transform(items: any[], searchText: string, filterDone: boolean): any[] {
     if (!items) return [];
-    if (filterDone) {
+    if (!filterDone) {
       items = items.filter((it) => {
-        return (it.orderStatus === 'done')
+        return (it.orderStatus !== 'done')
       })
     }
     if (searchText === '') return items;

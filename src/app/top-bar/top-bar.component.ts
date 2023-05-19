@@ -11,12 +11,15 @@ export class TopBarComponent {
   @ViewChild('searchbar') searchbar!: ElementRef;
   searchText: string = '';
   toggleSearch: boolean = false;
-  selectedSorting: string = "abc";
+  selectedSorting: any = '';
   sortAscending: boolean = false;
   filterDone: boolean = true;
   statusSelection: OrderSortingInterface[] = sortingStatusSelection;
 
   constructor(private searchbarService: SearchbarService) {}
+  ngOnInit() {
+    this.selectedSorting = 'creationTime';
+  }
 
   openSearch() {
     this.toggleSearch = true;
@@ -34,6 +37,7 @@ export class TopBarComponent {
     this.searchbarService.setFilterDone(toggleValue.checked);
   }
   changeRadioValue(radioValue: any) {
+    console.log(this.selectedSorting);
     this.searchbarService.setSortField(radioValue.value);
   }
   changeSortValue(sortValue: any) {
