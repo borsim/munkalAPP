@@ -13,6 +13,7 @@ export class TopBarComponent {
   toggleSearch: boolean = false;
   selectedSorting: string = "abc";
   sortAscending: boolean = false;
+  filterDone: boolean = true;
   statusSelection: OrderSortingInterface[] = sortingStatusSelection;
 
   constructor(private searchbarService: SearchbarService) {}
@@ -28,6 +29,9 @@ export class TopBarComponent {
   }
   updateSBServiceData() {
     this.searchbarService.setSearchString(this.searchText);
+  }
+  changeToggleValue(toggleValue: any) {
+    this.searchbarService.setFilterDone(toggleValue.checked);
   }
   changeRadioValue(radioValue: any) {
     this.searchbarService.setSortField(radioValue.value);

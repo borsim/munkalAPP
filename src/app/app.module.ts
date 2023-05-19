@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -64,6 +65,7 @@ const firebaseConfig = {
     MatToolbarModule,
     MatFormFieldModule,
     MatMomentDateModule,
+    MatSlideToggleModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -24,6 +24,7 @@ export class OrderListComponent {
   filteredOrders: Order[] = [];
   sortedOrdersSubject: BehaviorSubject<Order[]> = new BehaviorSubject([] as Order[]);
   filterString: string = '';
+  filterDone: boolean = true;
   sortTuple: [string, boolean] = ['', false];
   oss = orderStatusSelection;
   orderFormIsOpen = false;
@@ -68,14 +69,15 @@ export class OrderListComponent {
     });
     this.filteredOrders = this.orders;
     this.sortedOrdersSubject.next(this.filteredOrders);
-    this.searchbarService.sbtSubject.subscribe((newSbString) => {
-      this.filterString = newSbString;
-      this.filteredOrders = this.filterPipe.transform(this.orders, newSbString);
+    this.searchbarService.sbtSubject.subscribe((newSbTuple) => {
+      this.filterString = newSbTuple[0];
+      this.filterDone = newSbTuple[1];
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.searchbarService.sortSubject.subscribe((newSortTuple) => {
       this.sortTuple = newSortTuple;
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString);
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
       if (!this.filterString) this.filteredOrders = this.filteredOrders.slice();
       this.sortedOrdersSubject.next(this.filteredOrders);
     });

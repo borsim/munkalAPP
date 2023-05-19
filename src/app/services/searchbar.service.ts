@@ -8,23 +8,24 @@ export class SearchbarService {
   private searchbarText: string = '';
   private sortField: string = '';
   private sortAscending: boolean = false;
+  private filterDone: boolean = true;
 
-  public sbtSubject: BehaviorSubject<string> = new BehaviorSubject('');
+  public sbtSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['', false] as [string, boolean]);
   public sortSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['', false] as [string, boolean]);
 
 
   setSearchString(sbtxt: string) {
     this.searchbarText = sbtxt;
-    this.sbtSubject.next(this.searchbarText); 
+    this.sbtSubject.next([this.searchbarText, this.filterDone]); 
   }
 
-  getSearchString() {
+  getSearchTuple() {
     return this.sbtSubject.asObservable();
   }
 
   clearSearchString() {
     this.searchbarText = '';
-    this.sbtSubject.next(this.searchbarText); 
+    this.sbtSubject.next([this.searchbarText, this.filterDone]); 
     return this.sbtSubject.asObservable();
   }
 
@@ -38,6 +39,12 @@ export class SearchbarService {
     this.sortAscending = ascending;
     console.log(this.sortAscending);
     this.sortSubject.next([this.sortField, this.sortAscending]); 
+  }
+
+  setFilterDone(filterDone: boolean) {
+    this.filterDone = filterDone;
+    this.sbtSubject.next([this.searchbarText, this.filterDone]);
+    console.log(this.filterDone);
   }
 
   getSortTuple() {
