@@ -64,7 +64,9 @@ export class OrderDetailsComponent implements OnInit {
               dbOrder!.advancePayment,
               dbOrder!.notes,
               dbOrder!.doneTasks,
-              dbOrder!.handoverState
+              dbOrder!.guarantee,
+              dbOrder!.handoverState,
+              dbOrder!.numPhotos,
             )
           : new Order('0');
       this.order = nonNullOrder;

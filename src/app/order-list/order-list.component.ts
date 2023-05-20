@@ -12,6 +12,18 @@ import { DatabaseService } from '../services/database.service';
 import { FilterPipe } from './../shared/filter.pipe';
 import { ArraySortPipe } from './../shared/sort.pipe';
 import { Observable, of, BehaviorSubject } from 'rxjs';
+/*const firebaseConfig = {
+  apiKey: 'AIzaSyD3p6xJROowWv9ZBfvVkIG1jVcyxmNIG5w',
+  authDomain: 'oraszerviz-munkalap.firebaseapp.com',
+  projectId: 'oraszerviz-munkalap',
+  storageBucket: 'oraszerviz-munkalap.appspot.com',
+  messagingSenderId: '2130836140',
+  appId: '1:2130836140:web:1fb76877d4c195602efd09',
+  measurementId: 'G-55ZRJL2CJN',
+};
+import { AngularFireModule } from '@angular/fire/compat';
+AngularFireModule.initializeApp(firebaseConfig)
+import { AngularFireStorage } from '@angular/fire/compat/storage'*/
 
 @Component({
   selector: 'app-order-list',
@@ -31,13 +43,14 @@ export class OrderListComponent {
   stringifiedData: string = '';
   //alreadyLoggedIn: boolean = false;
 
-  orderFormComponent = new OrderFormComponent(this.databaseService);
+  orderFormComponent = new OrderFormComponent(this.databaseService, /*this.afStorage*/);
 
   constructor(
     public searchbarService: SearchbarService,
     public databaseService: DatabaseService,
     public filterPipe: FilterPipe,
-    public sortPipe: ArraySortPipe
+    public sortPipe: ArraySortPipe,
+    /*public afStorage: AngularFireStorage,*/
   ) {
     this.databaseService.databaseOrders.subscribe((dbOrders) => {
        
@@ -65,7 +78,8 @@ export class OrderListComponent {
             dbOrder.notes,
             dbOrder.doneTasks,
             dbOrder.guarantee,
-            dbOrder.handoverState
+            dbOrder.handoverState,
+            dbOrder.numPhotos
           )
         );
       });
