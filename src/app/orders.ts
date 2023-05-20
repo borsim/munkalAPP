@@ -6,7 +6,9 @@ export class Order implements OrderInterface {
     public id: string = '0',
     public name: string = '',
     public price: number = 0,
+    public casingNumber: string = '',
     public description: string = '',
+    public originalState: string = '',
     public orderStatus: string = 'registered',
     public icon: string = '',
     public customerName: string = '',
@@ -20,13 +22,16 @@ export class Order implements OrderInterface {
     public advancePayment: number = 0,
     public notes: string = '',
     public doneTasks: string = '',
-    public guarantee: string = ''
+    public guarantee: string = '',
+    public handoverState: string = '',
   ) {}
   toInterface() {
-    let oi: OrderInterface = {id: this.id, name: this.name, price: this.price, description: this.description, orderStatus: this.orderStatus,
+    let oi: OrderInterface = {id: this.id, name: this.name, price: this.price, casingNumber: this.casingNumber, 
+      description: this.description, originalState: this.originalState, orderStatus: this.orderStatus,
       icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
       task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
-      returnedTime: this.returnedTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks, guarantee: this.guarantee}
+      returnedTime: this.returnedTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks,
+      guarantee: this.guarantee, handoverState: this.handoverState}
     return oi;
   }
 }
@@ -35,7 +40,9 @@ export interface OrderInterface {
   id: string;
   name: string;
   price: number;
+  casingNumber: string;
   description: string;
+  originalState: string;
   orderStatus: string;
   icon: string;
   customerName: string;
@@ -50,6 +57,7 @@ export interface OrderInterface {
   notes: string;
   doneTasks: string;
   guarantee: string;
+  handoverState: string;
 }
 
 export var orders = [
@@ -57,7 +65,9 @@ export var orders = [
     id: '1',
     name: 'Omega123',
     price: 799,
+    casingNumber: 'A1B2C3',
     description: 'Törött üveg',
+    originalState: 'Karcolt hátlap',
     orderStatus: 'ready for pickup',
     icon: 'home',
     customerName: 'Jóska Pista',
@@ -72,6 +82,7 @@ export var orders = [
     notes: 'rozsdás a hátlap',
     doneTasks: '',
     guarantee: '3 hónap',
+    handoverState: 'polírozott hátlap',
   },
 ];
 

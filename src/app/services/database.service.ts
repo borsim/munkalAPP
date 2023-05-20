@@ -31,7 +31,9 @@ export class DatabaseService {
       id: dbid,
       name: newOrder.name,
       price: newOrder.price,
+      casingNumber: newOrder.casingNumber,
       description: newOrder.description,
+      originalState: newOrder.originalState,
       orderStatus: newOrder.orderStatus,
       icon: newOrder.icon,
       customerName: newOrder.customerName,
@@ -46,6 +48,7 @@ export class DatabaseService {
       notes: newOrder.notes,
       doneTasks: newOrder.doneTasks,
       guarantee: newOrder.guarantee,
+      handoverState: newOrder.handoverState,
     };
     this.ordersCollection.add(newIOrder);
   }

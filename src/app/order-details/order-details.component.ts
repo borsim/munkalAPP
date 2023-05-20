@@ -48,7 +48,9 @@ export class OrderDetailsComponent implements OnInit {
               oid,
               dbOrder!.name,
               dbOrder!.price,
+              dbOrder!.casingNumber,
               dbOrder!.description,
+              dbOrder!.originalState,
               dbOrder!.orderStatus,
               dbOrder!.icon,
               dbOrder!.customerName,
@@ -62,7 +64,7 @@ export class OrderDetailsComponent implements OnInit {
               dbOrder!.advancePayment,
               dbOrder!.notes,
               dbOrder!.doneTasks,
-              dbOrder!.guarantee
+              dbOrder!.handoverState
             )
           : new Order('0');
       this.order = nonNullOrder;

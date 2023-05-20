@@ -154,73 +154,114 @@
         </div>
         <div [hidden]="!(openTab == 1)">
           <mat-form-field appearance="fill">
-          <div class="form-group">
-            <label for="orderStatus">Státusz</label>
-            <mat-select
-              class="form-control"
-              id="orderStatus"
-              required
-              [(ngModel)]="model.orderStatus"
-              name="orderStatus"
-              #orderStatus="ngModel"
-              [disabled]="readonly"
-            >
-              <mat-option *ngFor="let os of orderStatusValues" [value]="os.value">
-                {{ os.viewValue }}
-              </mat-option>
-            </mat-select>
-            <div
-              [hidden]="orderStatus.valid || orderStatus.pristine"
-              class="alert alert-danger"
-            >
-              Státusz megadása kötelező
+            <div class="form-group">
+              <label for="orderStatus">Státusz</label>
+              <mat-select
+                class="form-control"
+                id="orderStatus"
+                required
+                [(ngModel)]="model.orderStatus"
+                name="orderStatus"
+                #orderStatus="ngModel"
+                [disabled]="readonly"
+              >
+                <mat-option *ngFor="let os of orderStatusValues" [value]="os.value">
+                  {{ os.viewValue }}
+                </mat-option>
+              </mat-select>
+              <div [hidden]="orderStatus.valid || orderStatus.pristine" class="alert alert-danger">
+                Státusz megadása kötelező
+              </div>
             </div>
-          </div>
-        </mat-form-field>
-        <br>
-          <mat-form-field appearance="fill">
-          <div class="form-group">
-            <label for="description">Megjegyzések</label>
-            <input matInput
-              type="text"
-              class="form-control"
-              id="notes"
-              [(ngModel)]="model.notes"
-              name="notes"
-              [disabled]="readonly"
-            />
-          </div>
-        </mat-form-field>
+          </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
-          <div class="form-group">
-            <label for="description">Elvégzett munkák</label>
-            <input matInput
-              type="text"
-              class="form-control"
-              id="doneTasks"
-              [(ngModel)]="model.doneTasks"
-              name="doneTasks"
-              [disabled]="readonly"
-            />
-          </div>
-        </mat-form-field>
-        <br>
+            <div class="form-group">
+              <label for="description">Tokszám</label>
+              <input matInput
+                type="text"
+                class="form-control"
+                id="casingNumber"
+                [(ngModel)]="model.casingNumber"
+                name="casingNumber"
+                [disabled]="readonly"
+              />
+            </div>
+          </mat-form-field>
+          <br>
           <mat-form-field appearance="fill">
-          <div class="form-group">
-            <label for="description">Garancia</label>
-            <input matInput
-              type="text"
-              class="form-control"
-              id="guarantee"
-              [(ngModel)]="model.guarantee"
-              name="guarantee"
-              [disabled]="readonly"
-            />
-          </div>
-        </mat-form-field>
+            <div class="form-group">
+              <label for="description">Átvételi állapot</label>
+              <input matInput
+                type="text"
+                class="form-control"
+                id="originalState"
+                [(ngModel)]="model.originalState"
+                name="originalState"
+                [disabled]="readonly"
+              />
+            </div>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <div class="form-group">
+              <label for="description">Megjegyzések</label>
+              <input matInput
+                type="text"
+                class="form-control"
+                id="notes"
+                [(ngModel)]="model.notes"
+                name="notes"
+                [disabled]="readonly"
+              />
+            </div>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <div class="form-group">
+              <label for="description">Elvégzett munkák</label>
+              <input matInput
+                type="text"
+                class="form-control"
+                id="doneTasks"
+                [(ngModel)]="model.doneTasks"
+                name="doneTasks"
+                [disabled]="readonly"
+              />
+            </div>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <div class="form-group">
+              <label for="description">Garancia</label>
+              <input matInput
+                type="text"
+                class="form-control"
+                id="guarantee"
+                [(ngModel)]="model.guarantee"
+                name="guarantee"
+                [disabled]="readonly"
+              />
+            </div>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <div class="form-group">
+              <label for="description">Átadási állapot</label>
+              <input matInput
+                type="text"
+                class="form-control"
+                id="handoverState"
+                [(ngModel)]="model.handoverState"
+                name="handoverState"
+                [disabled]="readonly"
+              />
+            </div>
+          </mat-form-field>
         </div>
-        <div [hidden]="!(openTab == 2)"></div>
+        <div [hidden]="!(openTab == 2)">
+
+        </div>
 
         <div [hidden]="confirmButtonsHidden">
         <button

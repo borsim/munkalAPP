@@ -48,7 +48,9 @@ export class OrderListComponent {
             dbOrder.id,
             dbOrder.name,
             dbOrder.price,
+            dbOrder.casingNumber,
             dbOrder.description,
+            dbOrder.originalState,
             dbOrder.orderStatus,
             dbOrder.icon,
             dbOrder.customerName,
@@ -62,7 +64,8 @@ export class OrderListComponent {
             dbOrder.advancePayment,
             dbOrder.notes,
             dbOrder.doneTasks,
-            dbOrder.guarantee
+            dbOrder.guarantee,
+            dbOrder.handoverState
           )
         );
       });
