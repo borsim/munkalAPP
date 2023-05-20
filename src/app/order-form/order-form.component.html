@@ -260,12 +260,14 @@
           </mat-form-field>
         </div>
         <div [hidden]="!(openTab == 2)">
-          Krumpli
-          <!--<label for="file">File:</label>
+          <label for="file">Fotó feltöltése:</label>
           <input type="file" class="photo-upload-input" (change)="uploadPhoto($event)" accept=".png,.jpg" />
-          <div class="photo-upload-progress" *ngIf="uploadProgress">
-            <progress max="100" [value]="uploadProgress"></progress>
-          </div> -->
+          <div class="photo-upload-progress" *ngIf="uploadProgress | async">
+            <progress max="100" [value]="uploadProgress | async"></progress>
+          </div>
+          <div class="photos-container" *ngFor="let pr of photoRefs; let i = index">
+            <img src='' alt="Mentett kép" id="img{{i}}" class="user-img">
+          </div>
         </div>
 
         <div [hidden]="confirmButtonsHidden">

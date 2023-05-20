@@ -2,8 +2,9 @@ import { Component, Input, SimpleChanges, EventEmitter, Output } from '@angular/
 import { Order, orderStatusSelection } from '../orders';
 import { DatabaseService } from '../services/database.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-//import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage'
-import { Observable, of, map } from 'rxjs';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage'
+import { Observable, of, map, BehaviorSubject } from 'rxjs';
+import { subscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'order-form',
@@ -14,46 +15,32 @@ export class OrderFormComponent {
   orderStatusValues = orderStatusSelection;
   openTab: number = 0;
   uploadProgress: Observable<number> = of(0);
+  photoRefs: string[] = [];
   @Input() readonly: boolean = false;
   @Input() confirmButtonsHidden: boolean = false;
   @Input() order: Order = new Order('0');
   @Input() submitBehaviour = 'new';
 
 
-  constructor(private dbs: DatabaseService, /*private afStorage: AngularFireStorage*/) {
+  constructor(private dbs: DatabaseService, public afStorage: AngularFireStorage) {
   }
 
   model = this.order;
-  /*new Order(
-    '123456789',
-    'Megrendelés neve',
-    0,
-    'Leírás',
-    this.orderStatusValues[0].value,
-    'home',
-    'Vásárló',
-    '0630 111 1111',
-    '123@456.com',
-    'javítás',
-    123,
-    456,
-    789,
-    1234,
-    200,
-    'megjegyzések',
-    '',
-    'Nem garanciás'
-  );*/
 
   submitted = false;
 
-  /*uploadPhoto(event: any) {
+  uploadPhoto(event: any) {
+    console.log(this.order.numPhotos);
     let uploadPath = '/'.concat(this.order.id,'/', this.order.numPhotos.toString());
     let ref = this.afStorage.ref(uploadPath);
     let task = ref.put(event.target.files[0]);
+    let newOrder: Order = this.order;
+    newOrder.numPhotos += 1;
+    this.dbs.updateOrderInDb(newOrder);
+    this.order.numPhotos = newOrder.numPhotos;
     this.uploadProgress = task.snapshotChanges()
     .pipe(map(s => (s!.bytesTransferred / s!.totalBytes) * 100));
-  }*/
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -80,6 +67,17 @@ export class OrderFormComponent {
     if (changes['order']) {
       this.order = changes['order'].currentValue;
       this.model = this.order;
+      this.photoRefs = [];
+      for (let i: number=0; i < this.order.numPhotos; i++) {
+        let currentRef: string = this.order.id.concat('/', i.toString());
+        this.photoRefs.push(currentRef);
+      }
+      for (let i: number=0; i < this.order.numPhotos; i++) {
+        this.afStorage.ref(this.photoRefs[i]).getDownloadURL().subscribe((url) => {
+          let currentImg = document.getElementById('img'.concat(i.toString()));
+          if (currentImg) currentImg.setAttribute('src', url);
+        });
+      }
     }
   }
 }

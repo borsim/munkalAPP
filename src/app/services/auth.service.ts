@@ -22,7 +22,6 @@ export class AuthService {
 authStatusListener(){
   this.fireAuth.onAuthStateChanged((credential)=>{
     if(credential){
-      console.log(credential);
       this.authStatusSub.next(credential);
       console.log('User is logged in');
     }

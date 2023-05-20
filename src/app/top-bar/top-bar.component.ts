@@ -37,7 +37,6 @@ export class TopBarComponent {
     this.searchbarService.setFilterDone(toggleValue.checked);
   }
   changeRadioValue(radioValue: any) {
-    console.log(this.selectedSorting);
     this.searchbarService.setSortField(radioValue.value);
   }
   changeSortValue(sortValue: any) {

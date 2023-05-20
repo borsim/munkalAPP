@@ -41,6 +41,7 @@ import { ArraySortPipe } from './shared/sort.pipe';
 import { WarrantyCardComponent } from './warranty-card/warranty-card.component';
 import { WorksheetCardComponent } from './worksheet-card/worksheet-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { UserImageDisplayComponent } from './user-image-display/user-image-display.component';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -106,6 +107,7 @@ const firebaseConfig = {
     ArraySortPipe,
     WarrantyCardComponent,
     WorksheetCardComponent,
+    UserImageDisplayComponent,
   ],
   bootstrap: [AppComponent],
 })

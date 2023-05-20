@@ -3,6 +3,9 @@ input[type="text"][disabled] {
  }
 .flex-parent {
     display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    width: 200px;
 }
 .flex-child {
     flex: 1;
@@ -19,4 +22,11 @@ input[type="text"][disabled] {
 .container {
     justify-content: left;
     margin-left: 10px;
+}
+.user-img {
+    width: 400px;
+    height: auto;
+}
+.photo-upload-input {
+  margin-top: 0px;
 }

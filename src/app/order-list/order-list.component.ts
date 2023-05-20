@@ -22,8 +22,8 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
   measurementId: 'G-55ZRJL2CJN',
 };
 import { AngularFireModule } from '@angular/fire/compat';
-AngularFireModule.initializeApp(firebaseConfig)
-import { AngularFireStorage } from '@angular/fire/compat/storage'*/
+AngularFireModule.initializeApp(firebaseConfig)*/
+import { AngularFireStorage } from '@angular/fire/compat/storage'
 
 @Component({
   selector: 'app-order-list',
@@ -43,14 +43,14 @@ export class OrderListComponent {
   stringifiedData: string = '';
   //alreadyLoggedIn: boolean = false;
 
-  orderFormComponent = new OrderFormComponent(this.databaseService, /*this.afStorage*/);
+  orderFormComponent = new OrderFormComponent(this.databaseService, this.afStorage);
 
   constructor(
     public searchbarService: SearchbarService,
     public databaseService: DatabaseService,
     public filterPipe: FilterPipe,
     public sortPipe: ArraySortPipe,
-    /*public afStorage: AngularFireStorage,*/
+    public afStorage: AngularFireStorage
   ) {
     this.databaseService.databaseOrders.subscribe((dbOrders) => {
        
