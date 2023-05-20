@@ -30,7 +30,6 @@ export class OrderFormComponent {
   submitted = false;
 
   uploadPhoto(event: any) {
-    console.log(this.order.numPhotos);
     let uploadPath = '/'.concat(this.order.id,'/', this.order.numPhotos.toString());
     let ref = this.afStorage.ref(uploadPath);
     let task = ref.put(event.target.files[0]);

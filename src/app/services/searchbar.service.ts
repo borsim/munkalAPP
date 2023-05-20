@@ -31,20 +31,17 @@ export class SearchbarService {
 
   setSortField(sortField: string) {
     this.sortField = sortField;
-    console.log(this.sortField);
     this.sortSubject.next([this.sortField, this.sortAscending]); 
   }
   
   setAscending(ascending: boolean) {
     this.sortAscending = ascending;
-    console.log(this.sortAscending);
     this.sortSubject.next([this.sortField, this.sortAscending]); 
   }
 
   setFilterDone(filterDone: boolean) {
     this.filterDone = filterDone;
     this.sbtSubject.next([this.searchbarText, this.filterDone]);
-    console.log(this.filterDone);
   }
 
   getSortTuple() {

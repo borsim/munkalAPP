@@ -119,6 +119,5 @@ export class OrderListComponent {
   }
   updateOrderStatus(incomingOrder: any) {
     this.databaseService.updateOrderInDb(incomingOrder);
-    console.log(this.sortTuple);
   }
 }
