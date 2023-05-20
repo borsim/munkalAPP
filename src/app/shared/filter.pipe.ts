@@ -14,12 +14,18 @@ export class FilterPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
     return items.filter((it) => {
       return (
+        it.name.toLowerCase().includes(searchText) ||
+        it.casingNumber.toLowerCase().includes(searchText) ||
         it.description.toLowerCase().includes(searchText) ||
-        it.task.toLowerCase().includes(searchText) ||
-        it.email.toLowerCase().includes(searchText) ||
+        it.originalState.toLowerCase().includes(searchText) ||
         it.customerName.toLowerCase().includes(searchText) ||
+        it.telephoneNumber.toLowerCase().includes(searchText) ||
+        it.email.toLowerCase().includes(searchText) ||
+        it.task.toLowerCase().includes(searchText) ||
         it.notes.toLowerCase().includes(searchText) ||
-        it.name.toLowerCase().includes(searchText)
+        it.doneTasks.toLowerCase().includes(searchText) ||
+        it.warranty.toLowerCase().includes(searchText) ||
+        it.handoverState.toLowerCase().includes(searchText)
       );
     });
   }

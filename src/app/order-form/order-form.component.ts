@@ -2,6 +2,7 @@ import { Component, Input, SimpleChanges, EventEmitter, Output } from '@angular/
 import { Order, orderStatusSelection } from '../orders';
 import { DatabaseService } from '../services/database.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AuthService } from './../services/auth.service';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage'
 import { Observable, of, map, BehaviorSubject } from 'rxjs';
 import { subscribe } from 'diagnostics_channel';
@@ -22,7 +23,7 @@ export class OrderFormComponent {
   @Input() submitBehaviour = 'new';
 
 
-  constructor(private dbs: DatabaseService, public afStorage: AngularFireStorage) {
+  constructor(private dbs: DatabaseService, public afStorage: AngularFireStorage, public authservice: AuthService) {
   }
 
   model = this.order;

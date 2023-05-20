@@ -265,8 +265,10 @@
           <div class="photo-upload-progress" *ngIf="uploadProgress | async">
             <progress max="100" [value]="uploadProgress | async"></progress>
           </div>
-          <div class="photos-container" *ngFor="let pr of photoRefs; let i = index">
-            <img src='' alt="Mentett kép" id="img{{i}}" class="user-img">
+          <div *ngIf="authservice.currentAuthStatus | async">
+            <div class="photos-container" *ngFor="let pr of photoRefs; let i = index">
+              <img src='' alt="Mentett kép" id="img{{i}}" class="user-img">
+            </div>
           </div>
         </div>
 

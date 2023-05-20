@@ -23,6 +23,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 };
 import { AngularFireModule } from '@angular/fire/compat';
 AngularFireModule.initializeApp(firebaseConfig)*/
+import { AuthService } from './../services/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage'
 
 @Component({
@@ -43,14 +44,15 @@ export class OrderListComponent {
   stringifiedData: string = '';
   //alreadyLoggedIn: boolean = false;
 
-  orderFormComponent = new OrderFormComponent(this.databaseService, this.afStorage);
+  orderFormComponent = new OrderFormComponent(this.databaseService, this.afStorage, this.authService);
 
   constructor(
     public searchbarService: SearchbarService,
     public databaseService: DatabaseService,
     public filterPipe: FilterPipe,
     public sortPipe: ArraySortPipe,
-    public afStorage: AngularFireStorage
+    public afStorage: AngularFireStorage,
+    public authService: AuthService,
   ) {
     this.databaseService.databaseOrders.subscribe((dbOrders) => {
        
