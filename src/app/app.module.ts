@@ -31,7 +31,7 @@ import { environment } from '../../src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-//import { AngularFireStorageModule } from '@angular/fire/compat/storage'
+import { AngularFireStorageModule } from '@angular/fire/compat/storage'
 import {
   MatMomentDateModule,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -41,7 +41,6 @@ import { ArraySortPipe } from './shared/sort.pipe';
 import { WarrantyCardComponent } from './warranty-card/warranty-card.component';
 import { WorksheetCardComponent } from './worksheet-card/worksheet-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { UserImageDisplayComponent } from './user-image-display/user-image-display.component';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -74,7 +73,7 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    //AngularFireStorageModule,
+    AngularFireStorageModule,
     MatDatepickerModule,
     MatRadioModule,
     ScrollingModule,
@@ -107,7 +106,6 @@ const firebaseConfig = {
     ArraySortPipe,
     WarrantyCardComponent,
     WorksheetCardComponent,
-    UserImageDisplayComponent,
   ],
   bootstrap: [AppComponent],
 })
