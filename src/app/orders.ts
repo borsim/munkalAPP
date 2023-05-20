@@ -24,6 +24,7 @@ export class Order implements OrderInterface {
     public doneTasks: string = '',
     public guarantee: string = '',
     public handoverState: string = '',
+    public numPhotos: number = 0,
   ) {}
   toInterface() {
     let oi: OrderInterface = {id: this.id, name: this.name, price: this.price, casingNumber: this.casingNumber, 
@@ -31,7 +32,7 @@ export class Order implements OrderInterface {
       icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
       task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
       returnedTime: this.returnedTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks,
-      guarantee: this.guarantee, handoverState: this.handoverState}
+      guarantee: this.guarantee, handoverState: this.handoverState, numPhotos: this.numPhotos}
     return oi;
   }
 }
@@ -58,6 +59,7 @@ export interface OrderInterface {
   doneTasks: string;
   guarantee: string;
   handoverState: string;
+  numPhotos: number;
 }
 
 export var orders = [
@@ -83,6 +85,7 @@ export var orders = [
     doneTasks: '',
     guarantee: '3 hónap',
     handoverState: 'polírozott hátlap',
+    numPhotos: 0,
   },
 ];
 

@@ -59,7 +59,8 @@ export class WorksheetCardComponent implements OnInit {
               dbOrder!.notes,
               dbOrder!.doneTasks,
               dbOrder!.guarantee,
-              dbOrder!.handoverState
+              dbOrder!.handoverState,
+              dbOrder!.numPhotos,
             )
           : new Order('0');
         this.order = nonNullOrder;

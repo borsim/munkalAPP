@@ -49,6 +49,7 @@ export class DatabaseService {
       doneTasks: newOrder.doneTasks,
       guarantee: newOrder.guarantee,
       handoverState: newOrder.handoverState,
+      numPhotos: newOrder.numPhotos,
     };
     this.ordersCollection.add(newIOrder);
   }
