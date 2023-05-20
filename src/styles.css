@@ -10,6 +10,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media print {
+  .no-print {
+      display: none;
+  }
+}
+
 body {
   margin: 0;
 }

@@ -1,6 +1,24 @@
-.flex-parent {
-  display: flex;
+.order-details-body {
+  justify-content: left;
+  margin-left: 0px;
 }
-.flex-child {
-  flex: 1;
+
+.back-link {
+  padding-left: 20px;
+}
+.order-title {
+  padding-left: 25px;
+}
+
+#orderForm {
+  padding-left: 0px
+}
+
+.details-buttons {
+  display: flex;
+  gap: 10px;
+  padding-left: 20px;
+}
+.print-button {
+  padding-left: 20px;
 }

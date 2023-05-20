@@ -1,10 +1,14 @@
-<app-top-bar></app-top-bar>
-<div *ngIf="authservice.currentAuthStatus | async; else showLogin">
-  <router-outlet></router-outlet>
-  Bejelentkezve
+<div class="no-print">
+  <app-top-bar></app-top-bar>
+  
+  <div *ngIf="authservice.currentAuthStatus | async; else showLogin">
+    <router-outlet></router-outlet>
+    Bejelentkezve
+  </div>
+  <ng-template #showLogin>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+  </ng-template>
 </div>
-<ng-template #showLogin>
-  <div id="firebaseui-auth-container"></div>
-  <div id="loader">Loading...</div>
-</ng-template>
+<router-outlet name="print"></router-outlet>
 

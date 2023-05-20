@@ -1,6 +1,6 @@
-<div *ngIf="orderObs | async">
+<div *ngIf="orderObs | async" class="order-details-body">
   <div *ngIf="order">
-    <h3>{{ order.name }}</h3>
+    <h3 class="order-title">{{ order.name }}</h3>
     <order-form [order]="order" [readonly]="disableEditing" [confirmButtonsHidden]="true" [submitBehaviour]="submitBehaviour" id="orderForm"> </order-form>
     <!-- <h4>{{ order.deadline | time }}</h4>
     <div class="child flex-parent">
@@ -43,13 +43,21 @@
   </div>
 </div>
 
-<button
-  (click)="disableEditing = !disableEditing; toggleEditing()"
-  type="button"
-  [hidden]="!disableEditing"
->
-  {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
-</button>
 <h3>
-  <a [routerLink]="['/']"> Vissza </a>
+  <a [routerLink]="['/']" class="back-link"> Vissza </a>
 </h3>
+
+<div class="details-buttons">
+  <button
+    (click)="disableEditing = !disableEditing; toggleEditing()"
+    type="button"
+  >
+    {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
+  </button>
+  <button (click)="onPrintWorksheet()" type="button" class="print-button">
+    <mat-icon>print</mat-icon>  Munkalap
+  </button>
+  <button (click)="onPrintWarranty()" type="button" class="print-button">
+    <mat-icon>print</mat-icon>  Garancialevél
+  </button>
+</div>

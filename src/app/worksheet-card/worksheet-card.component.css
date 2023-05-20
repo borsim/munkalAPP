@@ -1,0 +1,83 @@
+@media screen {
+  :host {
+    display: none;
+    width: 0px;
+  }
+}
+@page {
+  size: auto;  /* auto is the initial value */
+  margin-top: 0mm; /* this affects the margin in the printer settings */
+  margin-bottom: 0mm;
+}
+.print-header {
+  margin-top: 0px;
+  display: flex;
+}
+.print-header-left {
+  justify-content: left;
+  text-align: left;
+}
+.print-header-right {
+  margin-left: auto;
+}
+.print-footer {
+  padding-top: 30px;
+  justify-content: center;
+  text-align: center;
+  line-height: 75%;
+}
+
+.horizontal-centered-item {
+  margin: 0 auto;
+}
+
+.cutting-line {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.worksheet-body {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.worksheet-body-left {
+  color: black;
+  flex: 1 1 auto;
+  text-align: center;
+  align-content: center;
+  width: 40%;
+}
+.worksheet-info-left-container {
+  padding-top: 20px;
+  align-content: center;
+  margin-left: auto;
+}
+
+.worksheet-body-right {
+  padding-left: 50px;
+  vertical-align: middle;
+  flex: 1 1 auto;
+  width: 60%;
+}
+.worksheet-info-item {
+  color: black;
+  display: flex;
+  text-align: left;
+}
+.worksheet-info-item-name {
+  justify-content: left;
+  width: 150px;
+}
+.worksheet-info-item-value {
+  padding-left: 10px;
+  justify-content: left;
+}
+.disclaimer {
+  font-size: smaller;
+}
+.logo {
+  height: 80%;
+  width: 80%;
+}

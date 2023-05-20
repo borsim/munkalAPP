@@ -1,0 +1,71 @@
+<div class="warranty-card-container" *ngIf="orderObs | async">
+    <div *ngIf="order">
+        <div class="print-header">
+            <div class="print-header-left">{{datetimeText}}</div>
+            <div class="print-header-right">Munkalap nyilvántartó</div>
+        </div>
+        <div class="warranty-body">
+        <div class="warranty-body-left">
+            <div class="logo-container horizontal-centered-item">
+                <img src="/assets/munkalAPP_logo.png" alt="image">
+            </div>
+            <h1 class="horizontal-centered-item">Garancialevél</h1>
+        </div>
+        <div class="warranty-body-right">
+            <div class="warranty-info-item">
+                <div class="warranty-info-item-name">
+                    Dátum:
+                </div>
+                <div class="warranty-info-item-value">
+                    {{dateText}}
+                </div>
+            </div>
+            <div class="warranty-info-item">
+                <div class="warranty-info-item-name">
+                    Tárgy:
+                </div>
+                <div class="warranty-info-item-value">
+                    {{order.name}}
+                </div>
+            </div>
+            <div class="warranty-info-item">
+                <div class="warranty-info-item-name">
+                    Tokszám:
+                </div>
+                <div class="warranty-info-item-value">
+                    CASENUMBERVALUE
+                </div>
+            </div>
+            <div class="warranty-info-item">
+                <div class="warranty-info-item-name">
+                    Elvégzett munkák:
+                </div>
+                <div class="warranty-info-item-value">
+                    {{order.doneTasks}}
+                </div>
+            </div>
+            <div class="warranty-info-item">
+                <div class="warranty-info-item-name">
+                    Garancia:
+                </div>
+                <div class="warranty-info-item-value">
+                    {{order.guarantee}}
+                </div>
+            </div>
+            <div class="warranty-info-item">
+                <div class="warranty-info-item-name">
+                    Garancia állapot:
+                </div>
+                <div class="warranty-info-item-value">
+                    WARRANTY_STATEVALUE
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="print-footer">
+        <p>1147 Budapest, Gervay utca 24.</p>
+        <p>Nyitvatartás: mindig és bármikor</p>
+        <p>https://www.instagram.com/borsieshoblyak</p>
+        </div>
+    </div>
+  </div>

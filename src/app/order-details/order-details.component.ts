@@ -8,6 +8,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import moment from 'moment';
+import { PrintService } from '../services/print.service';
 
 @Component({
   selector: 'app-order-details',
@@ -28,7 +29,8 @@ export class OrderDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: AngularFirestore,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    public printService: PrintService,
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const oid: string = routeParams.get('orderId')!;
@@ -37,6 +39,7 @@ export class OrderDetailsComponent implements OnInit {
     this.orderDoc = store.doc<OrderInterface>('Orders/' + oid);
     let orderVC = this.orderDoc.valueChanges(); //{idField: 'id'});
     this.orderObs = orderVC;
+
 
     orderVC.subscribe((dbOrder) => {
       const nonNullOrder: Order =
@@ -82,5 +85,13 @@ export class OrderDetailsComponent implements OnInit {
 
     // Find the order that correspond with the id provided in route.
     //this.order = this.getDocument(routeParams.get('orderId')); //this.orders.find((order) => order.id === orderIdFromRoute);
+  }
+
+  onPrintWarranty() {
+    this.printService.printDocument('warranty-card', this.currentOrderId);
+  }
+
+  onPrintWorksheet() {
+    this.printService.printDocument('worksheet-card', this.currentOrderId);
   }
 }

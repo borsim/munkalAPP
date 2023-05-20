@@ -29,6 +29,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "angular-in-memory-web-api": "~0.14.0",
+    "angularx-qrcode": "^14.0.0",
     "firebase-tools": "^9.9.0 || ^10.0.0 || ^11.0.0",
     "firebaseui": "^6.0.2",
     "moment": "^2.29.4",

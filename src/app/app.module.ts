@@ -37,6 +37,9 @@ import {
   MAT_MOMENT_DATE_FORMATS
 } from '@angular/material-moment-adapter';
 import { ArraySortPipe } from './shared/sort.pipe';
+import { WarrantyCardComponent } from './warranty-card/warranty-card.component';
+import { WorksheetCardComponent } from './worksheet-card/worksheet-card.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -72,9 +75,17 @@ const firebaseConfig = {
     MatDatepickerModule,
     MatRadioModule,
     ScrollingModule,
+    QRCodeModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },
       { path: 'orders/:orderId', component: OrderDetailsComponent },
+      { path: 'print',
+        outlet: 'print',
+        children: [
+          { path: 'warranty-card/:orderId', component: WarrantyCardComponent },
+          { path: 'worksheet-card/:orderId', component: WorksheetCardComponent },
+        ]
+      }
     ]),
   ],
   providers: [
@@ -91,6 +102,8 @@ const firebaseConfig = {
     OrderFormComponent,
     FilterPipe,
     ArraySortPipe,
+    WarrantyCardComponent,
+    WorksheetCardComponent,
   ],
   bootstrap: [AppComponent],
 })

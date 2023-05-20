@@ -1,0 +1,62 @@
+@media screen {
+  :host {
+    display: none;
+    width: 0px;
+  }
+}
+@page {
+  size: auto;  /* auto is the initial value */
+  margin-top: 0mm; /* this affects the margin in the printer settings */
+  margin-bottom: 0mm;
+}
+.print-header {
+  display: flex;
+}
+.print-header-left {
+  justify-content: left;
+  text-align: left;
+}
+.print-header-right {
+  margin-left: auto;
+}
+.print-footer {
+  padding-top: 50px;
+  justify-content: center;
+  text-align: center;
+  line-height: 75%;
+}
+
+.horizontal-centered-item {
+  margin: 0 auto;
+}
+
+.warranty-body {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.warranty-body-left {
+  align-content: center;
+  color: black;
+  width: 50%;
+  flex: 1 1 auto;
+  text-align: center;
+}
+.warranty-body-right {
+  padding-left: 50px;
+  vertical-align: middle;
+  width: 50%;
+  flex: 1 1 auto;
+}
+.warranty-info-item {
+  color: black;
+  display: flex;
+}
+.warranty-info-item-name {
+  justify-content: left;
+  width: 150px;
+}
+.warranty-info-item-value {
+  padding-left: 10px;
+  justify-content: left;
+}

@@ -1,0 +1,230 @@
+<div class="worksheet-card-container" *ngIf="orderObs | async">
+    <div *ngIf="order">
+        <div class="print-header">
+            <div class="print-header-left">{{datetimeText}}</div>
+            <div class="print-header-right">Munkalap nyilvántartó</div>
+        </div>
+        <div class="worksheet-body">
+            <div class="worksheet-body-left">
+                <div class="logo-container horizontal-centered-item">
+                    <img src="/assets/munkalAPP_logo.png" alt="image" class="logo">
+                </div>
+                <h1 class="horizontal-centered-item">Munkalap</h1>
+                <h2 class="horizontal-centered-item">Átvételi elismervény</h2>
+                <div class="qr-code-container horizontal-centered-ite">
+                    <qrcode [qrdata]="qrcodeString" [width]="128" [errorCorrectionLevel]="'M'"></qrcode>
+                </div>
+                <p class="disclaimer horizontal-centered-item">
+                    E szelvényt gondosan őrizze meg, a leadott tárgy csak ennek ellenében vehető át! Az elkészült tárgyat
+                    ::: EGYÉB RÉSZLETEK :::
+                    ::: MÉG TÖBB RÉSZLET :::
+                </p>
+                
+            </div>
+            <div class="worksheet-body-right">
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Kelt:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{dateText}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Tárgy:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.name}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Felvett állapot:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        PICKUP_STATEVALUE
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Tokszám:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        CASENUMBERVALUE
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Hiba:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.description}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Elvégzett munkák:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.doneTasks}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Határidő:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.deadline | date}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Ár:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.price}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Előleg:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.advancePayment}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print-footer">
+            <p>1147 Budapest, Gervay utca 24.</p>
+            <p>Nyitvatartás: mindig és bármikor</p>
+            <p>https://www.instagram.com/borsieshoblyak</p>
+        </div>
+        <div class="cutting-line">
+            ----------------------------------------------------------------------------------------------------------------------------------------------------
+        </div>
+        <div class="print-header">
+            <div class="print-header-left">{{datetimeText}}</div>
+            <div class="print-header-right">Munkalap nyilvántartó</div>
+        </div>
+        <div class="worksheet-body">
+            <div class="worksheet-body-left">
+                <h1 class="horizontal-centered-item">Munkalap</h1>
+                <h2 class="horizontal-centered-item">Műhely példánya</h2>
+                <div class="qr-code-container horizontal-centered-item">
+                    <qrcode [qrdata]="qrcodeString" [width]="128" [errorCorrectionLevel]="'M'"></qrcode>
+                </div>
+                <div class="worksheet-info-left-container">
+                    <div class="worksheet-info-item horizontal-centered-item">
+                        <div class="worksheet-info-item-name">
+                            Kelt:
+                        </div>
+                        <div class="worksheet-info-item-value">
+                            {{dateText}}
+                        </div>
+                    </div>
+                    <div class="worksheet-info-item horizontal-centered-item">
+                        <div class="worksheet-info-item-name">
+                            Ügyfél:
+                        </div>
+                        <div class="worksheet-info-item-value">
+                            {{order.customerName}}
+                        </div>
+                    </div>
+                    <div class="worksheet-info-item horizontal-centered-item">
+                        <div class="worksheet-info-item-name">
+                            Telefon:
+                        </div>
+                        <div class="worksheet-info-item-value">
+                            {{order.telephoneNumber}}
+                        </div>
+                    </div>
+                    <div class="worksheet-info-item horizontal-centered-item">
+                        <div class="worksheet-info-item-name">
+                            Email:
+                        </div>
+                        <div class="worksheet-info-item-value">
+                            {{order.email}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="worksheet-body-right">
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Tárgy:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.name}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Felvett állapot:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        PICKUP_STATEVALUE
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Tokszám:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        CASENUMBERVALUE
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Hiba:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.description}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Munkák:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.task}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Határidő:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.deadline | date}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Ár:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.price}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Előleg:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.advancePayment}}
+                    </div>
+                </div>
+                <div class="worksheet-info-item">
+                    <div class="worksheet-info-item-name">
+                        Megjegyzések:
+                    </div>
+                    <div class="worksheet-info-item-value">
+                        {{order.notes}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

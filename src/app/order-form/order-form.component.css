@@ -2,10 +2,10 @@ input[type="text"][disabled] {
     color: rgb(0, 0, 0);
  }
 .flex-parent {
-display: flex;
+    display: flex;
 }
 .flex-child {
-flex: 1;
+    flex: 1;
 }
 .order-title {
     padding-left: 50px;
@@ -15,4 +15,8 @@ flex: 1;
     padding-bottom: 0;
     margin-top: 0;
     margin-bottom: 0;
+}
+.container {
+    justify-content: left;
+    margin-left: 10px;
 }

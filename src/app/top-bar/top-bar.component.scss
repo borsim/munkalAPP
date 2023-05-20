@@ -30,7 +30,7 @@ header {
   }
 }
 .filter-done-toggle {
-  padding-left: 20px ;
+  padding-left: 60px ;
   color: #fff;
 }
 .slide-toggle-label {
@@ -42,7 +42,7 @@ header {
   justify-content: left;
 }
 .sorting-radio-label {
-  padding-left: 80px;
+  padding-left: 30px;
   color: #fff;
   justify-content: left;
   text-transform: capitalize;
@@ -62,6 +62,7 @@ header {
 
 .sort-ascending-button {
   width: 40px;
+  height: 80%;
   align-content: center;
   justify-content: center;
   color: #fff;
@@ -69,8 +70,14 @@ header {
 
 .sort-arrow {
   color: white;
+  margin-top: 50%;
 }
 .open-search-button {
   margin-left: auto;
   margin-right: 30px;
+}
+
+.top-bar-left {
+  margin-left: 0px;
+  padding-left: 0px;
 }
