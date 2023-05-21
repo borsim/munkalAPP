@@ -21,7 +21,6 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio'
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule } from '@angular/forms';
@@ -34,9 +33,12 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage'
 import {
   MatMomentDateModule,
+  MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MAT_MOMENT_DATE_FORMATS
+  MAT_MOMENT_DATE_FORMATS,
 } from '@angular/material-moment-adapter';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ArraySortPipe } from './shared/sort.pipe';
 import { WarrantyCardComponent } from './warranty-card/warranty-card.component';
 import { WorksheetCardComponent } from './worksheet-card/worksheet-card.component';
@@ -92,7 +94,17 @@ const firebaseConfig = {
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
-    { provide:   MAT_MOMENT_DATE_FORMATS, useValue: {parse:{dateInput: 'DD.MM.YYYY'} } },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: { 
+      parse: {
+        dateInput: 'YYYY/MM/DD'
+      },
+      display: {
+          dateInput: 'YYYY/MM/DD',
+          monthYearLabel: 'YYYY MMMM',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'YYYY MMMM'
+      }}},
     FilterPipe,
     ArraySortPipe
   ],

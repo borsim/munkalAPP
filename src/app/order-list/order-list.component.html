@@ -42,7 +42,7 @@
             <mat-divider></mat-divider>
             <div class="order-details-flexbox">
               <p *ngIf="order.description" class="order-description-text">{{ order.description }}</p>
-              <p *ngIf="order.deadline" class="order-deadline-text">Határidő: {{order.deadline | date: 'dd-MM-yyyy'}}</p>
+              <p *ngIf="order.deadline" class="order-deadline-text">Határidő: {{order.deadline | date: 'yyyy/MM/dd'}}</p>
             </div>
 
               <!--

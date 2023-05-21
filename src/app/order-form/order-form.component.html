@@ -113,9 +113,8 @@
           <br>
           <mat-form-field appearance="fill">
             <label for="deadline">Határidő</label>
-
-            <input matInput [matDatepicker]="picker" (dateChange)="deadlineChanged($event.value)" placeholder="DD/MM/YYYY" [disabled]="readonly"/>
-            <!-- <mat-hint>DD/MM/YYYY</mat-hint> -->
+            <input matInput [matDatepicker]="picker" (dateChange)="deadlineChanged($event.value)" placeholder="{{model.deadline | date: 'yyyy/MM/dd'}}" [disabled]="readonly"/>
+            <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"

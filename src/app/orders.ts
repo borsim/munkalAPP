@@ -96,10 +96,12 @@ export interface OrderStatusInterface {
 }
 
 export const orderStatusSelection: OrderStatusInterface[] = [
-  { value: 'registered', viewValue: 'Felvéve' },
-  { value: 'ready for pickup', viewValue: 'Átadásra vár' },
-  { value: 'waiting for part', viewValue: 'Darabra vár' },
-  { value: 'done', viewValue: 'Kész, átadva'}
+  { value: 'registered', viewValue: 'Átvéve' },
+  { value: 'waiting for part', viewValue: 'Alkatrészre vár' },
+  { value: 'tasks done', viewValue: 'Elkészült, értesíthető'},
+  { value: 'ready for pickup', viewValue: 'Ádatásra vár, értesítve' },
+  { value: 'done', viewValue: 'Átadva'},
+  { value: 'canceled', viewValue: 'Visszamondva'}
 ];
 
 export interface OrderSortingInterface {
