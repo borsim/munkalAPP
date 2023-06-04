@@ -21,12 +21,17 @@
              class="order-list-virtual-scroll-item">
              <div class="order-title-flexbox">
               <!-- <mat-label>Státusz</mat-label> -->
-                <select [(ngModel)]="order.orderStatus" (change)="updateOrderStatus(order)">
-                  <option></option>
-                  <option [value]="o.value" *ngFor="let o of oss">
+                <mat-select [(ngModel)]="order.orderStatus" (change)="updateOrderStatus(order)" class="order-status-select">
+                  <mat-option></mat-option>
+                  <mat-option [value]="o.value" *ngFor="let o of oss" class="order-status-option">
+                    <mat-icon>{{o.icon}}</mat-icon>
                     {{ o.viewValue }}
-                  </option>
-                </select>
+                  </mat-option>
+                  <mat-select-trigger>
+                    <mat-icon>{{order.getStatusIcon()}}</mat-icon>
+                    {{order.getStatusDisplay()}}
+                  </mat-select-trigger>
+                </mat-select>
 
               <div class="order-title">
                 <h3>

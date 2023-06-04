@@ -34,6 +34,56 @@ export class Order implements OrderInterface {
       guarantee: this.guarantee, handoverState: this.handoverState, numPhotos: this.numPhotos}
     return oi;
   }
+  getStatusIcon(): string {
+    switch (this.orderStatus) {
+      case 'registered': {
+        return 'add_box';
+      }
+      case 'waiting for part': {
+        return 'hourglass_empty';
+      }
+      case 'tasks done': {
+        return 'assignment_turned_in';
+      }
+      case 'ready for pickup': {
+        return 'contact_mail';
+      }
+      case 'done': {
+        return 'done';
+      }
+      case 'canceled': {
+        return 'clear';
+      }
+      default: {
+        return '';
+      }
+    }
+  }
+  getStatusDisplay(): string {
+    switch (this.orderStatus) {
+      case 'registered': {
+        return 'Felvéve';
+      }
+      case 'waiting for part': {
+        return 'Alkatrészre vár';
+      }
+      case 'tasks done': {
+        return 'Elkészült, értesíthető';
+      }
+      case 'ready for pickup': {
+        return 'Átadásra vár, értesítve';
+      }
+      case 'done': {
+        return 'Átadva, kész';
+      }
+      case 'canceled': {
+        return 'Visszamondva';
+      }
+      default: {
+        return '';
+      }
+    }
+  }
 }
 
 export interface OrderInterface {
@@ -93,15 +143,16 @@ export const possibleStatuses = ['asd'];
 export interface OrderStatusInterface {
   value: string;
   viewValue: string;
+  icon: string;
 }
 
 export const orderStatusSelection: OrderStatusInterface[] = [
-  { value: 'registered', viewValue: 'Átvéve' },
-  { value: 'waiting for part', viewValue: 'Alkatrészre vár' },
-  { value: 'tasks done', viewValue: 'Elkészült, értesíthető'},
-  { value: 'ready for pickup', viewValue: 'Ádatásra vár, értesítve' },
-  { value: 'done', viewValue: 'Átadva'},
-  { value: 'canceled', viewValue: 'Visszamondva'}
+  { value: 'registered', viewValue: 'Felvéve', icon:'add_box' },
+  { value: 'waiting for part', viewValue: 'Alkatrészre vár', icon:'hourglass_empty' },
+  { value: 'tasks done', viewValue: 'Elkészült, értesíthető', icon:'assignment_turned_in'},
+  { value: 'ready for pickup', viewValue: 'Átadásra vár, értesítve', icon:'contact_mail' },
+  { value: 'done', viewValue: 'Átadva, kész', icon:'done'},
+  { value: 'canceled', viewValue: 'Visszamondva', icon:'clear'}
 ];
 
 export interface OrderSortingInterface {
@@ -116,21 +167,7 @@ export const sortingStatusSelection: OrderSortingInterface[] = [
   { value: 'deadline', viewValue: 'Határidő' },
 ];
 
-export const statusToIcon = {
-  home: 'done',
-  search: 'incomplete',
-};
 
-export const statusToDisplayName = {
-  registered: 'Felvéve',
-  ready_for_pickup: 'Átadásra vár',
-  waiting_for_part: 'Darabra vár',
-};
-
-export const iconToStatus = {
-  done: 'home',
-  incomplete: 'search',
-};
 
 /*
 Copyright Google LLC. All Rights Reserved.

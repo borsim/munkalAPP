@@ -31,6 +31,7 @@ export class TopBarComponent {
     this.searchbarService.clearSearchString();
   }
   updateSBServiceData() {
+    console.log(this.searchText);
     this.searchbarService.setSearchString(this.searchText);
   }
   changeToggleValue(toggleValue: any) {

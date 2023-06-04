@@ -2,8 +2,6 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IconPickerModule } from 'ngx-icon-picker';
 import {
   Order,
-  statusToIcon,
-  iconToStatus,
   orderStatusSelection,
 } from '../orders';
 import { OrderFormComponent } from '../order-form/order-form.component';

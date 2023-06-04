@@ -13,6 +13,7 @@ import { OrderFormComponent } from './order-form/order-form.component';
 import { IconPickerModule } from 'ngx-icon-picker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -65,6 +66,7 @@ const firebaseConfig = {
     MatDividerModule,
     FormsModule,
     MatSelectModule,
+    MatOptionModule,
     MatInputModule,
     MatPaginatorModule,
     MatSortModule,

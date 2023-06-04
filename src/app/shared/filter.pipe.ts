@@ -24,7 +24,7 @@ export class FilterPipe implements PipeTransform {
         it.task.toLowerCase().includes(searchText) ||
         it.notes.toLowerCase().includes(searchText) ||
         it.doneTasks.toLowerCase().includes(searchText) ||
-        it.warranty.toLowerCase().includes(searchText) ||
+        it.guarantee.toLowerCase().includes(searchText) ||
         it.handoverState.toLowerCase().includes(searchText)
       );
     });
