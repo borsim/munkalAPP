@@ -21,15 +21,33 @@
              class="order-list-virtual-scroll-item">
              <div class="order-title-flexbox">
               <!-- <mat-label>Státusz</mat-label> -->
-                <mat-select [(ngModel)]="order.orderStatus" (change)="updateOrderStatus(order)" class="order-status-select">
-                  <mat-option></mat-option>
+                <div class="icon-container">
+                  <mat-icon class="big-icon" >{{order.getStatusIcon()}}</mat-icon>
+                </div>
+                <mat-select [(ngModel)]="order.orderStatus" (selectionChange)="updateOrderStatus(order)" class="order-status-select">
                   <mat-option [value]="o.value" *ngFor="let o of oss" class="order-status-option">
-                    <mat-icon>{{o.icon}}</mat-icon>
-                    {{ o.viewValue }}
+                    <div [ngClass]="{
+                      'statusRed' : o.value == 'canceled',
+                      'statusGreen' : o.value == 'tasks done',
+                      'statusYellow' : o.value == 'waiting for part', 
+                      'statusLightgreen' : o.value == 'ready for pickup',
+                      'statusBlue' : o.value == 'registered',
+                      'statusGrey' : o.value == 'done'}">
+                      <mat-icon class="status-icon">{{o.icon}}</mat-icon>
+                      {{ o.viewValue }}
+                    </div>
                   </mat-option>
-                  <mat-select-trigger>
-                    <mat-icon>{{order.getStatusIcon()}}</mat-icon>
-                    {{order.getStatusDisplay()}}
+                  <mat-option></mat-option>
+                  <mat-select-trigger class="selected-order-status">
+                    <div [ngClass]="{
+                      'statusRed' : order.orderStatus == 'canceled',
+                      'statusGreen' : order.orderStatus == 'tasks done',
+                      'statusYellow' : order.orderStatus == 'waiting for part', 
+                      'statusLightgreen' : order.orderStatus == 'ready for pickup',
+                      'statusBlue' : order.orderStatus == 'registered',
+                      'statusGrey' : order.orderStatus == 'done'}">
+                      {{  order.getStatusDisplay()}}
+                    </div>
                   </mat-select-trigger>
                 </mat-select>
 
@@ -47,7 +65,7 @@
             <mat-divider></mat-divider>
             <div class="order-details-flexbox">
               <p *ngIf="order.description" class="order-description-text">{{ order.description }}</p>
-              <p *ngIf="order.deadline" class="order-deadline-text">Határidő: {{order.deadline | date: 'yyyy/MM/dd'}}</p>
+              <p *ngIf="order.deadline" class="order-deadline-text" [ngClass]="{'statusRed': order.isDeadlineUrgent()}">Határidő: {{order.deadline | date: 'yyyy/MM/dd'}}</p>
             </div>
 
               <!--

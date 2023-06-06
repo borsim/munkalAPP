@@ -152,11 +152,11 @@
         </mat-form-field>
         </div>
         <div [hidden]="!(openTab == 1)">
-          <mat-form-field appearance="fill">
+          <mat-form-field [style.width.%]="110" appearance="fill">
             <div class="form-group">
               <label for="orderStatus">Státusz</label>
               <mat-select
-                class="form-control"
+                class="order-status-select"
                 id="orderStatus"
                 required
                 [(ngModel)]="model.orderStatus"
@@ -164,10 +164,31 @@
                 #orderStatus="ngModel"
                 [disabled]="readonly"
               >
-                <mat-option *ngFor="let os of orderStatusValues" [value]="os.value">
-                  {{ os.viewValue }}
-                </mat-option>
-              </mat-select>
+              <mat-option [value]="o.value" *ngFor="let o of orderStatusValues" class="order-status-option">
+                <div [ngClass]="{
+                  'statusRed' : o.value == 'canceled',
+                  'statusGreen' : o.value == 'tasks done',
+                  'statusYellow' : o.value == 'waiting for part', 
+                  'statusLightgreen' : o.value == 'ready for pickup',
+                  'statusBlue' : o.value == 'registered',
+                  'statusGrey' : o.value == 'done'}">
+                  <mat-icon class="status-icon">{{o.icon}}</mat-icon>
+                  {{ o.viewValue }}
+                </div>
+              </mat-option>
+              <mat-option></mat-option>
+              <mat-select-trigger class="selected-order-status">
+                <div [ngClass]="{
+                  'statusRed' : order.orderStatus == 'canceled',
+                  'statusGreen' : order.orderStatus == 'tasks done',
+                  'statusYellow' : order.orderStatus == 'waiting for part', 
+                  'statusLightgreen' : order.orderStatus == 'ready for pickup',
+                  'statusBlue' : order.orderStatus == 'registered',
+                  'statusGrey' : order.orderStatus == 'done'}">
+                  {{  order.getStatusDisplay()}}
+                </div>
+              </mat-select-trigger>
+            </mat-select>
               <div [hidden]="orderStatus.valid || orderStatus.pristine" class="alert alert-danger">
                 Státusz megadása kötelező
               </div>

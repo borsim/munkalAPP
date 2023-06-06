@@ -1,4 +1,5 @@
 import { throwToolbarMixedModesError } from "@angular/material/toolbar";
+import moment from "moment";
 
 export class Order implements OrderInterface {
   constructor(
@@ -83,6 +84,11 @@ export class Order implements OrderInterface {
         return '';
       }
     }
+  }
+  isDeadlineUrgent(): boolean {
+    const oneWeekInTimestamp: number = 604800000;
+    var lessThanAWeek: boolean = (this.deadline - moment().valueOf()) <= oneWeekInTimestamp;
+    return lessThanAWeek;
   }
 }
 

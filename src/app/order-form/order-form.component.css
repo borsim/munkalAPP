@@ -19,6 +19,7 @@ input[type="text"][disabled] {
     margin-top: 0;
     margin-bottom: 0;
 }
+
 .container {
     justify-content: left;
     margin-left: 10px;
@@ -30,3 +31,41 @@ input[type="text"][disabled] {
 .photo-upload-input {
   margin-top: 0px;
 }
+
+.order-status-option {
+    width: 200;
+    align-items: center;
+    border-color: darkgray;
+    margin-top: auto;
+    font-weight: bolder;
+    vertical-align: middle;
+    
+  }
+  .order-status-select {
+    height: 75%;
+    width: 200px;
+    border: 2px solid;
+    border-color: rgb(90, 90, 90);
+    margin-top: auto;
+    background-color: rgb(235, 235, 235);
+    align-items: center;
+  }
+  
+  .statusYellow {
+    color:orange;
+  }
+  .statusGreen {
+    color: darkgreen;
+  }
+  .statusLightgreen {
+    color:rgb(28, 170, 28);
+  }
+  .statusBlue {
+    color:cornflowerblue;
+  }
+  .statusRed {
+    color:crimson;
+  }
+  .statusGrey {
+    color: darkgrey;
+  }
