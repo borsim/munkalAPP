@@ -83,7 +83,7 @@
                         Ár:
                     </div>
                     <div class="worksheet-info-item-value">
-                        {{order.price}}
+                        {{order.price | number:'1.0-0'}}
                     </div>
                 </div>
                 <div class="worksheet-info-item">
@@ -91,7 +91,7 @@
                         Előleg:
                     </div>
                     <div class="worksheet-info-item-value">
-                        {{order.advancePayment}}
+                        {{order.advancePayment | number:'1.0-0'}}
                     </div>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                         Ár:
                     </div>
                     <div class="worksheet-info-item-value">
-                        {{order.price}}
+                        {{order.price | number:'1.0-0'}}
                     </div>
                 </div>
                 <div class="worksheet-info-item">
@@ -213,7 +213,7 @@
                         Előleg:
                     </div>
                     <div class="worksheet-info-item-value">
-                        {{order.advancePayment}}
+                        {{order.advancePayment | number:'1.0-0'}}
                     </div>
                 </div>
                 <div class="worksheet-info-item">

@@ -10,6 +10,7 @@ export class PrintService {
   constructor(private router: Router) { }
 
   printDocument(documentName: string, orderId: string) {
+    console.log("Start printing?");
     this.isPrinting = true;
     this.router.navigate(['/',
       { outlets: {
@@ -18,10 +19,12 @@ export class PrintService {
   }
 
   onDataReady() {
-    setTimeout(() => {
-      window.print();
-      this.isPrinting = false;
-      this.router.navigate([{ outlets: { print: null }}]);
-    });
+    if (this.isPrinting) {
+      setTimeout(() => {
+        window.print();
+        this.isPrinting = false;
+        this.router.navigate([{ outlets: { print: null }}]);
+      });
+    }
   }
 }

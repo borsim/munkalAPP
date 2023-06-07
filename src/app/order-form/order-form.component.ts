@@ -14,7 +14,7 @@ import { subscribe } from 'diagnostics_channel';
 })
 export class OrderFormComponent {
   orderStatusValues = orderStatusSelection;
-  openTab: number = 0;
+  public openTab: number = 0;
   uploadProgress: Observable<number> = of(0);
   photoRefs: string[] = [];
   @Input() readonly: boolean = false;
@@ -43,6 +43,7 @@ export class OrderFormComponent {
   }
 
   onSubmit() {
+    console.log("form submitted");
     this.submitted = true;
     if (this.submitBehaviour === 'new') {
       this.dbs.addOrderToDb(this.model);

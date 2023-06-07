@@ -61,6 +61,14 @@ export class DatabaseService {
     orderDoc.update(newIOrder);
   }
 
+  deleteOrderInDb(toDelete: Order) {
+    if(window.confirm('Biztosan törölni szeretnéd ezt a munkalapot?\nKitörölt munkalapok NEM VISSZAÁLLÍTHATÓAK.')) {
+      let orderDoc = this.store.doc<OrderInterface>('Orders/' + toDelete.id);
+      // TODO delete associated photos
+      orderDoc.delete();
+    }
+  }
+
   getOrders() {
     return this.orders;
   }

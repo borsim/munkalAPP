@@ -167,7 +167,8 @@ export interface OrderSortingInterface {
 }
 
 export const sortingStatusSelection: OrderSortingInterface[] = [
-  { value: 'name', viewValue: 'ABC' },
+  { value: 'name', viewValue: 'Munkalapnév' },
+  { value: 'customerName', viewValue: "Ügyfél"},
   { value: 'creationTime', viewValue: 'Felvétel ideje' },
   { value: 'lastUpdatedTime', viewValue: 'Legutóbb módosítva' },
   { value: 'deadline', viewValue: 'Határidő' },

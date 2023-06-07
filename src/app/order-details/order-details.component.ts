@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import moment from 'moment';
 import { PrintService } from '../services/print.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -31,6 +32,7 @@ export class OrderDetailsComponent implements OnInit {
     private store: AngularFirestore,
     private databaseService: DatabaseService,
     public printService: PrintService,
+    private router: Router,
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const oid: string = routeParams.get('orderId')!;
@@ -97,5 +99,12 @@ export class OrderDetailsComponent implements OnInit {
 
   onPrintWorksheet() {
     this.printService.printDocument('worksheet-card', this.currentOrderId);
+  }
+
+  deleteOrder() {
+    if (this.order) {
+      this.databaseService.deleteOrderInDb(this.order);
+      this.router.navigateByUrl('/')
+    }
   }
 }

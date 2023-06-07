@@ -37,7 +37,7 @@
                       {{ o.viewValue }}
                     </div>
                   </mat-option>
-                  <mat-option></mat-option>
+                  <!-- <mat-option></mat-option> -->
                   <mat-select-trigger class="selected-order-status">
                     <div [ngClass]="{
                       'statusRed' : order.orderStatus == 'canceled',
@@ -51,15 +51,20 @@
                   </mat-select-trigger>
                 </mat-select>
 
-              <div class="order-title">
-                <h3>
-                  <a
-                    [title]="order.name + ' details'"
-                    [routerLink]="['/orders', order.id]"
-                  >
-                    {{ order.name }}
-                  </a>
-                </h3>
+              <div class="order-top-row">
+                <div class="order-title">
+                  <h3>
+                    <a
+                      [title]="order.name + ' details'"
+                      [routerLink]="['/orders', order.id]"
+                    >
+                      {{ order.name }}
+                    </a>
+                  </h3>
+                </div>
+                <div class="order-customer-name">
+                  {{order.customerName}}
+                </div>
               </div>
             </div>
             <mat-divider></mat-divider>

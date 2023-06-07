@@ -4,21 +4,49 @@
 }
 
 .back-link {
-  padding-left: 20px;
+  padding-left: 200px;
+  padding-bottom: 10px;
+  margin-bottom: auto;
+  padding-right: 100px;
 }
 .order-title {
   padding-left: 25px;
+  font-weight: bolder;
+  font-size:xx-large;
+}
+
+.order-title-row {
+  fill: rgb(203, 203, 255);
+  
 }
 
 #orderForm {
-  padding-left: 0px
+  margin-top: 5px;
+  padding-left: 0px;
+}
+
+.divider {
+  padding-bottom: 5px;
+  margin: 5px;
+}
+
+.button-navigation-container {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
 }
 
 .details-buttons {
   display: flex;
   gap: 10px;
   padding-left: 20px;
+  height: 50px;
 }
 .print-button {
   padding-left: 20px;
+}
+.delete-order-button {
+  margin-left: 100px;
+  color: rgb(255, 255, 255); 
+  background-color: brown;
 }

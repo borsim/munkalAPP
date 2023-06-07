@@ -7,7 +7,7 @@ export class FilterPipe implements PipeTransform {
     if (!items) return [];
     if (!filterDone) {
       items = items.filter((it) => {
-        return (it.orderStatus !== 'done')
+        return (it.orderStatus !== 'done' && it.orderStatus !== 'canceled')
       })
     }
     if (searchText === '') return items;

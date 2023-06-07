@@ -32,6 +32,16 @@
   margin-bottom: 5px;
   padding-left: 25px;
 }
+.order-customer-name {
+  margin-left: auto;
+  padding-right: 10px;
+}
+.order-top-row {
+  display: flex;
+  vertical-align: middle;
+  flex: 1;
+}
+
 .order-title-flexbox {
   display: flex;
   margin-bottom: 5px;

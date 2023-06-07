@@ -1,6 +1,39 @@
 <div *ngIf="orderObs | async" class="order-details-body">
   <div *ngIf="order">
-    <h3 class="order-title">{{ order.name }}</h3>
+    <div class="order-title-row">
+      <h3 class="order-title">{{ order.name }}</h3>
+
+    </div>
+    <div class="button-navigation-container">
+      <div class="details-buttons">
+        <button
+          (click)="disableEditing = !disableEditing; toggleEditing()"
+          type="button"
+          class="details-button-single"
+        >
+          {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
+        </button>
+        <button (click)="onPrintWorksheet()" type="button" class="print-button details-button-single">
+          <mat-icon>print</mat-icon>  Munkalap
+        </button>
+        <button (click)="onPrintWarranty()" type="button" class="print-button details-button-single">
+          <mat-icon>print</mat-icon>  Garancialevél
+        </button>
+      </div>
+
+      <h3>
+        <a [routerLink]="['/']" class="back-link"> Vissza </a>
+      </h3>
+      <button
+          (click)="deleteOrder()"
+          type="button"
+          class="delete-order-button"
+        >
+          <mat-icon>delete_forever</mat-icon>
+          Munkalap törlése
+      </button>
+    </div>
+    <mat-divider class="divider"></mat-divider>
     <order-form [order]="order" [readonly]="disableEditing" [confirmButtonsHidden]="true" [submitBehaviour]="submitBehaviour" id="orderForm"> </order-form>
     <!-- <h4>{{ order.deadline | time }}</h4>
     <div class="child flex-parent">
@@ -43,21 +76,3 @@
   </div>
 </div>
 
-<h3>
-  <a [routerLink]="['/']" class="back-link"> Vissza </a>
-</h3>
-
-<div class="details-buttons">
-  <button
-    (click)="disableEditing = !disableEditing; toggleEditing()"
-    type="button"
-  >
-    {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
-  </button>
-  <button (click)="onPrintWorksheet()" type="button" class="print-button">
-    <mat-icon>print</mat-icon>  Munkalap
-  </button>
-  <button (click)="onPrintWarranty()" type="button" class="print-button">
-    <mat-icon>print</mat-icon>  Garancialevél
-  </button>
-</div>
