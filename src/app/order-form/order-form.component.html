@@ -16,7 +16,7 @@
           <button (click)="openTab = 2" type="button">Fotók</button>
         </div>
       </div>
-      <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #orderForm="ngForm" (keydown.enter)="$event.preventDefault()">
         <div [hidden]="!(openTab == 0)">
           <mat-form-field appearance="fill">
           <div class="form-group">
@@ -277,7 +277,7 @@
         </div>
         <div [hidden]="!(openTab == 2)">
           <label for="file">Fotó feltöltése:</label>
-          <input type="file" class="photo-upload-input" (change)="uploadPhoto($event)" accept=".png,.jpg" />
+          <input type="file" class="photo-upload-input" (change)="uploadPhoto($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
           <div class="photo-upload-progress" *ngIf="uploadProgress | async">
             <progress max="100" [value]="uploadProgress | async"></progress>
           </div>

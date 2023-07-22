@@ -3,6 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage'
 import { Order, OrderInterface } from '../orders';
 import { Observable } from 'rxjs';
 import moment from 'moment';
@@ -15,7 +16,7 @@ export class DatabaseService {
   public databaseOrders: Observable<OrderInterface[]>;
   public orders: Order[] = [];
 
-  constructor(private store: AngularFirestore) {
+  constructor(private store: AngularFirestore, public afStorage: AngularFireStorage) {
     this.ordersCollection = store.collection<Order>('Orders');
     this.databaseOrders = this.ordersCollection.valueChanges({ idField: 'id' });
   }
@@ -49,7 +50,7 @@ export class DatabaseService {
       doneTasks: newOrder.doneTasks,
       guarantee: newOrder.guarantee,
       handoverState: newOrder.handoverState,
-      numPhotos: newOrder.numPhotos,
+      photoIds: newOrder.photoIds,
     };
     this.ordersCollection.add(newIOrder);
   }
@@ -62,9 +63,13 @@ export class DatabaseService {
   }
 
   deleteOrderInDb(toDelete: Order) {
-    if(window.confirm('Biztosan törölni szeretnéd ezt a munkalapot?\nKitörölt munkalapok NEM VISSZAÁLLÍTHATÓAK.')) {
+    if(window.confirm('Biztosan törölni szeretnéd ezt a munkalapot és a fotóit?\nAz itt kitörölt adatok NEM VISSZAÁLLÍTHATÓAK.')) {
       let orderDoc = this.store.doc<OrderInterface>('Orders/' + toDelete.id);
-      // TODO delete associated photos
+      for (let i: number=0; i < toDelete.photoIds.length; i++) {
+        let currentId: string = toDelete.id.concat('/', toDelete.photoIds[i]);
+        let photoRef = this.afStorage.ref(currentId);
+        photoRef.delete();
+      }
       orderDoc.delete();
     }
   }

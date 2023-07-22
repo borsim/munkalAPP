@@ -79,7 +79,7 @@ export class OrderListComponent {
             dbOrder.doneTasks,
             dbOrder.guarantee,
             dbOrder.handoverState,
-            dbOrder.numPhotos
+            dbOrder.photoIds
           )
         );
       });
