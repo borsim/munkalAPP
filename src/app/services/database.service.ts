@@ -63,7 +63,7 @@ export class DatabaseService {
   }
 
   deleteOrderInDb(toDelete: Order) {
-    if(window.confirm('Biztosan törölni szeretnéd ezt a munkalapot és a fotóit?\nAz itt kitörölt adatok NEM VISSZAÁLLÍTHATÓAK.')) {
+    if (window.confirm('Biztosan törölni szeretnéd ezt a munkalapot és a fotóit?\nAz itt kitörölt adatok NEM VISSZAÁLLÍTHATÓAK.')) {
       let orderDoc = this.store.doc<OrderInterface>('Orders/' + toDelete.id);
       for (let i: number=0; i < toDelete.photoIds.length; i++) {
         let currentId: string = toDelete.id.concat('/', toDelete.photoIds[i]);

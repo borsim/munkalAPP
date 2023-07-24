@@ -35,7 +35,7 @@ export class OrderListComponent {
   filteredOrders: Order[] = [];
   sortedOrdersSubject: BehaviorSubject<Order[]> = new BehaviorSubject([] as Order[]);
   filterString: string = '';
-  filterDone: boolean = true;
+  filterStatuses: string[] = ['registered', 'waiting for part', 'tasks done', 'ready for pickup'];
   sortTuple: [string, boolean] = ['creationTime', false];
   oss = orderStatusSelection;
   orderFormIsOpen = false;
@@ -83,21 +83,21 @@ export class OrderListComponent {
           )
         );
       });
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses);
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.filteredOrders = this.orders;
     this.sortedOrdersSubject.next(this.filteredOrders);
     this.searchbarService.sbtSubject.subscribe((newSbTuple) => {
       this.filterString = newSbTuple[0];
-      this.filterDone = newSbTuple[1];
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
+      this.filterStatuses = newSbTuple[1];
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses);
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.searchbarService.sortSubject.subscribe((newSortTuple) => {
       var oldSortTuple: [string, boolean] = this.sortTuple;
       this.sortTuple = newSortTuple;
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterDone);
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses);
       if (!this.filterString) this.filteredOrders = this.filteredOrders.slice();
       if (oldSortTuple[1] !== newSortTuple[1] || oldSortTuple[0] !== newSortTuple[0]) this.filteredOrders = this.filteredOrders.slice();
       this.sortedOrdersSubject.next(this.filteredOrders);

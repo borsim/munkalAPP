@@ -16,7 +16,8 @@
           <button (click)="openTab = 2" type="button">Fotók</button>
         </div>
       </div>
-      <form (ngSubmit)="onSubmit()" #orderForm="ngForm" (keydown.enter)="$event.preventDefault()">
+      <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
+        <button type="submit" disabled style="display: none" aria-hidden="true"></button>
         <div [hidden]="!(openTab == 0)">
           <mat-form-field appearance="fill">
           <div class="form-group">
@@ -86,28 +87,34 @@
           <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Hibaleírás</label>
-            <input matInput
-              type="text"
+            <textarea matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="4"
               class="form-control"
               id="description"
               [(ngModel)]="model.description"
               name="description"
               [disabled]="readonly"
-            />
+            ></textarea>
           </div>
         </mat-form-field>
         <br>
           <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Feladatok</label>
-            <input matInput
-              type="text"
+            <textarea matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="4"
               class="form-control"
               id="task"
               [(ngModel)]="model.task"
               name="task"
               [disabled]="readonly"
-            />
+            ></textarea>
           </div>
           </mat-form-field>
           <br>
@@ -222,28 +229,34 @@
           <mat-form-field appearance="fill">
             <div class="form-group">
               <label for="description">Megjegyzések</label>
-              <input matInput
-                type="text"
+              <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="4"
                 class="form-control"
                 id="notes"
                 [(ngModel)]="model.notes"
                 name="notes"
                 [disabled]="readonly"
-              />
+              ></textarea>
             </div>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
             <div class="form-group">
               <label for="description">Elvégzett munkák</label>
-              <input matInput
-                type="text"
+              <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="4"
                 class="form-control"
                 id="doneTasks"
                 [(ngModel)]="model.doneTasks"
                 name="doneTasks"
                 [disabled]="readonly"
-              />
+              ></textarea>
             </div>
           </mat-form-field>
           <br>
@@ -263,15 +276,18 @@
           <br>
           <mat-form-field appearance="fill">
             <div class="form-group">
-              <label for="description">Átadási állapot</label>
-              <input matInput
+              <label for="description">Egyéb információ</label>
+              <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="4"
                 type="text"
                 class="form-control"
                 id="handoverState"
                 [(ngModel)]="model.handoverState"
                 name="handoverState"
-                [disabled]="readonly"
-              />
+                [disabled]="readonly"></textarea>
             </div>
           </mat-form-field>
         </div>
@@ -282,8 +298,18 @@
             <progress max="100" [value]="uploadProgress | async"></progress>
           </div>
           <div *ngIf="authservice.currentAuthStatus | async">
-            <div class="photos-container" *ngFor="let pr of photoRefs; let i = index">
-              <img src='' alt="Mentett kép" id="img{{i}}" class="user-img">
+            <div class="photos-list" *ngFor="let pr of photoRefs; let i = index">
+              <mat-divider class="divider"></mat-divider>
+              <div class="photos-container">
+                <img src='' alt="Fotó" id="img{{i}}" class="user-img">
+                <button
+                    (click)="deletePhoto(pr)"
+                    type="button"
+                    class="delete-photo-button"
+                  >
+                    <mat-icon class="delete-icon">delete_forever</mat-icon>
+                </button>
+              </div>
             </div>
           </div>
         </div>

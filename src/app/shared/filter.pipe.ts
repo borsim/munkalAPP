@@ -3,11 +3,13 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string, filterDone: boolean): any[] {
+  transform(items: any[], searchText: string, filterStatuses: string[]): any[] {
     if (!items) return [];
-    if (!filterDone) {
+    if (!filterStatuses) {
+      return [];
+    } else {
       items = items.filter((it) => {
-        return (it.orderStatus !== 'done' && it.orderStatus !== 'canceled')
+        return (filterStatuses.includes(it.orderStatus))
       })
     }
     if (searchText === '') return items;

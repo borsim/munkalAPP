@@ -7,6 +7,8 @@ import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/c
 import { Observable, of, map, BehaviorSubject } from 'rxjs';
 import { subscribe } from 'diagnostics_channel';
 import { v4 as uuid } from 'uuid';
+import { filter, switchMap } from 'rxjs';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'order-form',
@@ -37,11 +39,21 @@ export class OrderFormComponent {
     let ref = this.afStorage.ref(uploadPath);
     let task = ref.put(event.target.files[0]);
     let newOrder: Order = this.order;
-    newOrder.photoIds.push(randomUuid);
-    this.dbs.updateOrderInDb(newOrder);
-    this.order.photoIds = newOrder.photoIds;
     this.uploadProgress = task.snapshotChanges()
     .pipe(map(s => (s!.bytesTransferred / s!.totalBytes) * 100));
+    
+    task.snapshotChanges().pipe(
+      filter((snapshot: any) => snapshot.state === 'success'),
+      switchMap(() => ref.getDownloadURL())
+    )
+    .subscribe({
+      next: (url) => {
+        newOrder.photoIds.push(randomUuid);
+        this.dbs.updateOrderInDb(newOrder);
+        this.order.photoIds = newOrder.photoIds;
+      },
+      error: (err) => {console.error(err.message)}
+    })
   }
 
   onSubmit() {
@@ -81,6 +93,17 @@ export class OrderFormComponent {
           if (currentImg) currentImg.setAttribute('src', url);
         });
       }
+    }
+  }
+
+  deletePhoto(photoRef: string) {
+    if (window.confirm('Biztosan törölni szeretnéd ezt a fotót?')) {
+      let storagePhotoRef = this.afStorage.ref(photoRef);
+      let pid = (photoRef.split("/", 2))[1];
+      this.order.photoIds.splice(this.order.photoIds.indexOf(pid), 1);
+      let orderWithoutPhoto: Order = this.order;
+      storagePhotoRef.delete();
+      this.dbs.updateOrderInDb(orderWithoutPhoto);
     }
   }
 }

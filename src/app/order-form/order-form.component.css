@@ -31,6 +31,24 @@ input[type="text"][disabled] {
 .photo-upload-input {
   margin-top: 0px;
 }
+.photos-container {
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.delete-photo-button {
+  margin-left: 75px;
+  height: 50px;
+  width: 50px;
+  background-color: brown;
+  border: 2px solid;
+  border-color: black;
+  color: rgb(255, 255, 255); 
+}
+.delete-icon {
+  margin-left: -40%;
+  color: rgb(255, 255, 255);
+}
 
 .order-status-option {
     width: 200;

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SearchbarService } from '../services/searchbar.service';
-import { OrderSortingInterface, sortingStatusSelection } from '../orders';
+import { OrderSortingInterface, sortingStatusSelection, orderStatusSelection, Order } from '../orders';
 
 @Component({
   selector: 'app-top-bar',
@@ -13,8 +13,9 @@ export class TopBarComponent {
   toggleSearch: boolean = false;
   selectedSorting: any = '';
   sortAscending: boolean = false;
-  filterDone: boolean = true;
+  filterStatuses: string[] = ['registered', 'waiting for part', 'tasks done', 'ready for pickup'];
   statusSelection: OrderSortingInterface[] = sortingStatusSelection;
+  orderStatusValues = orderStatusSelection;
 
   constructor(private searchbarService: SearchbarService) {}
   ngOnInit() {
@@ -34,8 +35,8 @@ export class TopBarComponent {
     console.log(this.searchText);
     this.searchbarService.setSearchString(this.searchText);
   }
-  changeToggleValue(toggleValue: any) {
-    this.searchbarService.setFilterDone(toggleValue.checked);
+  changeFilterValue(filterValue: any) {
+    this.searchbarService.setFilterDone(filterValue.value);
   }
   changeRadioValue(radioValue: any) {
     this.searchbarService.setSortField(radioValue.value);

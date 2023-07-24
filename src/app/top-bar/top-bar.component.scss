@@ -29,8 +29,11 @@ header {
     padding-left: 10px;
   }
 }
-.filter-done-toggle {
+.order-status-filter {
   padding-left: 60px ;
+  color: #fff;
+}
+.white-text {
   color: #fff;
 }
 .slide-toggle-label {
@@ -80,4 +83,47 @@ header {
 .top-bar-left {
   margin-left: 0px;
   padding-left: 0px;
+}
+
+.order-status-option {
+  width: 200;
+  align-items: center;
+  border-color: darkgray;
+  margin-top: auto;
+  font-weight: bolder;
+  vertical-align: middle;
+  
+}
+.order-status-select {
+  height: 75%;
+  width: 200px;
+  margin-top: auto;
+  align-items: center;
+  color: #fff;
+  background-color: #fff;
+  border: 2px solid;
+  border-color: black;
+}
+
+::ng-deep .mat-select-panel {
+  max-height: none !important;
+}
+
+.statusYellow {
+  color:orange;
+}
+.statusGreen {
+  color: darkgreen;
+}
+.statusLightgreen {
+  color:rgb(28, 170, 28);
+}
+.statusBlue {
+  color:cornflowerblue;
+}
+.statusRed {
+  color:crimson;
+}
+.statusGrey {
+  color: darkgrey;
 }

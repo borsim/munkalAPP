@@ -19,7 +19,28 @@
           </div>
         </a>
       </div>
-      <mat-slide-toggle class="filter-done-toggle" (change)="changeToggleValue($event)" aria-label="Kész"><div class="slide-toggle-label">Kész</div></mat-slide-toggle>
+      <!-- <mat-slide-toggle class="filter-done-toggle" (change)="changeToggleValue($event)" aria-label="Kész"><div class="slide-toggle-label">Kész</div></mat-slide-toggle> -->
+      <mat-form-field class="order-status-filter">
+        <mat-label class="white-text">Státusz filter</mat-label>
+        <mat-select multiple class="order-status-select" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
+          <mat-option *ngFor="let o of orderStatusValues" class="order-status-option" [value]="o.value">
+            <div [ngClass]="{
+              'statusRed' : o.value == 'canceled',
+              'statusGreen' : o.value == 'tasks done',
+              'statusYellow' : o.value == 'waiting for part', 
+              'statusLightgreen' : o.value == 'ready for pickup',
+              'statusBlue' : o.value == 'registered',
+              'statusGrey' : o.value == 'done'}">
+              <mat-icon class="status-icon">{{o.icon}}</mat-icon>
+              {{ o.viewValue }}
+            </div>
+          </mat-option>
+          <mat-select-trigger>
+            Státusz szűrő
+          </mat-select-trigger>
+        </mat-select>
+      </mat-form-field>
+      
       <label id="sorting-radio-group" class="sorting-radio-group"><h2 class="sorting-radio-label">Rendezés:</h2></label>
       <mat-radio-group
         aria-labelledby="Rendezés"

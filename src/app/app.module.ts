@@ -44,6 +44,7 @@ import { ArraySortPipe } from './shared/sort.pipe';
 import { WarrantyCardComponent } from './warranty-card/warranty-card.component';
 import { WorksheetCardComponent } from './worksheet-card/worksheet-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -81,6 +82,7 @@ const firebaseConfig = {
     MatDatepickerModule,
     MatRadioModule,
     ScrollingModule,
+    TextFieldModule,
     QRCodeModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },

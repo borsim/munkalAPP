@@ -9,7 +9,7 @@ export class Order implements OrderInterface {
     public casingNumber: string = '',
     public description: string = '',
     public originalState: string = '',
-    public orderStatus: string = 'registered',
+    private _orderStatus: string = 'registered',
     public icon: string = '',
     public customerName: string = '',
     public telephoneNumber: string = '',
@@ -89,6 +89,17 @@ export class Order implements OrderInterface {
     const oneWeekInTimestamp: number = 604800000;
     var lessThanAWeek: boolean = (this.deadline - moment().valueOf()) <= oneWeekInTimestamp;
     return lessThanAWeek;
+  }
+  public set orderStatus(newStatus: string) {
+    if (newStatus === 'tasks done' || newStatus === 'ready for pickup') {
+      if (this.doneTasks === '') {
+        this.doneTasks = this.task;
+      }
+    }
+    this._orderStatus = newStatus;
+  }
+  public get orderStatus() {
+    return this._orderStatus;
   }
 }
 

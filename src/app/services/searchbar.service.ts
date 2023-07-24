@@ -8,15 +8,15 @@ export class SearchbarService {
   private searchbarText: string = '';
   private sortField: string = 'creationTime';
   private sortAscending: boolean = false;
-  private filterDone: boolean = true;
+  private filterStatuses: string[] = ['registered', 'waiting for part', 'tasks done', 'ready for pickup'];
 
-  public sbtSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['', false] as [string, boolean]);
+  public sbtSubject: BehaviorSubject<[string, string[]]> = new BehaviorSubject(['', this.filterStatuses] as [string, string[]]);
   public sortSubject: BehaviorSubject<[string, boolean]> = new BehaviorSubject(['creationTime', false] as [string, boolean]);
 
 
   setSearchString(sbtxt: string) {
     this.searchbarText = sbtxt;
-    this.sbtSubject.next([this.searchbarText, this.filterDone]); 
+    this.sbtSubject.next([this.searchbarText, this.filterStatuses]); 
   }
 
   getSearchTuple() {
@@ -25,7 +25,7 @@ export class SearchbarService {
 
   clearSearchString() {
     this.searchbarText = '';
-    this.sbtSubject.next([this.searchbarText, this.filterDone]); 
+    this.sbtSubject.next([this.searchbarText, this.filterStatuses]); 
     return this.sbtSubject.asObservable();
   }
 
@@ -39,9 +39,9 @@ export class SearchbarService {
     this.sortSubject.next([this.sortField, this.sortAscending]); 
   }
 
-  setFilterDone(filterDone: boolean) {
-    this.filterDone = filterDone;
-    this.sbtSubject.next([this.searchbarText, this.filterDone]);
+  setFilterDone(filterStatuses: string[]) {
+    this.filterStatuses = filterStatuses;
+    this.sbtSubject.next([this.searchbarText, this.filterStatuses]);
   }
 
   getSortTuple() {
