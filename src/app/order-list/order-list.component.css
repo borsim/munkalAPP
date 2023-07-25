@@ -69,7 +69,13 @@
   flex-grow: 1;
   font-size: large;
 }
-
+.order-guarantee-text {
+  margin-top: auto;
+  text-align: right;
+  margin-right: 0;
+  flex-grow: 1;
+  font-size: large;
+}
 
 .order-list-header {
   margin: auto;

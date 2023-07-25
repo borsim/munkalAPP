@@ -19,10 +19,11 @@ export class Order implements OrderInterface {
     public creationTime: number = 0,
     public lastUpdatedTime: number = 0,
     public returnedTime: number = 0,
+    public guaranteeEndTime: number = 0,
     public advancePayment: number = 0,
     public notes: string = '',
     public doneTasks: string = '',
-    public guarantee: string = '',
+    public guarantee: number = 0,
     public handoverState: string = '',
     public photoIds: string[] = [],
   ) {}
@@ -31,7 +32,7 @@ export class Order implements OrderInterface {
       description: this.description, originalState: this.originalState, orderStatus: this.orderStatus,
       icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
       task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
-      returnedTime: this.returnedTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks,
+      returnedTime: this.returnedTime, guaranteeEndTime: this.guaranteeEndTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks,
       guarantee: this.guarantee, handoverState: this.handoverState, photoIds: this.photoIds}
     return oi;
   }
@@ -96,6 +97,10 @@ export class Order implements OrderInterface {
         this.doneTasks = this.task;
       }
     }
+    if (newStatus === 'done' || this.guarantee != 0) {
+      let currentTime = moment().endOf('day');
+      this.guaranteeEndTime = (moment(currentTime).add(this.guarantee, 'M')).valueOf();
+    }
     this._orderStatus = newStatus;
   }
   public get orderStatus() {
@@ -120,10 +125,11 @@ export interface OrderInterface {
   creationTime: number;
   lastUpdatedTime: number;
   returnedTime: number;
+  guaranteeEndTime: number;
   advancePayment: number;
   notes: string;
   doneTasks: string;
-  guarantee: string;
+  guarantee: number;
   handoverState: string;
   photoIds: string[];
 }
@@ -149,7 +155,7 @@ export var orders = [
     advancePayment: 200,
     notes: 'rozsdás a hátlap',
     doneTasks: '',
-    guarantee: '3 hónap',
+    guarantee: 3,
     handoverState: 'polírozott hátlap',
     photoIds: [],
   },

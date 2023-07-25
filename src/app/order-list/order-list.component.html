@@ -70,7 +70,9 @@
             <mat-divider></mat-divider>
             <div class="order-details-flexbox">
               <p *ngIf="order.description" class="order-description-text">{{ order.description }}</p>
-              <p *ngIf="order.deadline" class="order-deadline-text" [ngClass]="{'statusRed': order.isDeadlineUrgent()}">Határidő: {{order.deadline | date: 'yyyy/MM/dd'}}</p>
+              <p *ngIf="order.deadline && order.orderStatus != 'done'" class="order-deadline-text" [ngClass]="{'statusRed': order.isDeadlineUrgent()}">Határidő: {{order.deadline | date: 'yyyy/MM/dd'}}</p>
+              <p *ngIf="order.orderStatus == 'done' && order.guaranteeEndTime != 0" class="order-guarantee-text">Garanciás: {{order.guaranteeEndTime | date: 'yyyy/MM/dd'}}</p>
+              <p *ngIf="order.orderStatus == 'done' && order.guaranteeEndTime == 0" class="order-guarantee-text">Nem garanciás</p>
             </div>
 
               <!--

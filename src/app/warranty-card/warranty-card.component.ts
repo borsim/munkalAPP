@@ -55,6 +55,7 @@ export class WarrantyCardComponent implements OnInit {
               dbOrder!.creationTime,
               dbOrder!.lastUpdatedTime,
               dbOrder!.returnedTime,
+              dbOrder!.guaranteeEndTime,
               dbOrder!.advancePayment,
               dbOrder!.notes,
               dbOrder!.doneTasks,

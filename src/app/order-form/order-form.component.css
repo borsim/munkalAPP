@@ -13,6 +13,11 @@ input[type="text"][disabled] {
 .order-title {
     padding-left: 50px;
 }
+.order-guarantee-text {
+  margin-top: auto;
+  margin-right: 0;
+  font-size: large;
+}
 .form-group {
     padding-top: 0;
     padding-bottom: 0;
@@ -86,4 +91,15 @@ input[type="text"][disabled] {
   }
   .statusGrey {
     color: darkgrey;
+  }
+
+  .guarantee-unit {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+  }
+  .guarantee-form {
+    margin: auto;
+    position: relative;
+    display: flex;
   }

@@ -6,10 +6,8 @@
         </div>
         <div class="warranty-body">
         <div class="warranty-body-left">
-            <div class="logo-container horizontal-centered-item">
-                <img src="/assets/munkalAPP_logo.png" alt="image">
-            </div>
-            <h1 class="horizontal-centered-item">Garancialevél</h1>
+            <a class="horizontal-centered-item warranty-card-title">Garanciakártya</a>
+            <img class="horizontal-centered-item logo" src="/assets/munkalAPP_logo.png" alt="image">
         </div>
         <div class="warranty-body-right">
             <div class="warranty-info-item">
@@ -20,6 +18,7 @@
                     {{dateText}}
                 </div>
             </div>
+            <hr class="solid">
             <div class="warranty-info-item">
                 <div class="warranty-info-item-name">
                     Tárgy:
@@ -28,6 +27,7 @@
                     {{order.name}}
                 </div>
             </div>
+            <hr class="solid">
             <div class="warranty-info-item">
                 <div class="warranty-info-item-name">
                     Tokszám:
@@ -36,14 +36,16 @@
                     {{order.casingNumber}}
                 </div>
             </div>
+            <hr class="solid">
             <div class="warranty-info-item">
                 <div class="warranty-info-item-name">
-                    Elvégzett munkák:
+                    Elvégzett<br>munkák:
                 </div>
                 <div class="warranty-info-item-value">
                     {{order.doneTasks}}
                 </div>
             </div>
+            <hr class="solid">
             <div class="warranty-info-item">
                 <div class="warranty-info-item-name">
                     Garancia:
@@ -52,9 +54,10 @@
                     {{order.guarantee}}
                 </div>
             </div>
+            <hr class="solid">
             <div class="warranty-info-item">
                 <div class="warranty-info-item-name">
-                    Egyéb információ:
+                    Egyéb:
                 </div>
                 <div class="warranty-info-item-value">
                     {{order.handoverState}}
@@ -63,9 +66,9 @@
         </div>
         </div>
         <div class="print-footer">
-        <p>1147 Budapest, Gervay utca 24.</p>
-        <p>Nyitvatartás: mindig és bármikor</p>
-        <p>https://www.instagram.com/borsieshoblyak</p>
+        <p class="print-footer-text">1147 Budapest, Gervay utca 24.</p>
+        <p class="print-footer-text">Nyitvatartás: mindig és bármikor</p>
+        <p class="print-footer-text">https://www.instagram.com/borsieshoblyak</p>
         </div>
     </div>
   </div>

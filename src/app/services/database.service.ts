@@ -45,6 +45,7 @@ export class DatabaseService {
       creationTime: newOrder.creationTime,
       lastUpdatedTime: newOrder.lastUpdatedTime,
       returnedTime: newOrder.returnedTime,
+      guaranteeEndTime: newOrder.guaranteeEndTime,
       advancePayment: newOrder.advancePayment,
       notes: newOrder.notes,
       doneTasks: newOrder.doneTasks,

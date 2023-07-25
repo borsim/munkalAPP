@@ -74,6 +74,7 @@ export class OrderListComponent {
             dbOrder.creationTime,
             dbOrder.lastUpdatedTime,
             dbOrder.returnedTime,
+            dbOrder.guaranteeEndTime,
             dbOrder.advancePayment,
             dbOrder.notes,
             dbOrder.doneTasks,
