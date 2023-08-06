@@ -10,19 +10,9 @@ import { DatabaseService } from '../services/database.service';
 import { FilterPipe } from './../shared/filter.pipe';
 import { ArraySortPipe } from './../shared/sort.pipe';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-/*const firebaseConfig = {
-  apiKey: 'AIzaSyD3p6xJROowWv9ZBfvVkIG1jVcyxmNIG5w',
-  authDomain: 'oraszerviz-munkalap.firebaseapp.com',
-  projectId: 'oraszerviz-munkalap',
-  storageBucket: 'oraszerviz-munkalap.appspot.com',
-  messagingSenderId: '2130836140',
-  appId: '1:2130836140:web:1fb76877d4c195602efd09',
-  measurementId: 'G-55ZRJL2CJN',
-};
-import { AngularFireModule } from '@angular/fire/compat';
-AngularFireModule.initializeApp(firebaseConfig)*/
 import { AuthService } from './../services/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage'
+import { Userconfig } from '../userconfigs';
 
 @Component({
   selector: 'app-order-list',
@@ -34,8 +24,10 @@ export class OrderListComponent {
   orders: Order[] = [];
   filteredOrders: Order[] = [];
   sortedOrdersSubject: BehaviorSubject<Order[]> = new BehaviorSubject([] as Order[]);
+  userConfigSubject: BehaviorSubject<Userconfig> = new BehaviorSubject<Userconfig>(new Userconfig());
   filterString: string = '';
   filterStatuses: string[] = ['registered', 'waiting for part', 'tasks done', 'ready for pickup'];
+  filterCreatedByUser: string = '';
   sortTuple: [string, boolean] = ['creationTime', false];
   oss = orderStatusSelection;
   orderFormIsOpen = false;
@@ -52,6 +44,14 @@ export class OrderListComponent {
     public afStorage: AngularFireStorage,
     public authService: AuthService,
   ) {
+    this.userConfigSubject = this.databaseService.currentUserConfig;
+    this.userConfigSubject.subscribe((newUC) => {
+      if (newUC.showOtherOrders) {
+        this.filterCreatedByUser = '';
+      } else {
+        this.filterCreatedByUser = authService.currentUser;
+      }
+    })
     this.databaseService.databaseOrders.subscribe((dbOrders) => {
        
       this.orders = [];
@@ -59,6 +59,7 @@ export class OrderListComponent {
         this.orders.push(
           new Order(
             dbOrder.id,
+            dbOrder.createdByUser,
             dbOrder.name,
             dbOrder.price,
             dbOrder.casingNumber,
@@ -84,7 +85,7 @@ export class OrderListComponent {
           )
         );
       });
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses);
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses, this.filterCreatedByUser);
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.filteredOrders = this.orders;
@@ -92,13 +93,13 @@ export class OrderListComponent {
     this.searchbarService.sbtSubject.subscribe((newSbTuple) => {
       this.filterString = newSbTuple[0];
       this.filterStatuses = newSbTuple[1];
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses);
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses, this.filterCreatedByUser);
       this.sortedOrdersSubject.next(this.filteredOrders);
     });
     this.searchbarService.sortSubject.subscribe((newSortTuple) => {
       var oldSortTuple: [string, boolean] = this.sortTuple;
       this.sortTuple = newSortTuple;
-      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses);
+      this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses, this.filterCreatedByUser);
       if (!this.filterString) this.filteredOrders = this.filteredOrders.slice();
       if (oldSortTuple[1] !== newSortTuple[1] || oldSortTuple[0] !== newSortTuple[0]) this.filteredOrders = this.filteredOrders.slice();
       this.sortedOrdersSubject.next(this.filteredOrders);
@@ -106,7 +107,6 @@ export class OrderListComponent {
   }
 
   onIconSelect(icon: string, order: Order) {
-    console.log(icon);
     order.icon = icon;
     //order.orderStatus = iconToStatus[icon as keyof iconToStatus];
   }

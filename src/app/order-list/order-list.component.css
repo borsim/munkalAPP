@@ -34,7 +34,11 @@
 }
 .order-customer-name {
   margin-left: auto;
+  margin-top: auto;
   padding-right: 10px;
+  font-size: x-large;
+  font-weight: bold;
+  vertical-align: bottom;
 }
 .order-top-row {
   display: flex;

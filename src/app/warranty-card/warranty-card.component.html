@@ -1,13 +1,14 @@
 <div class="warranty-card-container" *ngIf="orderObs | async">
     <div *ngIf="order">
         <div class="print-header">
-            <div class="print-header-left">{{datetimeText}}</div>
-            <div class="print-header-right">Munkalap nyilvántartó</div>
+            <div class="print-header-left">Kelt: {{datetimeText}}</div>
+            <!-- <div class="print-header-right">Munkalap nyilvántartó</div> -->
         </div>
         <div class="warranty-body">
         <div class="warranty-body-left">
             <a class="horizontal-centered-item warranty-card-title">Garanciakártya</a>
-            <img class="horizontal-centered-item logo" src="/assets/munkalAPP_logo.png" alt="image">
+            <img src='' alt="logo" id="logo-img" class="logo horizontal-centered-item">
+            <!-- <img class="horizontal-centered-item logo" src="/assets/munkalAPP_logo.png" alt="image"> -->
         </div>
         <div class="warranty-body-right">
             <div class="warranty-info-item">
@@ -51,7 +52,7 @@
                     Garancia:
                 </div>
                 <div class="warranty-info-item-value">
-                    {{order.guarantee}}
+                    {{order.guarantee}} hónap
                 </div>
             </div>
             <hr class="solid">
@@ -66,9 +67,9 @@
         </div>
         </div>
         <div class="print-footer">
-        <p class="print-footer-text">1147 Budapest, Gervay utca 24.</p>
-        <p class="print-footer-text">Nyitvatartás: mindig és bármikor</p>
-        <p class="print-footer-text">https://www.instagram.com/borsieshoblyak</p>
+        <p class="print-footer-text">{{wcFooterText}}</p>
+        <!-- <p class="print-footer-text">Nyitvatartás: mindig és bármikor</p>
+        <p class="print-footer-text">https://www.instagram.com/borsieshoblyak</p> -->
         </div>
     </div>
   </div>

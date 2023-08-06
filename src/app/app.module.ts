@@ -45,6 +45,7 @@ import { WarrantyCardComponent } from './warranty-card/warranty-card.component';
 import { WorksheetCardComponent } from './worksheet-card/worksheet-card.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { UserconfigFormComponent } from './userconfig-form/userconfig-form.component';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -86,6 +87,7 @@ const firebaseConfig = {
     QRCodeModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },
+      { path: 'settings', component: UserconfigFormComponent },
       { path: 'orders/:orderId', component: OrderDetailsComponent },
       { path: 'print',
         outlet: 'print',
@@ -118,6 +120,7 @@ const firebaseConfig = {
     OrderListComponent,
     OrderDetailsComponent,
     OrderFormComponent,
+    UserconfigFormComponent,
     FilterPipe,
     ArraySortPipe,
     WarrantyCardComponent,

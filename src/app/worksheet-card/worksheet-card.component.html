@@ -1,13 +1,13 @@
 <div class="worksheet-card-container" *ngIf="orderObs | async">
     <div *ngIf="order">
-        <div class="print-header">
+        <!-- <div class="print-header">
             <div class="print-header-left">{{datetimeText}}</div>
             <div class="print-header-right">Munkalap nyilvántartó</div>
-        </div>
+        </div> -->
         <div class="worksheet-body">
             <div class="worksheet-body-left">
                 <div class="logo-container horizontal-centered-item">
-                    <img src="/assets/munkalAPP_logo.png" alt="image" class="logo">
+                    <img src='' alt="logo" id="logo-img" class="logo horizontal-centered-item">
                 </div>
                 <h1 class="horizontal-centered-item">Munkalap</h1>
                 <h2 class="horizontal-centered-item">Átvételi elismervény</h2>
@@ -15,9 +15,7 @@
                     <qrcode [qrdata]="qrcodeString" [width]="128" [errorCorrectionLevel]="'M'"></qrcode>
                 </div>
                 <p class="disclaimer horizontal-centered-item">
-                    E szelvényt gondosan őrizze meg, a leadott tárgy csak ennek ellenében vehető át! Az elkészült tárgyat
-                    ::: EGYÉB RÉSZLETEK :::
-                    ::: MÉG TÖBB RÉSZLET :::
+                    {{wsReceiptText}}
                 </p>
                 
             </div>
@@ -94,16 +92,16 @@
                         {{order.advancePayment | number:'1.0-0'}}
                     </div>
                 </div>
+
+                <div class="print-footer">
+                    <p>{{wsFooterText}}</p>
+                </div>
             </div>
         </div>
-        <div class="print-footer">
-            <p>1147 Budapest, Gervay utca 24.</p>
-            <p>Nyitvatartás: mindig és bármikor</p>
-            <p>https://www.instagram.com/borsieshoblyak</p>
-        </div>
-        <!--<div class="cutting-line">
+        
+        <div class="cutting-line">
             ----------------------------------------------------------------------------------------------------------------------------------------------------
-        </div>-->
+        </div>
         <div class="print-header">
             <div class="print-header-left">{{datetimeText}}</div>
             <div class="print-header-right">Munkalap nyilvántartó</div>

@@ -1,6 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { SearchbarService } from '../services/searchbar.service';
 import { OrderSortingInterface, sortingStatusSelection, orderStatusSelection, Order } from '../orders';
+import { DatabaseService } from '../services/database.service';
+import { BehaviorSubject } from 'rxjs';
+import { Userconfig } from '../userconfigs';
 
 @Component({
   selector: 'app-top-bar',
@@ -16,10 +19,12 @@ export class TopBarComponent {
   filterStatuses: string[] = ['registered', 'waiting for part', 'tasks done', 'ready for pickup'];
   statusSelection: OrderSortingInterface[] = sortingStatusSelection;
   orderStatusValues = orderStatusSelection;
+  userConfigSubject: BehaviorSubject<Userconfig> = new BehaviorSubject<Userconfig>(new Userconfig());
 
-  constructor(private searchbarService: SearchbarService) {}
+  constructor(private searchbarService: SearchbarService, private dbs: DatabaseService) {}
   ngOnInit() {
     this.selectedSorting = 'creationTime';
+    this.userConfigSubject = this.dbs.currentUserConfig;
   }
 
   openSearch() {
@@ -32,7 +37,6 @@ export class TopBarComponent {
     this.searchbarService.clearSearchString();
   }
   updateSBServiceData() {
-    console.log(this.searchText);
     this.searchbarService.setSearchString(this.searchText);
   }
   changeFilterValue(filterValue: any) {

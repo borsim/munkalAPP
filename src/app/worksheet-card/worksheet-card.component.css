@@ -5,7 +5,7 @@
   }
 }
 @page {
-  size: A5 landscape;
+  size: A4 portrait;
   margin-top: 0mm; /* this affects the margin in the printer settings */
   margin-bottom: 0mm;
 }
@@ -22,9 +22,11 @@
 }
 .print-footer {
   padding-top: 30px;
-  justify-content: center;
+  justify-content:center;
   text-align: center;
-  line-height: 75%;
+  vertical-align: bottom;
+  line-height: 100%;
+  white-space: pre-line;
 }
 
 .horizontal-centered-item {

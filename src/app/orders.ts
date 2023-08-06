@@ -4,6 +4,7 @@ import moment from "moment";
 export class Order implements OrderInterface {
   constructor(
     public id: string = '0',
+    public createdByUser: string = '',
     public name: string = '',
     public price: number = 0,
     public casingNumber: string = '',
@@ -28,7 +29,7 @@ export class Order implements OrderInterface {
     public photoIds: string[] = [],
   ) {}
   toInterface() {
-    let oi: OrderInterface = {id: this.id, name: this.name, price: this.price, casingNumber: this.casingNumber, 
+    let oi: OrderInterface = {id: this.id, createdByUser: this.createdByUser, name: this.name, price: this.price, casingNumber: this.casingNumber, 
       description: this.description, originalState: this.originalState, orderStatus: this.orderStatus,
       icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
       task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
@@ -110,6 +111,7 @@ export class Order implements OrderInterface {
 
 export interface OrderInterface {
   id: string;
+  createdByUser: string;
   name: string;
   price: number;
   casingNumber: string;
@@ -190,11 +192,3 @@ export const sortingStatusSelection: OrderSortingInterface[] = [
   { value: 'lastUpdatedTime', viewValue: 'Legutóbb módosítva' },
   { value: 'deadline', viewValue: 'Határidő' },
 ];
-
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/

@@ -7,6 +7,7 @@ import { DatabaseService } from '../services/database.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Moment } from 'moment';
 import moment from 'moment';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-warranty-card',
@@ -22,10 +23,11 @@ export class WarrantyCardComponent implements OnInit {
   timeSnapshot: Moment = moment();
   datetimeText = '';
   dateText = '';
+  wcFooterText: string = '';
 
 
   constructor(private route: ActivatedRoute, private printService: PrintService,
-    private store: AngularFirestore, private databaseService: DatabaseService) {
+    private store: AngularFirestore, private databaseService: DatabaseService, private afStorage: AngularFireStorage) {
 
     const routeParams = this.route.snapshot.paramMap;
     const oid: string = routeParams.get('orderId')!;
@@ -40,6 +42,7 @@ export class WarrantyCardComponent implements OnInit {
         (dbOrder !== null && dbOrder !== undefined)
           ? new Order(
               oid,
+              dbOrder!.createdByUser,
               dbOrder!.name,
               dbOrder!.price,
               dbOrder!.casingNumber,
@@ -69,8 +72,13 @@ export class WarrantyCardComponent implements OnInit {
         this.timeSnapshot = moment();
         this.datetimeText = this.timeSnapshot.format('YYYY-MM-DD HH:mm');
         this.dateText = this.timeSnapshot.format('YYYY-MM-DD');
+        this.wcFooterText = this.databaseService.currentUserConfig.value.warrantyCardFooterText;
 
-        this.printService.onDataReady();
+        this.afStorage.ref('/config/logo').getDownloadURL().subscribe((url) => {
+          let currentImg = document.getElementById('logo-img');
+          if (currentImg) currentImg.setAttribute('src', url);
+          this.printService.onDataReady();
+        });
     })
   }
 

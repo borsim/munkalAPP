@@ -42,37 +42,43 @@ export class OrderDetailsComponent implements OnInit {
     let orderVC = this.orderDoc.valueChanges(); //{idField: 'id'});
     this.orderObs = orderVC;
 
-
-    orderVC.subscribe((dbOrder) => {
-      const nonNullOrder: Order =
-        dbOrder !== null
-          ? new Order(
-              oid,
-              dbOrder!.name,
-              dbOrder!.price,
-              dbOrder!.casingNumber,
-              dbOrder!.description,
-              dbOrder!.originalState,
-              dbOrder!.orderStatus,
-              dbOrder!.icon,
-              dbOrder!.customerName,
-              dbOrder!.telephoneNumber,
-              dbOrder!.email,
-              dbOrder!.task,
-              dbOrder!.deadline,
-              dbOrder!.creationTime,
-              dbOrder!.lastUpdatedTime,
-              dbOrder!.returnedTime,
-              dbOrder!.guaranteeEndTime,
-              dbOrder!.advancePayment,
-              dbOrder!.notes,
-              dbOrder!.doneTasks,
-              dbOrder!.guarantee,
-              dbOrder!.handoverState,
-              dbOrder!.photoIds,
-            )
-          : new Order('0');
-      this.order = nonNullOrder;
+    this.orderDoc.get().subscribe((docSnapshot) => {
+      if (docSnapshot.exists) {
+        orderVC.subscribe((dbOrder) => {
+          if (dbOrder !== undefined) {
+            const nonNullOrder: Order =
+            dbOrder !== null
+              ? new Order(
+                  oid,
+                  dbOrder!.createdByUser,
+                  dbOrder!.name,
+                  dbOrder!.price,
+                  dbOrder!.casingNumber,
+                  dbOrder!.description,
+                  dbOrder!.originalState,
+                  dbOrder!.orderStatus,
+                  dbOrder!.icon,
+                  dbOrder!.customerName,
+                  dbOrder!.telephoneNumber,
+                  dbOrder!.email,
+                  dbOrder!.task,
+                  dbOrder!.deadline,
+                  dbOrder!.creationTime,
+                  dbOrder!.lastUpdatedTime,
+                  dbOrder!.returnedTime,
+                  dbOrder!.guaranteeEndTime,
+                  dbOrder!.advancePayment,
+                  dbOrder!.notes,
+                  dbOrder!.doneTasks,
+                  dbOrder!.guarantee,
+                  dbOrder!.handoverState,
+                  dbOrder!.photoIds,
+                )
+              : new Order('0');
+          this.order = nonNullOrder;
+          }
+        });
+      }
     });
   }
 

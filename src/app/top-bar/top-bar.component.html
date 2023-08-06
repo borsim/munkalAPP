@@ -11,11 +11,11 @@
     <mat-toolbar-row style="padding: 0 5px;">
       <div style="padding:8px 0 0 10px;">
         <a [routerLink]="['/']">
-          <div class="mat-title" style="margin-bottom:2px;color:white;">
-            Borsi és Hoblyák
+          <div class="mat-title" style="margin-bottom:2px;color:white;" *ngIf="(userConfigSubject.asObservable() | async)" >
+            {{userConfigSubject.value.companyNameTop}}
           </div>
-          <div class="mat-subheading-2" style="line-height:.6rem;color:white;">
-            Óraszerviz
+          <div class="mat-subheading-2" style="line-height:.6rem;color:white;" *ngIf="(userConfigSubject.asObservable() | async)">
+           {{userConfigSubject.value.companyNameBottom}}
           </div>
         </a>
       </div>
@@ -64,6 +64,10 @@
       <button mat-icon-button class="open-search-button" (click)="openSearch()">
         <mat-icon>search</mat-icon>
       </button>
+      <button class="settings-button" mat-icon-button [routerLink]="['settings']">
+        <mat-icon class="settings-icon">settings</mat-icon>
+      </button>
+      
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -88,4 +92,5 @@
       </button>
     </mat-toolbar-row>
   </div>
+  
 </div>

@@ -4,12 +4,13 @@ import 'firebase/compat/auth';
 import * as firebaseui from 'firebaseui';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(public fireAuth: AngularFireAuth){
+  constructor(public fireAuth: AngularFireAuth, private dtb: DatabaseService){
     this.authStatusListener();
   }
 
@@ -23,11 +24,13 @@ authStatusListener(){
   this.fireAuth.onAuthStateChanged((credential)=>{
     if(credential){
       this.authStatusSub.next(credential);
-      console.log('User is logged in');
+      this.currentUser = credential.uid;
+      this.dtb.getSpecificUserConfig(this.currentUser);
     }
     else{
       this.authStatusSub.next(null);
       console.log('User is logged out');
+      this.currentUser = null;
     }
   })
 }

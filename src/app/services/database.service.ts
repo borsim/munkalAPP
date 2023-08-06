@@ -5,8 +5,10 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage'
 import { Order, OrderInterface } from '../orders';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import moment from 'moment';
+import { Userconfig, UserConfigInterface } from '../userconfigs';
+import { AuthService } from './auth.service';
 /* . . . */
 @Injectable({
   providedIn: 'root',
@@ -14,22 +16,32 @@ import moment from 'moment';
 export class DatabaseService {
   private ordersCollection: AngularFirestoreCollection<OrderInterface>;
   public databaseOrders: Observable<OrderInterface[]>;
-  public orders: Order[] = [];
+
+  private userConfigCollection: AngularFirestoreCollection<UserConfigInterface>;
+  public databaseUC: Observable<UserConfigInterface[]>;
+  public currentUserConfig: BehaviorSubject<Userconfig> = new BehaviorSubject<Userconfig>(new Userconfig());
+  public globalUserConfig: BehaviorSubject<Userconfig> = new BehaviorSubject<Userconfig>(new Userconfig());
 
   constructor(private store: AngularFirestore, public afStorage: AngularFireStorage) {
     this.ordersCollection = store.collection<Order>('Orders');
     this.databaseOrders = this.ordersCollection.valueChanges({ idField: 'id' });
+
+    this.userConfigCollection = store.collection<Userconfig>('userconfig');
+    this.databaseUC = this.userConfigCollection.valueChanges({ idField: 'id' });
+    this.getGlobalUserConfig();
   }
 
   async dbToArray() {}
 
-  addOrderToDb(newOrder: Order) {
+  addOrderToDb(newOrder: Order, currentUser: string) {
     let dbid = this.store.createId();
     newOrder.id = dbid;
     newOrder.creationTime = moment().valueOf();
     newOrder.lastUpdatedTime = newOrder.creationTime;
+    newOrder.createdByUser = (currentUser === null ? '' : currentUser);
     let newIOrder: OrderInterface = {
       id: dbid,
+      createdByUser: newOrder.createdByUser,
       name: newOrder.name,
       price: newOrder.price,
       casingNumber: newOrder.casingNumber,
@@ -75,12 +87,56 @@ export class DatabaseService {
     }
   }
 
-  getOrders() {
-    return this.orders;
+  getGlobalUserConfig() {
+    let guc = this.store.doc<Userconfig>('userconfig/global');
+    let gucVC = guc.valueChanges();
+    gucVC.subscribe((dbconfig) => {
+      const nonNullUC: Userconfig =
+      dbconfig !== null ? new Userconfig(
+        dbconfig!.id,
+        dbconfig!.showOtherOrders,
+        dbconfig!.warrantyCardFooterText,
+        dbconfig!.worksheetCardFooterText,
+        dbconfig!.worksheetCardReceiptText,
+        dbconfig!.companyNameTop,
+        dbconfig!.companyNameBottom
+      ) : new Userconfig();
+      this.globalUserConfig.next(nonNullUC);
+    })
+  }
+  getSpecificUserConfig(userId: string) {
+    let uc = this.store.doc<Userconfig>('userconfig/' + userId);
+    uc.get().subscribe((docSnapshot) => {
+      if (docSnapshot.exists) {
+        let ucVC = uc.valueChanges();
+        ucVC.subscribe((dbconfig) => {
+          const nonNullUC: Userconfig =
+          dbconfig !== null ? new Userconfig(
+            (dbconfig!.id == null ? this.globalUserConfig.value.id : dbconfig!.id),
+            (dbconfig!.showOtherOrders == null ? this.globalUserConfig.value.showOtherOrders : dbconfig!.showOtherOrders),
+            (dbconfig!.warrantyCardFooterText == null ? this.globalUserConfig.value.warrantyCardFooterText : dbconfig!.warrantyCardFooterText),
+            (dbconfig!.worksheetCardFooterText == null ? this.globalUserConfig.value.worksheetCardFooterText : dbconfig!.worksheetCardFooterText),
+            (dbconfig!.worksheetCardReceiptText == null ? this.globalUserConfig.value.worksheetCardReceiptText : dbconfig!.worksheetCardReceiptText),
+            (dbconfig!.companyNameTop == null ? this.globalUserConfig.value.companyNameTop : dbconfig!.companyNameTop),
+            (dbconfig!.companyNameBottom == null ? this.globalUserConfig.value.companyNameBottom : dbconfig!.companyNameBottom),
+          ) : new Userconfig();
+          this.currentUserConfig.next(nonNullUC);
+        })
+      } else {
+        this.currentUserConfig.next(this.globalUserConfig.value);
+      }
+    })
   }
 
-  /*clearDatabaseOrders() {
-    this.databaseOrders = [];
-    return this.databaseOrders;
-  }*/
+  updateUserconfigInDb(newUC: Userconfig) {
+    let UCDoc = this.store.doc<UserConfigInterface>('userconfig/' + newUC.id);
+    let newIUC = newUC.toInterface();
+    UCDoc.get().subscribe((docSnapshot) => {
+      if (docSnapshot.exists) {
+        let UCVC = UCDoc.valueChanges();
+        UCDoc.update(newIUC);
+      } else {
+        this.userConfigCollection.doc(newIUC.id).set(newIUC);
+      }});
+  }
 }

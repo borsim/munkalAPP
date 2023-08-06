@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string, filterStatuses: string[]): any[] {
+  transform(items: any[], searchText: string, filterStatuses: string[], filterCreatedByUser: string): any[] {
     if (!items) return [];
     if (!filterStatuses) {
       return [];
@@ -12,6 +12,12 @@ export class FilterPipe implements PipeTransform {
         return (filterStatuses.includes(it.orderStatus))
       })
     }
+    if (filterCreatedByUser !== '') {
+      items = items.filter((it) => {
+        return (filterCreatedByUser === it.createdByUser)
+      })
+    }
+      
     if (searchText === '') return items;
     searchText = searchText.toLowerCase();
     return items.filter((it) => {

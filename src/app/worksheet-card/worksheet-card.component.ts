@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DatabaseService } from '../services/database.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Moment } from 'moment';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import moment from 'moment';
 
 @Component({
@@ -23,9 +24,11 @@ export class WorksheetCardComponent implements OnInit {
   datetimeText = '';
   dateText = '';
   qrcodeString: string = '';
+  wsFooterText: string = 'Lábléc';
+  wsReceiptText: string = 'Átvétel szabályai';
 
   constructor(private route: ActivatedRoute, private printService: PrintService,
-    private store: AngularFirestore, private databaseService: DatabaseService) {
+    private store: AngularFirestore, private databaseService: DatabaseService, private afStorage: AngularFireStorage) {
 
     const routeParams = this.route.snapshot.paramMap;
     const oid: string = routeParams.get('orderId')!;
@@ -40,6 +43,7 @@ export class WorksheetCardComponent implements OnInit {
         (dbOrder !== null && dbOrder !== undefined)
           ? new Order(
               oid,
+              dbOrder!.createdByUser,
               dbOrder!.name,
               dbOrder!.price,
               dbOrder!.casingNumber,
@@ -70,8 +74,14 @@ export class WorksheetCardComponent implements OnInit {
         this.datetimeText = this.timeSnapshot.format('YYYY-MM-DD HH:mm');
         this.dateText = this.timeSnapshot.format('YYYY-MM-DD');
         this.qrcodeString = 'https://www.oraszerviz-munkalap.firebaseapp.com/orders/'.concat(this.orderId); 
+        this.wsFooterText = this.databaseService.currentUserConfig.value.worksheetCardFooterText;
+        this.wsReceiptText = this.databaseService.currentUserConfig.value.worksheetCardReceiptText;
 
-        this.printService.onDataReady();
+        this.afStorage.ref('/config/logo').getDownloadURL().subscribe((url) => {
+          let currentImg = document.getElementById('logo-img');
+          if (currentImg) currentImg.setAttribute('src', url);
+          this.printService.onDataReady();
+        });
     })
   }
 

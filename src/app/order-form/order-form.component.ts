@@ -60,7 +60,7 @@ export class OrderFormComponent {
     console.log("form submitted");
     this.submitted = true;
     if (this.submitBehaviour === 'new') {
-      this.dbs.addOrderToDb(this.model);
+      this.dbs.addOrderToDb(this.model, this.authservice.currentUser);
     } else if (this.submitBehaviour === 'update') {
       this.dbs.updateOrderInDb(this.model);
     }
