@@ -106,12 +106,20 @@
           </div>
         </mat-form-field>
 
-      <label for="file">Logó feltöltése:</label>
+      <label for="file">Logó feltöltése (minden felhasználónak):</label>
       <input type="file" class="photo-upload-input" (change)="uploadLogo($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
       <div class="photo-upload-progress" *ngIf="uploadProgress | async">
         <progress max="100" [value]="uploadProgress | async"></progress>
       </div>
-
+      <button
+          (click)="signOut()"
+          type="button"
+          class="sign-out-button"
+        >
+          <mat-icon class="signout-icon">exit_to_app</mat-icon>
+          Kijelentkezés
+      </button>
+      
     </form>
   </div>
 </div>

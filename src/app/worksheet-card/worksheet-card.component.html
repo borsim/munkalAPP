@@ -28,6 +28,7 @@
                         {{dateText}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Tárgy:
@@ -36,6 +37,7 @@
                         {{order.name}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Felvett állapot:
@@ -44,6 +46,7 @@
                         {{order.originalState}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Tokszám:
@@ -52,6 +55,7 @@
                         {{order.casingNumber}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Hiba:
@@ -60,22 +64,25 @@
                         {{order.description}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
-                        Elvégzett munkák:
+                        Munkák:
                     </div>
                     <div class="worksheet-info-item-value">
-                        {{order.doneTasks}}
+                        {{order.task}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Határidő:
                     </div>
-                    <div class="worksheet-info-item-value">
+                    <div class="worksheet-info-item-value" *ngIf="order.deadline !== 0">
                         {{order.deadline | date: 'yyyy/MM/dd'}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Ár:
@@ -84,6 +91,7 @@
                         {{order.price | number:'1.0-0'}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Előleg:
@@ -92,7 +100,7 @@
                         {{order.advancePayment | number:'1.0-0'}}
                     </div>
                 </div>
-
+                <hr class="solid">
                 <div class="print-footer">
                     <p>{{wsFooterText}}</p>
                 </div>
@@ -122,6 +130,7 @@
                             {{dateText}}
                         </div>
                     </div>
+                    <hr class="solid">
                     <div class="worksheet-info-item horizontal-centered-item">
                         <div class="worksheet-info-item-name">
                             Ügyfél:
@@ -130,6 +139,7 @@
                             {{order.customerName}}
                         </div>
                     </div>
+                    <hr class="solid">
                     <div class="worksheet-info-item horizontal-centered-item">
                         <div class="worksheet-info-item-name">
                             Telefon:
@@ -138,6 +148,7 @@
                             {{order.telephoneNumber}}
                         </div>
                     </div>
+                    <hr class="solid">
                     <div class="worksheet-info-item horizontal-centered-item">
                         <div class="worksheet-info-item-name">
                             Email:
@@ -158,14 +169,16 @@
                         {{order.name}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
-                        Felvett állapot:
+                        Állapot:
                     </div>
                     <div class="worksheet-info-item-value">
                         {{order.originalState}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Tokszám:
@@ -174,6 +187,7 @@
                         {{order.casingNumber}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Hiba:
@@ -182,6 +196,7 @@
                         {{order.description}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Munkák:
@@ -190,14 +205,16 @@
                         {{order.task}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Határidő:
                     </div>
-                    <div class="worksheet-info-item-value">
+                    <div class="worksheet-info-item-value" *ngIf="order.deadline !== 0">
                         {{order.deadline | date: 'yyyy/MM/dd'}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Ár:
@@ -206,6 +223,7 @@
                         {{order.price | number:'1.0-0'}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
                         Előleg:
@@ -214,9 +232,10 @@
                         {{order.advancePayment | number:'1.0-0'}}
                     </div>
                 </div>
+                <hr class="solid">
                 <div class="worksheet-info-item">
                     <div class="worksheet-info-item-name">
-                        Megjegyzések:
+                        Megjegyzés:
                     </div>
                     <div class="worksheet-info-item-value">
                         {{order.notes}}

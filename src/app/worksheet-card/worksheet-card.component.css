@@ -58,7 +58,7 @@
 }
 
 .worksheet-body-right {
-  padding-left: 50px;
+  margin-left: 50px;
   vertical-align: middle;
   flex: 1 1 auto;
   width: 60%;
@@ -70,7 +70,8 @@
 }
 .worksheet-info-item-name {
   justify-content: left;
-  width: 150px;
+  width: 50px;
+  margin-right: 25px;
 }
 .worksheet-info-item-value {
   padding-left: 10px;
@@ -82,4 +83,11 @@
 .logo {
   height: 80%;
   width: 80%;
+}
+hr.solid {
+  border-top: 3px solid #bbb;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }

@@ -9,6 +9,7 @@ import { v4 as uuid } from 'uuid';
 import { filter, switchMap } from 'rxjs';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { Userconfig } from '../userconfigs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'userconfig-form',
@@ -22,7 +23,11 @@ export class UserconfigFormComponent {
   readonly: boolean = true;
 
 
-  constructor(private dbs: DatabaseService, public afStorage: AngularFireStorage, public authservice: AuthService) {
+  constructor(private dbs: DatabaseService, public afStorage: AngularFireStorage,
+    public authservice: AuthService, private router: Router) {
+    dbs.currentUserConfig.subscribe((newUC) => {
+      this.model = dbs.currentUserConfig.value;
+    })
     this.model = dbs.currentUserConfig.value;
   }
 
@@ -88,6 +93,11 @@ export class UserconfigFormComponent {
         console.log(error);
       }
     }
-      
+  }
+
+  signOut() {
+    this.authservice.fireAuth.signOut();
+    this.router.navigateByUrl('/');
+    window.location.reload();
   }
 }
