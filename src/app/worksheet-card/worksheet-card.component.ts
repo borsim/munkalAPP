@@ -79,8 +79,12 @@ export class WorksheetCardComponent implements OnInit {
 
         this.afStorage.ref('/config/logo').getDownloadURL().subscribe((url) => {
           let currentImg = document.getElementById('logo-img');
-          if (currentImg) currentImg.setAttribute('src', url);
-          this.printService.onDataReady();
+          if (currentImg != null) {
+            currentImg.onload = function() {
+              printService.onDataReady();
+            }
+            currentImg.setAttribute('src', url);
+          }
         });
     })
   }
