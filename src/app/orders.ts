@@ -4,6 +4,7 @@ import moment from "moment";
 export class Order implements OrderInterface {
   constructor(
     public id: string = '0',
+    public serialNumber: number = 0,
     public createdByUser: string = '',
     public name: string = '',
     public price: number = 0,
@@ -29,7 +30,7 @@ export class Order implements OrderInterface {
     public photoIds: string[] = [],
   ) {}
   toInterface() {
-    let oi: OrderInterface = {id: this.id, createdByUser: this.createdByUser, name: this.name, price: this.price, casingNumber: this.casingNumber, 
+    let oi: OrderInterface = {id: this.id, serialNumber: this.serialNumber, createdByUser: this.createdByUser, name: this.name, price: this.price, casingNumber: this.casingNumber, 
       description: this.description, originalState: this.originalState, orderStatus: this.orderStatus,
       icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
       task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
@@ -111,6 +112,7 @@ export class Order implements OrderInterface {
 
 export interface OrderInterface {
   id: string;
+  serialNumber: number;
   createdByUser: string;
   name: string;
   price: number;
@@ -136,34 +138,6 @@ export interface OrderInterface {
   photoIds: string[];
 }
 
-export var orders = [
-  {
-    id: '1',
-    name: 'Omega123',
-    price: 799,
-    casingNumber: 'A1B2C3',
-    description: 'Törött üveg',
-    originalState: 'Karcolt hátlap',
-    orderStatus: 'ready for pickup',
-    icon: 'home',
-    customerName: 'Jóska Pista',
-    telephoneNumber: '0630 123 4567',
-    email: 'abc@gmail.com',
-    task: 'üvegcsere',
-    deadline: 12345678,
-    creationTime: 23456789,
-    lastUpdatedTime: 345678901,
-    returnedTime: 456789012,
-    advancePayment: 200,
-    notes: 'rozsdás a hátlap',
-    doneTasks: '',
-    guarantee: 3,
-    handoverState: 'polírozott hátlap',
-    photoIds: [],
-  },
-];
-
-export const possibleStatuses = ['asd'];
 
 export interface OrderStatusInterface {
   value: string;

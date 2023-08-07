@@ -59,6 +59,7 @@ export class OrderListComponent {
         this.orders.push(
           new Order(
             dbOrder.id,
+            dbOrder.serialNumber,
             dbOrder.createdByUser,
             dbOrder.name,
             dbOrder.price,

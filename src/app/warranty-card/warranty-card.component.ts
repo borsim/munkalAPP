@@ -42,6 +42,7 @@ export class WarrantyCardComponent implements OnInit {
         (dbOrder !== null && dbOrder !== undefined)
           ? new Order(
               oid,
+              dbOrder!.serialNumber,
               dbOrder!.createdByUser,
               dbOrder!.name,
               dbOrder!.price,

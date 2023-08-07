@@ -38,6 +38,7 @@ export class UserconfigFormComponent {
     if (this.readonly) {
       if (submitType === 'global') {
         this.model.id = 'global';
+        this.model.nextOrderSerialNumber = this.dbs.globalUserConfig.value.nextOrderSerialNumber;
       } else {
         this.model.id = this.authservice.currentUser;
       }

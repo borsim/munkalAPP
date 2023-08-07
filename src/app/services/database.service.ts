@@ -31,16 +31,17 @@ export class DatabaseService {
     this.getGlobalUserConfig();
   }
 
-  async dbToArray() {}
 
-  addOrderToDb(newOrder: Order, currentUser: string) {
+  addOrderToDb(newOrder: Order, currentUser: string, nextOrderSerialNumber: number) {
     let dbid = this.store.createId();
     newOrder.id = dbid;
     newOrder.creationTime = moment().valueOf();
     newOrder.lastUpdatedTime = newOrder.creationTime;
     newOrder.createdByUser = (currentUser === null ? '' : currentUser);
+    newOrder.serialNumber = nextOrderSerialNumber;
     let newIOrder: OrderInterface = {
       id: dbid,
+      serialNumber: newOrder.serialNumber,
       createdByUser: newOrder.createdByUser,
       name: newOrder.name,
       price: newOrder.price,
@@ -99,7 +100,8 @@ export class DatabaseService {
         dbconfig!.worksheetCardFooterText,
         dbconfig!.worksheetCardReceiptText,
         dbconfig!.companyNameTop,
-        dbconfig!.companyNameBottom
+        dbconfig!.companyNameBottom,
+        dbconfig!.nextOrderSerialNumber,
       ) : new Userconfig();
       this.globalUserConfig.next(nonNullUC);
     })
@@ -119,6 +121,7 @@ export class DatabaseService {
             (dbconfig!.worksheetCardReceiptText == null ? this.globalUserConfig.value.worksheetCardReceiptText : dbconfig!.worksheetCardReceiptText),
             (dbconfig!.companyNameTop == null ? this.globalUserConfig.value.companyNameTop : dbconfig!.companyNameTop),
             (dbconfig!.companyNameBottom == null ? this.globalUserConfig.value.companyNameBottom : dbconfig!.companyNameBottom),
+            this.globalUserConfig.value.nextOrderSerialNumber,
           ) : new Userconfig();
           this.currentUserConfig.next(nonNullUC);
         })

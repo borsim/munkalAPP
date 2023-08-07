@@ -50,6 +50,7 @@ export class OrderDetailsComponent implements OnInit {
             dbOrder !== null
               ? new Order(
                   oid,
+                  dbOrder!.serialNumber,
                   dbOrder!.createdByUser,
                   dbOrder!.name,
                   dbOrder!.price,

@@ -17,7 +17,8 @@
 
 .order-title-row {
   fill: rgb(203, 203, 255);
-  
+  display: flex;
+  gap: 30px;
 }
 
 #orderForm {

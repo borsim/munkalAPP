@@ -32,6 +32,12 @@
   margin-bottom: 5px;
   padding-left: 25px;
 }
+.order-serial {
+  margin-left: 20px;
+  margin-top: auto;
+  font-size: large;
+  vertical-align: bottom;
+}
 .order-customer-name {
   margin-left: auto;
   margin-top: auto;
