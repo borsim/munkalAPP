@@ -115,4 +115,23 @@ export class OrderDetailsComponent implements OnInit {
       this.router.navigateByUrl('/')
     }
   }
+
+  sendNotificationSMS() {
+    let baseMessage: string = this.databaseService.currentUserConfig.value.smsNotificationMessage;
+    baseMessage = baseMessage.replace('UGYFEL', this.order!.customerName);
+    baseMessage = baseMessage.replace('MUNKALAP', this.order!.name);
+    let phoneNum: string = this.order!.telephoneNumber;
+
+    if(navigator.userAgent.match(/Android/i)) {
+      const newUrl = 'sms://' + phoneNum +'/?body=encodeURIComponent(' + baseMessage + '_blank';
+      window.open(newUrl);
+    } else if(navigator.userAgent.match(/iPhone/i)){
+      const newUrl = 'sms://' + phoneNum +'/&body=encodeURIComponent(' + baseMessage + '_blank';
+      window.open(newUrl);
+     }
+  }
+
+  sendNotificationEmail() {
+
+  }
 }

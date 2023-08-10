@@ -14,10 +14,16 @@
           {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
         </button>
         <button (click)="onPrintWorksheet()" type="button" class="print-button details-button-single">
-          <mat-icon>print</mat-icon>  Munkalap
+          <mat-icon class="white-icon">print</mat-icon>  Munkalap
         </button>
         <button (click)="onPrintWarranty()" type="button" class="print-button details-button-single">
-          <mat-icon>print</mat-icon>  Garanciakártya
+          <mat-icon class="white-icon">print</mat-icon>  Garanciakártya
+        </button>
+        <button (click)="sendNotificationEmail()" type="button" class="email-button details-button-single">
+          <mat-icon class="white-icon">alternate_email</mat-icon>  Email
+        </button>
+        <button (click)="sendNotificationSMS()" type="button" class="only-mobile sms-button details-button-single">
+          <mat-icon class="white-icon">textsms</mat-icon>  SMS
         </button>
       </div>
 

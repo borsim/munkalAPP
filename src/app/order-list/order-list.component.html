@@ -50,8 +50,8 @@
                     </div>
                   </mat-select-trigger>
                 </mat-select>
-
-              <div class="order-top-row">
+              <!-- Order name first-->
+              <div class="order-top-row" *ngIf="sortTuple[0]!=='customerName'">
                 <div class="order-title">
                   <h3>
                     <a
@@ -69,6 +69,23 @@
                   {{order.customerName}}
                 </div>
               </div>
+              <!-- Customer name first-->
+              <div class="order-top-row" *ngIf="sortTuple[0]==='customerName'">
+                <div class="order-title">
+                  <h3>
+                    <a
+                      [title]="order.name + ' details'"
+                      [routerLink]="['/orders', order.id]"
+                    >
+                      {{ order.customerName }}
+                    </a>
+                  </h3>
+                </div>
+                <div class="order-customer-name">
+                  {{order.name}} #{{ order.serialNumber }}
+                </div>
+              </div>
+
             </div>
             <mat-divider></mat-divider>
             <div class="order-details-flexbox">

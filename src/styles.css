@@ -143,9 +143,10 @@ app-top-bar h1 {
   padding-left: 5px;
 }
 
+@media all and (min-width: 480px) {
+  .only-mobile {display:none;}
+}
 
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/
+@media all and (max-width: 479px) {
+  .only-mobile {display:block;}
+}

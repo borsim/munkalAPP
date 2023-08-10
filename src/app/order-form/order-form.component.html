@@ -296,6 +296,8 @@
         <div [hidden]="!(openTab == 2)">
           <label for="file">Fotó feltöltése:</label>
           <input type="file" class="photo-upload-input" (change)="uploadPhoto($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
+          <label class="only-mobile" for="file-camera">Fotó készítése:</label>
+          <input class="only-mobile" type="file-camera" accept="image/*" (change)="uploadPhoto($event)" capture="environment">
           <div class="photo-upload-progress" *ngIf="uploadProgress | async">
             <progress max="100" [value]="uploadProgress | async"></progress>
           </div>
