@@ -9,14 +9,15 @@ export class Userconfig implements UserConfigInterface {
       public companyNameBottom: string = '',
       public nextOrderSerialNumber: number = 0,
       public smsNotificationMessage: string = '',
-      public emailNotificationMessage:string = '',
+      public emailNotificationMessage: string = '',
+      public emailSubject: string = '',
     ) {}
     toInterface() {
       let uc: UserConfigInterface = {id: this.id, showOtherOrders: this.showOtherOrders, warrantyCardFooterText: this.warrantyCardFooterText,
         worksheetCardFooterText: this.worksheetCardFooterText, worksheetCardReceiptText: this.worksheetCardReceiptText,
         companyNameTop: this.companyNameTop, companyNameBottom: this.companyNameBottom,
          nextOrderSerialNumber: this.nextOrderSerialNumber, smsNotificationMessage: this.smsNotificationMessage,
-        emailNotificationMessage: this.emailNotificationMessage}
+        emailNotificationMessage: this.emailNotificationMessage, emailSubject: this.emailSubject}
       return uc;
     }
 }
@@ -32,4 +33,5 @@ export interface UserConfigInterface {
     nextOrderSerialNumber: number;
     smsNotificationMessage: string;
     emailNotificationMessage: string;
+    emailSubject: string;
 }
