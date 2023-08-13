@@ -11,26 +11,30 @@
           type="button"
           class="details-button-single"
         >
-          <a class="only-desktop">{{ disableEditing ? 'Szerkesztés' : 'Mentés'}}</a>
           <mat-icon class="only-mobile white-icon">edit</mat-icon>
+          <a class="only-desktop button-text">{{ disableEditing ? 'Szerkesztés' : 'Mentés'}}</a>
         </button>
         <button (click)="onPrintWorksheet()" type="button" class="print-button details-button-single">
           <mat-icon class="white-icon">print</mat-icon>
-          <a class="only-desktop">Munkalap</a>
-          <mat-icon class="only-mobile white-icon">gavel_icon</mat-icon>
+          <a class="only-desktop button-text">Munkalap</a>
+          <div class="only-mobile">
+            <mat-icon class="white-icon">gavel_icon</mat-icon>
+          </div>
         </button>
         <button (click)="onPrintWarranty()" type="button" class="print-button details-button-single">
           <mat-icon class="white-icon">print</mat-icon>
-          <a class="only-desktop">Garanciakártya</a>
-          <mat-icon class="only-mobile white-icon">payment</mat-icon>
+          <a class="only-desktop button-text">Garanciakártya</a>
+          <div class="only-mobile">
+            <mat-icon class="white-icon">payment</mat-icon>
+          </div>
         </button>
         <button (click)="sendNotificationEmail()" type="button" class="email-button details-button-single">
           <mat-icon class="white-icon">alternate_email</mat-icon>
-          <a class="only-desktop">Email</a>
+          <a class="only-desktop button-text">Email</a>
         </button>
         <button (click)="sendNotificationSMS()" type="button" class="only-mobile sms-button details-button-single">
           <mat-icon class="white-icon">textsms</mat-icon>
-          <a class="only-desktop">SMS</a>
+          <a class="only-desktop button-text">SMS</a>
         </button>
       </div>
 
@@ -43,7 +47,7 @@
           class="delete-order-button only-desktop"
         >
           <mat-icon class="delete-icon">delete_forever</mat-icon>
-          Munkalap törlése
+          <a class="delete-button-text"> Munkalap törlése</a>
       </button>
     </div>
     <mat-divider class="divider"></mat-divider>
@@ -51,14 +55,16 @@
     <h3>
       <a [routerLink]="['/']" class="back-link-mobile only-mobile"> Vissza </a>
     </h3>
-    <button
-        (click)="deleteOrder()"
-        type="button"
-        class="delete-order-button-mobile only-mobile"
-      >
-        <mat-icon class="delete-icon">delete_forever</mat-icon>
-        Munkalap törlése
-    </button>
+    <div class="only-mobile">
+      <button
+          (click)="deleteOrder()"
+          type="button"
+          class="delete-order-button-mobile only-mobile"
+        >
+          <mat-icon class="delete-icon">delete_forever</mat-icon>
+          <a class="delete-button-text"> Munkalap törlése</a>
+      </button>
+    </div>
   </div>
 </div>
 

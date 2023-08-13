@@ -32,9 +32,9 @@ const transporter = nodemailer.createTransport({
 
 exports.sendemail = onCall((request) => {
   // Data passed from the client.
-  const emailText = request.data().emailText;
-  const emailTo = request.data().emailTo;
-  const emailSubject = request.data().emailSubject;
+  const emailText = request.data.emailText;
+  const emailTo = request.data.emailTo;
+  const emailSubject = request.data.emailSubject;
 
   const mailOptions = {
     from: "miklos.borsi.4@gmail.com",

@@ -43,6 +43,12 @@
   padding-left: 20px;
   height: 50px;
 }
+.button-text {
+  color: rgb(255, 255, 255);
+}
+.delete-button-text {
+  color: rgb(255, 255, 255);
+}
 .print-button {
   padding-left: 20px;
 }
@@ -50,11 +56,17 @@
   margin-left: 100px;
   color: rgb(255, 255, 255); 
   background-color: brown;
+  align-items: center;
+  vertical-align: middle;
+  display: flex;
 }
 .delete-order-button-mobile {
   margin-left: 10px;
   color: rgb(255, 255, 255); 
   background-color: brown;
+  align-items: center;
+  vertical-align: middle;
+  display: flex;
 }
 .back-link-mobile {
   padding-left: 10px;
