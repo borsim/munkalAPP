@@ -4,11 +4,13 @@ import { OrderSortingInterface, sortingStatusSelection, orderStatusSelection, Or
 import { DatabaseService } from '../services/database.service';
 import { BehaviorSubject } from 'rxjs';
 import { Userconfig } from '../userconfigs';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.scss'],
+  encapsulation : ViewEncapsulation.None,
 })
 export class TopBarComponent {
   @ViewChild('searchbar') searchbar!: ElementRef;

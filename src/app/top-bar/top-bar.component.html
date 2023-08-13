@@ -9,7 +9,7 @@
     class="main-header mat-elevation-z4"
   >
     <mat-toolbar-row style="padding: 0 5px;">
-      <div style="padding:8px 0 0 10px;">
+      <div class="only-desktop" style="padding:8px 0 0 10px;">
         <a [routerLink]="['/']">
           <div class="mat-title" style="margin-bottom:2px;color:white;" *ngIf="(userConfigSubject.asObservable() | async)" >
             {{userConfigSubject.value.companyNameTop}}
@@ -20,9 +20,9 @@
         </a>
       </div>
       <!-- <mat-slide-toggle class="filter-done-toggle" (change)="changeToggleValue($event)" aria-label="Kész"><div class="slide-toggle-label">Kész</div></mat-slide-toggle> -->
-      <mat-form-field class="order-status-filter">
+      <mat-form-field class="order-status-filter" style="width: 20px;">
         <mat-label class="white-text">Státusz filter</mat-label>
-        <mat-select multiple class="order-status-select" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
+        <mat-select multiple class="order-status-select" panelClass="order-status-panel" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
           <mat-option *ngFor="let o of orderStatusValues" class="order-status-option" [value]="o.value">
             <div [ngClass]="{
               'statusRed' : o.value == 'canceled',
@@ -36,21 +36,29 @@
             </div>
           </mat-option>
           <mat-select-trigger>
-            Státusz szűrő
+            <div class="only-desktop">
+              Státusz szűrő
+            </div>
+            <div class="only-mobile select-trigger">
+              <mat-icon>check_box</mat-icon>
+            </div>
           </mat-select-trigger>
         </mat-select>
       </mat-form-field>
-      
-      <label id="sorting-radio-group" class="sorting-radio-group"><h2 class="sorting-radio-label">Rendezés:</h2></label>
+
+      <label id="sorting-radio-group" class="sorting-radio-group only-desktop"><h2 class="sorting-radio-label">Rendezés:</h2></label>
       <mat-radio-group
         aria-labelledby="Rendezés"
         class="sorting-radio"
         [(ngModel)]="selectedSorting">
         <mat-radio-button class="sorting-radio-button" *ngFor="let sortOption of statusSelection" [value]="sortOption.value" (change)="changeRadioValue($event)">
-          <div class="sorting-radio-button" >{{sortOption.viewValue}}</div>  
+          <div class="only-desktop sorting-radio-button" >{{sortOption.viewValue}}</div>
+          <div class="only-mobile">
+            <mat-icon class="white-icon">{{sortOption.icon}}</mat-icon>
+          </div>
         </mat-radio-button>
       </mat-radio-group>
-      <button mat-icon-button class="sort-ascending-button" (click)="sortAscending = !sortAscending; changeSortValue(sortAscending)">
+      <button mat-icon-button class="sort-ascending-button only-desktop" (click)="sortAscending = !sortAscending; changeSortValue(sortAscending)">
         <div [hidden]="sortAscending">
           <mat-icon class="sort-arrow">arrow_upward</mat-icon>
         </div>
@@ -61,10 +69,10 @@
 
 
 
-      <button mat-icon-button class="open-search-button" (click)="openSearch()">
+      <button mat-icon-button class="open-search-button only-desktop" (click)="openSearch()">
         <mat-icon>search</mat-icon>
       </button>
-      <button class="settings-button" mat-icon-button [routerLink]="['settings']">
+      <button class="settings-button only-desktop" mat-icon-button [routerLink]="['settings']">
         <mat-icon class="settings-icon">settings</mat-icon>
       </button>
       
@@ -72,7 +80,7 @@
   </mat-toolbar>
 
   <div
-    class="search-block mat-elevation-z4"
+    class="only-desktop search-block mat-elevation-z4"
     [class.active]="toggleSearch"
   >
     <mat-toolbar-row style="padding: 0 5px;">
@@ -94,3 +102,48 @@
   </div>
   
 </div>
+
+<mat-toolbar
+  color="primary"
+  class="only-mobile secondary-header mat-elevation-z5"
+>
+  <mat-toolbar-row class="only-mobile" style="padding: 0 5px;">
+    <button mat-icon-button class="sort-ascending-button-mobile only-mobile" (click)="sortAscending = !sortAscending; changeSortValue(sortAscending)">
+      <div [hidden]="sortAscending">
+        <mat-icon class="sort-arrow-mobile">arrow_upward</mat-icon>
+      </div>
+      <div [hidden]="!sortAscending">
+        <mat-icon class="sort-arrow-mobile">arrow_downward</mat-icon>
+      </div>
+    </button>
+
+    <button mat-icon-button class="open-search-button-mobile only-mobile" (click)="openSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button class="settings-button-mobile only-mobile" mat-icon-button [routerLink]="['settings']">
+      <mat-icon class="settings-icon">settings</mat-icon>
+    </button>
+
+    <div
+        class="search-block-mobile mat-elevation-z4 only-mobile"
+        [class.active]="toggleSearch"
+    >
+      <mat-toolbar-row style="padding: 0 5px;">
+        <button class="search-icon" mat-icon-button disabled>
+          <mat-icon>search</mat-icon>
+        </button>
+        <input
+          class="search-control"
+          type="text"
+          placeholder="Keresés"
+          [(ngModel)]="searchText"
+          (keyup)="updateSBServiceData()"
+          #searchbar
+        />
+        <button mat-button mat-icon-button (click)="searchClose()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

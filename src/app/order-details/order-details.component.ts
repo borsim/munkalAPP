@@ -11,6 +11,8 @@ import moment from 'moment';
 import { PrintService } from '../services/print.service';
 import { Router } from '@angular/router';
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { functions } from '../app.component';
+
 
 @Component({
   selector: 'app-order-details',
@@ -137,20 +139,20 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   sendNotificationEmail() {
-    const messageText = this.databaseService.currentUserConfig.value.emailNotificationMessage;
+    let baseMessage = this.databaseService.currentUserConfig.value.emailNotificationMessage;
+    baseMessage = baseMessage.replace('UGYFEL', this.order!.customerName);
+    baseMessage = baseMessage.replace('MUNKALAP', this.order!.name);
+    const messageText = baseMessage;
     const messageSubject = this.databaseService.currentUserConfig.value.emailSubject;
     const messageTo = this.order?.email;
-    const functions = getFunctions();
     if (messageTo === '') {
       console.log("No email address given.");
       return;
     } else {
       if (window.confirm('Biztosan ki szeretnéd küldeni ezt az értesítést?')) {
-        const sendEmail = httpsCallable(functions, 'sendEmail');
-        sendEmail({ emailText: messageText, emailTo: messageTo, emailSubject: messageSubject })
-          .then((result) => {
-            // Read result of the Cloud Function.
-        });
+        const sendemail = httpsCallable(functions, 'sendemail')
+        const data = { emailText: messageText, emailTo: messageTo, emailSubject: messageSubject };
+        sendemail(data);
       }
     }
   }

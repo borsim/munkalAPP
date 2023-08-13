@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import { getFunctions } from 'firebase/functions';
 const firebaseConfig = {
     apiKey: 'AIzaSyD3p6xJROowWv9ZBfvVkIG1jVcyxmNIG5w',
     authDomain: 'oraszerviz-munkalap.firebaseapp.com',
@@ -10,8 +9,9 @@ const firebaseConfig = {
     appId: '1:2130836140:web:1fb76877d4c195602efd09',
     measurementId: 'G-55ZRJL2CJN',
   };
+import { getFunctions, httpsCallable } from "firebase/functions";
 const app = firebase.initializeApp(firebaseConfig);
-const functions = getFunctions(app);
+export const functions = getFunctions(app, 'europe-west1');
 
 import 'firebase/compat/auth';
 import * as firebaseui from 'firebaseui';

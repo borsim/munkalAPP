@@ -1,4 +1,9 @@
-<h1 class="settings-title">Beállítások</h1>
+<div class="title-container">
+  <h1 class="settings-title">Beállítások</h1>
+  <h3>
+    <a [routerLink]="['/']" class="back-link"> Vissza </a>
+  </h3>
+</div>
 <div class="button-navigation-container">
   <button
     (click)="readonly = !readonly; toggleEditing('local')"
@@ -67,8 +72,23 @@
               [(ngModel)]="model.smsNotificationMessage"
               name="smsNotificationMessage"
               [disabled]="readonly"
-              placeholder="Kedves UGYFEL, \nMUNKALAP órája elkészült és átvehető. B & H óraszerviz"
+              placeholder="Kedves UGYFEL, MUNKALAP órája elkészült és átvehető. B & H óraszerviz"
             ></textarea>
+          </div>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill">
+          <div class="form-group">
+            <label for="description">Email értesítés tárgya</label>
+            <input matInput
+              type="text"
+              class="form-control"
+              id="emailSubject"
+              [(ngModel)]="model.emailSubject"
+              name="emailSubject"
+              [disabled]="readonly"
+            />
           </div>
         </mat-form-field>
         <br>
@@ -86,7 +106,7 @@
               [(ngModel)]="model.emailNotificationMessage"
               name="emailNotificationMessage"
               [disabled]="readonly"
-              placeholder="Kedves UGYFEL, \nMUNKALAP órája elkészült és átvehető. Borsi és Hoblyák óraszerviz"
+              placeholder="Kedves UGYFEL, MUNKALAP órája elkészült és átvehető. Borsi és Hoblyák óraszerviz"
             ></textarea>
           </div>
         </mat-form-field>

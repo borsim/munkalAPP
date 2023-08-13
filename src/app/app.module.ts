@@ -32,6 +32,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage'
+import {AngularFireFunctionsModule, REGION, USE_EMULATOR} from '@angular/fire/compat/functions'
 import {
   MatMomentDateModule,
   MomentDateAdapter,
@@ -77,6 +78,7 @@ const firebaseConfig = {
     MatMomentDateModule,
     MatSlideToggleModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireFunctionsModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
@@ -99,6 +101,8 @@ const firebaseConfig = {
     ]),
   ],
   providers: [
+    { provide: USE_EMULATOR, useValue: ['localhost', 5001] },
+    { provide: REGION, useValue: 'europe-west1' },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: { 

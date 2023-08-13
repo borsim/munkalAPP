@@ -102,6 +102,9 @@ export class DatabaseService {
         dbconfig!.companyNameTop,
         dbconfig!.companyNameBottom,
         dbconfig!.nextOrderSerialNumber,
+        dbconfig!.smsNotificationMessage,
+        dbconfig!.emailNotificationMessage,
+        dbconfig!.emailSubject,
       ) : new Userconfig();
       this.globalUserConfig.next(nonNullUC);
     })
@@ -112,6 +115,7 @@ export class DatabaseService {
       if (docSnapshot.exists) {
         let ucVC = uc.valueChanges();
         ucVC.subscribe((dbconfig) => {
+          // Use globalConfig values if userConfig has them undefined. Except for serial number that's always global
           const nonNullUC: Userconfig =
           dbconfig !== null ? new Userconfig(
             (dbconfig!.id == null ? this.globalUserConfig.value.id : dbconfig!.id),
@@ -122,6 +126,9 @@ export class DatabaseService {
             (dbconfig!.companyNameTop == null ? this.globalUserConfig.value.companyNameTop : dbconfig!.companyNameTop),
             (dbconfig!.companyNameBottom == null ? this.globalUserConfig.value.companyNameBottom : dbconfig!.companyNameBottom),
             this.globalUserConfig.value.nextOrderSerialNumber,
+            (dbconfig!.smsNotificationMessage == null ? this.globalUserConfig.value.smsNotificationMessage : dbconfig!.smsNotificationMessage),
+            (dbconfig!.emailNotificationMessage == null ? this.globalUserConfig.value.emailNotificationMessage : dbconfig!.emailNotificationMessage),
+            (dbconfig!.emailSubject == null ? this.globalUserConfig.value.emailSubject : dbconfig!.emailSubject),
           ) : new Userconfig();
           this.currentUserConfig.next(nonNullUC);
         })

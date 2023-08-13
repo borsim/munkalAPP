@@ -11,29 +11,36 @@
           type="button"
           class="details-button-single"
         >
-          {{ disableEditing ? 'Szerkesztés' : 'Mentés'}}
+          <a class="only-desktop">{{ disableEditing ? 'Szerkesztés' : 'Mentés'}}</a>
+          <mat-icon class="only-mobile white-icon">edit</mat-icon>
         </button>
         <button (click)="onPrintWorksheet()" type="button" class="print-button details-button-single">
-          <mat-icon class="white-icon">print</mat-icon>  Munkalap
+          <mat-icon class="white-icon">print</mat-icon>
+          <a class="only-desktop">Munkalap</a>
+          <mat-icon class="only-mobile white-icon">gavel_icon</mat-icon>
         </button>
         <button (click)="onPrintWarranty()" type="button" class="print-button details-button-single">
-          <mat-icon class="white-icon">print</mat-icon>  Garanciakártya
+          <mat-icon class="white-icon">print</mat-icon>
+          <a class="only-desktop">Garanciakártya</a>
+          <mat-icon class="only-mobile white-icon">payment</mat-icon>
         </button>
         <button (click)="sendNotificationEmail()" type="button" class="email-button details-button-single">
-          <mat-icon class="white-icon">alternate_email</mat-icon>  Email
+          <mat-icon class="white-icon">alternate_email</mat-icon>
+          <a class="only-desktop">Email</a>
         </button>
         <button (click)="sendNotificationSMS()" type="button" class="only-mobile sms-button details-button-single">
-          <mat-icon class="white-icon">textsms</mat-icon>  SMS
+          <mat-icon class="white-icon">textsms</mat-icon>
+          <a class="only-desktop">SMS</a>
         </button>
       </div>
 
       <h3>
-        <a [routerLink]="['/']" class="back-link"> Vissza </a>
+        <a [routerLink]="['/']" class="back-link only-desktop"> Vissza </a>
       </h3>
       <button
           (click)="deleteOrder()"
           type="button"
-          class="delete-order-button"
+          class="delete-order-button only-desktop"
         >
           <mat-icon class="delete-icon">delete_forever</mat-icon>
           Munkalap törlése
@@ -41,44 +48,17 @@
     </div>
     <mat-divider class="divider"></mat-divider>
     <order-form [order]="order" [readonly]="disableEditing" [confirmButtonsHidden]="true" [submitBehaviour]="submitBehaviour" id="orderForm"> </order-form>
-    <!-- <h4>{{ order.deadline | time }}</h4>
-    <div class="child flex-parent">
-      <div class="child flex-child">
-        <button (click)="openTab = 0" type="button">Adatok</button>
-      </div>
-      <div class="child flex-child">
-        <button (click)="openTab = 1" type="button">Folyamat</button>
-      </div>
-      <div class="child flex-child">
-        <button (click)="openTab = 2" type="button">Fotók</button>
-      </div>
-    </div>
-
-    <div [hidden]="!(openTab == 0)">
-      <h2>Adatok</h2>
-      <div>
-        <h4>Név: {{ order.customerName }}</h4>
-        <h4>Telefon: {{ order.telephoneNumber }}</h4>
-        <h4>Email: {{ order.email }}</h4>
-        <h4>Hibaleírás: {{ order.description }}</h4>
-        <h4>Feladatok: {{ order.task }}</h4>
-        <h4>Határidő: {{ order.deadline | date }}</h4>
-        <h4>Ár: {{ order.price | currency }}</h4>
-        <p>Előleg: {{ order.advancePayment | currency }}</p>
-      </div>
-    </div>
-    <div [hidden]="!(openTab == 1)">
-      <h2>Folyamat</h2>
-      <div>
-        <h4>Státusz: {{ order.orderStatus }}</h4>
-        <h4>Felvéve: {{ order.creationTime | date }}</h4>
-        <h4>Megjegyzések: {{ order.notes }}</h4>
-        <h4>Elvégzett munkák: {{ order.doneTasks }}</h4>
-        <h4>Átadva: {{ order.returnedTime | date }}</h4>
-        <h4>Garancia: {{ order.guarantee }}</h4>
-      </div>
-    </div>
-    <div [hidden]="!(openTab == 2)"><h2>Fotók</h2></div>-->
+    <h3>
+      <a [routerLink]="['/']" class="back-link-mobile only-mobile"> Vissza </a>
+    </h3>
+    <button
+        (click)="deleteOrder()"
+        type="button"
+        class="delete-order-button-mobile only-mobile"
+      >
+        <mat-icon class="delete-icon">delete_forever</mat-icon>
+        Munkalap törlése
+    </button>
   </div>
 </div>
 

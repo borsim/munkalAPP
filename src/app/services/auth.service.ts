@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import 'firebase/compat/auth';
 import * as firebaseui from 'firebaseui';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, getIdToken } from "firebase/auth";
 import { DatabaseService } from './database.service';
 
 @Injectable({
@@ -16,22 +16,26 @@ export class AuthService {
 
 
   currentUser: any = null;
+  currentIdToken: string = '';
   private authStatusSub = new BehaviorSubject(this.currentUser);
   currentAuthStatus = this.authStatusSub.asObservable();
 
 
-authStatusListener(){
-  this.fireAuth.onAuthStateChanged((credential)=>{
-    if(credential){
-      this.authStatusSub.next(credential);
-      this.currentUser = credential.uid;
-      this.dtb.getSpecificUserConfig(this.currentUser);
-    }
-    else{
-      this.authStatusSub.next(null);
-      console.log('User is logged out');
-      this.currentUser = null;
-    }
-  })
-}
+  authStatusListener(){
+    this.fireAuth.onAuthStateChanged((credential)=>{
+      if(credential){
+        this.authStatusSub.next(credential);
+        this.currentUser = credential.uid;
+        this.dtb.getSpecificUserConfig(this.currentUser);
+        credential.getIdToken().then((token: string) => {
+          this.currentIdToken = token;
+        });
+      }
+      else{
+        this.authStatusSub.next(null);
+        console.log('User is logged out');
+        this.currentUser = null;
+      }
+    })
+  }
 }
