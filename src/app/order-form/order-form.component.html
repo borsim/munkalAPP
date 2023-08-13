@@ -296,9 +296,54 @@
         </div>
         <div [hidden]="!(openTab == 2)">
           <label for="file">Fotó feltöltése:</label>
-          <input type="file" class="photo-upload-input" (change)="uploadPhoto($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
-          <label class="only-mobile" for="file-camera">Fotó készítése:</label>
-          <input class="only-mobile" type="file-camera" accept="image/*" (change)="uploadPhoto($event)" capture="environment">
+          <input type="file" class="photo-upload-input" (change)="uploadSelectedImage($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
+          <label for="file-camera">Fotó készítése:</label>
+          <button
+            (click)="toggleWebcamActive(false); webcamActive = !webcamActive"
+            type="button"
+            class="webcam-active-button"
+          >
+            <div class="only-mobile" *ngIf="webcamActive">
+              <mat-icon class="white-icon">close</mat-icon>
+            </div>
+            <div class="only-mobile" *ngIf="!webcamActive">
+              <mat-icon class="only-mobile white-icon">camera_alt</mat-icon>
+            </div>
+            <a class="only-desktop button-text">{{ webcamActive ? 'Kamera ki' : 'Kamera be'}}</a>
+          </button>
+          <div class="only-desktop" *ngIf="webcamActive">
+            <webcam [height]="400" [width]="1000" 
+              [trigger]="triggerObservable"
+              (imageCapture)="handleImage($event)">
+            </webcam>
+          </div>
+          <div class="only-mobile" *ngIf="webcamActive">
+            <webcam [height]="400" [width]="400" 
+              [trigger]="triggerObservable"
+              (imageCapture)="handleImage($event)">
+            </webcam>
+          </div>
+          <div *ngIf="webcamActive">
+            <button class="webcam-take-button" (click)="triggerSnapshot();" type="button">
+              Kép készítése
+            </button>
+          </div>
+          <div class="snapshot" *ngIf="webcamImage && webcamActive">
+            <h2>Elkészített fotó</h2>
+            <img [src]="webcamImage.imageAsDataUrl"/>
+          </div>
+          <div class="save-img-button-div" *ngIf="webcamImage && webcamActive">
+            <button
+              (click)="toggleWebcamActive(true); webcamActive = false;"
+              type="button"
+              class="webcam-save-button"
+            >
+            Kép mentése
+            </button>
+          </div>
+
+
+
           <div class="photo-upload-progress" *ngIf="uploadProgress | async">
             <progress max="100" [value]="uploadProgress | async"></progress>
           </div>

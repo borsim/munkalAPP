@@ -11,7 +11,12 @@
           type="button"
           class="details-button-single"
         >
-          <mat-icon class="only-mobile white-icon">edit</mat-icon>
+          <div class="only-mobile" *ngIf="!disableEditing">
+            <mat-icon class="white-icon">save</mat-icon>
+          </div>
+          <div class="only-mobile" *ngIf="disableEditing">
+            <mat-icon class="only-mobile white-icon">edit</mat-icon>
+          </div>
           <a class="only-desktop button-text">{{ disableEditing ? 'Szerkesztés' : 'Mentés'}}</a>
         </button>
         <button (click)="onPrintWorksheet()" type="button" class="print-button details-button-single">
@@ -20,6 +25,7 @@
           <div class="only-mobile">
             <mat-icon class="white-icon">gavel_icon</mat-icon>
           </div>
+          
         </button>
         <button (click)="onPrintWarranty()" type="button" class="print-button details-button-single">
           <mat-icon class="white-icon">print</mat-icon>

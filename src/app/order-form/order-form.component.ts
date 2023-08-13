@@ -4,11 +4,12 @@ import { DatabaseService } from '../services/database.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AuthService } from './../services/auth.service';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage'
-import { Observable, of, map, BehaviorSubject } from 'rxjs';
+import { Observable, of, map, BehaviorSubject, Subject } from 'rxjs';
 import { subscribe } from 'diagnostics_channel';
 import { v4 as uuid } from 'uuid';
 import { filter, switchMap } from 'rxjs';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import {WebcamImage} from 'ngx-webcam';
 
 @Component({
   selector: 'order-form',
@@ -20,6 +21,11 @@ export class OrderFormComponent {
   public openTab: number = 0;
   uploadProgress: Observable<number> = of(0);
   photoRefs: string[] = [];
+
+  webcamActive: boolean = false;
+  webcamImage: any = null;
+  webcamTrigger: Subject<void> = new Subject<void>();
+
   @Input() readonly: boolean = false;
   @Input() confirmButtonsHidden: boolean = false;
   @Input() order: Order = new Order('0');
@@ -33,11 +39,15 @@ export class OrderFormComponent {
 
   submitted = false;
 
-  uploadPhoto(event: any) {
+  uploadSelectedImage(event: any) {
+    this.uploadPhoto(event.target.files[0]);
+  }
+
+  uploadPhoto(fileToUpload: File) {
     let randomUuid = uuid();
     let uploadPath = '/'.concat(this.order.id,'/', randomUuid);
     let ref = this.afStorage.ref(uploadPath);
-    let task = ref.put(event.target.files[0]);
+    let task = ref.put(fileToUpload);
     let newOrder: Order = this.order;
     this.uploadProgress = task.snapshotChanges()
     .pipe(map(s => (s!.bytesTransferred / s!.totalBytes) * 100));
@@ -107,6 +117,36 @@ export class OrderFormComponent {
       let orderWithoutPhoto: Order = this.order;
       storagePhotoRef.delete();
       this.dbs.updateOrderInDb(orderWithoutPhoto);
+    }
+  }
+
+  triggerSnapshot(): void {
+   this.webcamTrigger.next();
+  }
+  handleImage(webcamImage: WebcamImage): void {
+    this.webcamImage = webcamImage;
+  }
+    
+  public get triggerObservable(): Observable<void> {
+    return this.webcamTrigger.asObservable();
+  }
+  toggleWebcamActive(saveImg: boolean) {
+    if (this.webcamActive && saveImg) {
+
+      const arr = this.webcamImage.imageAsDataUrl.split(",");
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      const file: File = new File([u8arr], "camera_image.jpg", { type: "image/jpeg" })
+
+      this.uploadPhoto(file);
+      this.webcamImage = null;
+    } else if (this.webcamActive && !saveImg) {
+      this.webcamImage = null;
     }
   }
 }

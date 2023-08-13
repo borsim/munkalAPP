@@ -47,6 +47,7 @@ import { WorksheetCardComponent } from './worksheet-card/worksheet-card.componen
 import { QRCodeModule } from 'angularx-qrcode';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { UserconfigFormComponent } from './userconfig-form/userconfig-form.component';
+import { WebcamModule } from 'ngx-webcam';
 
 //import { MatNativeDateModule } from '@angular/material/core';
 const firebaseConfig = {
@@ -87,6 +88,7 @@ const firebaseConfig = {
     ScrollingModule,
     TextFieldModule,
     QRCodeModule,
+    WebcamModule,
     RouterModule.forRoot([
       { path: '', component: OrderListComponent },
       { path: 'settings', component: UserconfigFormComponent },

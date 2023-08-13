@@ -130,10 +130,10 @@ export class OrderDetailsComponent implements OnInit {
     }
 
     if(navigator.userAgent.match(/Android/i)) {
-      const newUrl = 'sms://' + phoneNum +'/?body=encodeURIComponent(' + baseMessage + '_blank';
+      const newUrl = 'sms://' + phoneNum +'/?body=' + baseMessage;
       window.open(newUrl);
     } else if(navigator.userAgent.match(/iPhone/i)){
-      const newUrl = 'sms://' + phoneNum +'/&body=encodeURIComponent(' + baseMessage + '_blank';
+      const newUrl = 'sms://' + phoneNum +'/&body=' + baseMessage;
       window.open(newUrl);
      }
   }
