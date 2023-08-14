@@ -40,7 +40,7 @@ exports.sendemail = onCall((request) => {
     from: "miklos.borsi.4@gmail.com",
     to: emailTo,
     subject: emailSubject,
-    html: emailText,
+    text: emailText,
   };
   // send mail with defined transport object
   return transporter.sendMail(mailOptions).catch((err: string)=>{
