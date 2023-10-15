@@ -208,7 +208,7 @@ app-top-bar h1 {
     display: none;
   }
   .order-serial {
-    font-size: medium!important;
+    font-size: small!important;
   }
   .order-customer-name {
     font-size: larger!important;
@@ -224,6 +224,9 @@ app-top-bar h1 {
   }
   .order-title-a {
     font-size: larger!important;
+  }
+  .delete-order-button {
+    display: none!important;
   }
 }
 
@@ -272,6 +275,10 @@ app-top-bar h1 {
   .order-list-header {
     text-align: left  !important;
   }
+  .order-title-row {
+    margin-top: 10px !important;
+    max-width: 96%!important;
+  }
   .order-title {
     padding-left: 2px !important;
   }
@@ -303,5 +310,7 @@ app-top-bar h1 {
   .details-button-single {
     width: 80%;
   }
-  
+  .delete-order-button {
+    display: none!important;
+  }
 }

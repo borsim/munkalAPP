@@ -3,7 +3,6 @@
   
   <div *ngIf="authservice.currentAuthStatus | async; else showLogin">
     <router-outlet></router-outlet>
-    Bejelentkezve
   </div>
   <ng-template #showLogin>
     <div id="firebaseui-auth-container"></div>
