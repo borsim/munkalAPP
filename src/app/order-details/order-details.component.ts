@@ -14,6 +14,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 import { functions } from '../app.component';
 
 
+
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',

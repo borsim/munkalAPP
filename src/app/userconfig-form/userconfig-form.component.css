@@ -6,6 +6,7 @@ input[type="text"][disabled] {
 }
 .title-container {
   display: flex;
+  padding-top: 8px;
 }
 .back-link {
   padding-left: 30px;

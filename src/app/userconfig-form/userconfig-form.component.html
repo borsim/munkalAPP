@@ -1,9 +1,9 @@
 <div class="title-container">
   <h1 class="settings-title">Beállítások</h1>
-  <h3>
-    <a [routerLink]="['/']" class="back-link"> Vissza </a>
-  </h3>
 </div>
+<h3 style="padding-left: 50px;">
+  <a [routerLink]="['/']" class="back-link" style="padding-left:0px;"> Vissza </a>
+</h3>
 <div class="button-navigation-container">
   <button
     (click)="readonly = !readonly; toggleEditing('local')"

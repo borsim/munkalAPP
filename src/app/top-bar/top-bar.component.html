@@ -9,12 +9,12 @@
     class="main-header mat-elevation-z4"
   >
     <mat-toolbar-row style="padding: 0 5px;">
-      <div class="only-desktop" style="padding:8px 0 0 10px;">
+      <div class="only-desktop midsize-screen" style="padding:8px 0 0 10px;">
         <a [routerLink]="['/']">
-          <div class="mat-title" style="margin-bottom:2px;color:white;" *ngIf="(userConfigSubject.asObservable() | async)" >
+          <div class="shop-title" *ngIf="(userConfigSubject.asObservable() | async)" >
             {{userConfigSubject.value.companyNameTop}}
           </div>
-          <div class="mat-subheading-2" style="line-height:.6rem;color:white;" *ngIf="(userConfigSubject.asObservable() | async)">
+          <div class="shop-subtitle" *ngIf="(userConfigSubject.asObservable() | async)">
            {{userConfigSubject.value.companyNameBottom}}
           </div>
         </a>
@@ -22,7 +22,7 @@
       <!-- <mat-slide-toggle class="filter-done-toggle" (change)="changeToggleValue($event)" aria-label="Kész"><div class="slide-toggle-label">Kész</div></mat-slide-toggle> -->
       <mat-form-field class="order-status-filter" style="width: 20px;">
         <mat-label class="white-text">Státusz filter</mat-label>
-        <mat-select multiple class="order-status-select" panelClass="order-status-panel" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
+        <mat-select multiple class="order-status-select top-bar-status-select" panelClass="order-status-panel" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
           <mat-option *ngFor="let o of orderStatusValues" class="order-status-option" [value]="o.value">
             <div [ngClass]="{
               'statusRed' : o.value == 'canceled',
@@ -58,7 +58,7 @@
           </div>
         </mat-radio-button>
       </mat-radio-group>
-      <button mat-icon-button class="sort-ascending-button only-desktop" (click)="sortAscending = !sortAscending; changeSortValue(sortAscending)">
+      <button mat-icon-button class="sort-ascending-button only-desktop midsize-screen" (click)="sortAscending = !sortAscending; changeSortValue(sortAscending)">
         <div [hidden]="sortAscending">
           <mat-icon class="sort-arrow">arrow_upward</mat-icon>
         </div>
@@ -69,10 +69,10 @@
 
 
 
-      <button mat-icon-button class="open-search-button only-desktop" (click)="openSearch()">
+      <button mat-icon-button class="open-search-button only-desktop midsize-screen" (click)="openSearch()">
         <mat-icon>search</mat-icon>
       </button>
-      <button class="settings-button only-desktop" mat-icon-button [routerLink]="['settings']">
+      <button class="settings-button only-desktop midsize-screen" mat-icon-button [routerLink]="['settings']">
         <mat-icon class="settings-icon">settings</mat-icon>
       </button>
       
@@ -80,7 +80,7 @@
   </mat-toolbar>
 
   <div
-    class="only-desktop search-block mat-elevation-z4"
+    class="only-desktop search-block mat-elevation-z4 midsize-screen"
     [class.active]="toggleSearch"
   >
     <mat-toolbar-row style="padding: 0 5px;">

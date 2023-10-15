@@ -44,8 +44,8 @@
         </button>
       </div>
 
-      <h3>
-        <a [routerLink]="['/']" class="back-link only-desktop"> Vissza </a>
+      <h3 class="back-link only-desktop">
+        <a [routerLink]="['/']" > Vissza </a>
       </h3>
       <button
           (click)="deleteOrder()"
@@ -55,6 +55,7 @@
           <mat-icon class="delete-icon">delete_forever</mat-icon>
           <a class="delete-button-text"> Munkalap törlése</a>
       </button>
+      <a name="logo-missing-warning" style="color: red;"></a>
     </div>
     <mat-divider class="divider"></mat-divider>
     <order-form [order]="order" [readonly]="disableEditing" [confirmButtonsHidden]="true" [submitBehaviour]="submitBehaviour" id="orderForm"> </order-form>

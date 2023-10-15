@@ -6,17 +6,22 @@
 }
 .orders-header {
   text-decoration: underline;
+  margin-left: 2.5%;
 }
 
 .order-list-viewport {
   height: 800px;
-  width: 1200px;
-  
+  width: 95%;
+  max-width: 1200px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
 }
 
 
 .order-list-virtual-scroll-item {
-  height: 100px;
+  height: fit-content;
+  max-height: 160px;
+  min-height: 100px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 5px;
@@ -59,7 +64,7 @@
 }
 .order-details-flexbox {
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   display: flex;
   padding-left: 10px;
   padding-right: 10px;
@@ -71,6 +76,7 @@
   margin-top: auto;
   margin-left: 0;
   font-size: large;
+  margin-bottom: 0px;
 }
 .order-deadline-text {
   margin-top: auto;
@@ -78,6 +84,7 @@
   margin-right: 0;
   flex-grow: 1;
   font-size: large;
+  margin-bottom: 0px;
 }
 .order-guarantee-text {
   margin-top: auto;

@@ -51,7 +51,7 @@
                   </mat-select-trigger>
                 </mat-select>
               <!-- Order name first-->
-              <div class="order-top-row" *ngIf="sortTuple[0]!=='customerName'">
+              <div class="order-top-row" *ngIf="lastSortTupleOrdering!=='customerName'">
                 <div class="order-title">
                   <h3 class="order-title-a">
                     <a
@@ -63,14 +63,14 @@
                   </h3>
                 </div>
                 <a class="order-serial">
-                  #{{ order.serialNumber }}
+                  Lap {{ order.serialNumber }}
                 </a>
                 <div class="order-customer-name">
                   {{order.customerName}}
                 </div>
               </div>
               <!-- Customer name first-->
-              <div class="order-top-row" *ngIf="sortTuple[0]==='customerName'">
+              <div class="order-top-row" *ngIf="lastSortTupleOrdering==='customerName'">
                 <div class="order-title">
                   <h3 class="order-title-a">
                     <a

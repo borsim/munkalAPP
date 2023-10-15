@@ -29,6 +29,7 @@ export class OrderListComponent {
   filterStatuses: string[] = ['registered', 'waiting for part', 'tasks done', 'ready for pickup'];
   filterCreatedByUser: string = '';
   sortTuple: [string, boolean] = ['creationTime', false];
+  lastSortTupleOrdering = "name"
   oss = orderStatusSelection;
   orderFormIsOpen = false;
   stringifiedData: string = '';
@@ -100,6 +101,11 @@ export class OrderListComponent {
     this.searchbarService.sortSubject.subscribe((newSortTuple) => {
       var oldSortTuple: [string, boolean] = this.sortTuple;
       this.sortTuple = newSortTuple;
+      if (newSortTuple[0] === "name") {
+        this.lastSortTupleOrdering = "name";
+      } else if (newSortTuple[0] === "customerName") {
+        this.lastSortTupleOrdering = "customerName";
+      }
       this.filteredOrders = this.filterPipe.transform(this.orders, this.filterString, this.filterStatuses, this.filterCreatedByUser);
       if (!this.filterString) this.filteredOrders = this.filteredOrders.slice();
       if (oldSortTuple[1] !== newSortTuple[1] || oldSortTuple[0] !== newSortTuple[0]) this.filteredOrders = this.filteredOrders.slice();

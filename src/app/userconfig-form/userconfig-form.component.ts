@@ -48,7 +48,7 @@ export class UserconfigFormComponent {
   }
 
   uploadLogo(event: any) {
-    this.deleteOldLogo();
+    //this.deleteOldLogo();
     let uploadPath = '/'.concat('config','/', 'logo');
     let ref = this.afStorage.ref(uploadPath);
     let task = ref.put(event.target.files[0]);
@@ -63,7 +63,10 @@ export class UserconfigFormComponent {
       next: (url) => {
         // upload finished
       },
-      error: (err) => {console.error(err.message)}
+      error: (err) => {
+        console.error(err.message);
+        alert("Logó feltöltése sikertelen. Próbálja újra.");
+      }
     })
   }
 
@@ -97,8 +100,9 @@ export class UserconfigFormComponent {
   }
 
   signOut() {
-    this.authservice.fireAuth.signOut();
-    this.router.navigateByUrl('/');
-    window.location.reload();
+    this.router.navigateByUrl('/').then(()=>{
+      this.authservice.fireAuth.signOut();
+      window.location.reload();
+    });
   }
 }

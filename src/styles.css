@@ -146,7 +146,7 @@ app-top-bar h1 {
   padding-left: 5px;
 }
 
-@media all and (min-width: 480px) {
+@media all and (min-width: 1440px) {
   .only-desktop {display: block;}
   .only-mobile {display:none;}
   .order-status-select {
@@ -156,14 +156,80 @@ app-top-bar h1 {
     width: 200px !important;
   }
   .secondary-header {
-    top: 0px!important;
+    display: none!important;
   }
 }
 
-@media all and (max-width: 479px) {
+@media all and (min-width: 601px) and (max-width: 1439px) {
   .only-desktop {display: none;}
   .only-mobile {display:block;}
+  .midsize-screen {display: block;}
+  .secondary-header {
+    display: none!important;
+  }
+  .shop-title {
+    display: none;
+  }
+  .shop-subtitle {
+    display: none;
+  }
+  .order-status-select {
+    width: 100px !important;
+    padding-left: 0px;
+    margin-left: 10px;
+  }
+  .top-bar-status-select {
+    width: 50px !important;
+    padding-left: 0px;
+    margin-left: 10px;
+  }
+  .order-status-filter {
+    width: 50px;
+    padding-left: 0px !important;
+    margin-left: 0px;
+  }
+  .sorting-radio {
+    margin-left: 40px;
+    padding-left: 0px !important;
+  }
+  .sorting-radio-button {
+    padding-left: 0px;
+    margin-left: 5px;
+    padding-right: 5px !important;
+    margin-right: 0px;
+  }
+  .sort-ascending-button {
+    margin-left: 10px;
+  }
+  .mat-radio-label-content {
+    padding-left: 0px !important;
+  }
+  .search-block-mobile {
+    display: none;
+  }
+  .order-serial {
+    font-size: medium!important;
+  }
+  .order-customer-name {
+    font-size: larger!important;
+  }
+  .order-description-text {
+    font-size: small!important;
+  }
+  .order-deadline-text {
+    font-size: small!important;
+  }
+  .order-guarantee-text {
+    font-size: small!important;
+  }
+  .order-title-a {
+    font-size: larger!important;
+  }
+}
 
+@media all and (max-width: 600px) {
+  .only-desktop {display: none;}
+  .only-mobile {display:block;}
   .order-status-filter {
     width: 50px;
     padding-left: 0px !important;
@@ -187,7 +253,9 @@ app-top-bar h1 {
   .mat-radio-label-content {
     padding-left: 0px !important;
   }
-
+  .orders-header {
+    margin-top: 20px;
+  }
   .order-serial {
     margin-left: 5px!important;
     font-size: small!important;
@@ -212,10 +280,6 @@ app-top-bar h1 {
     width:fit-content;
     word-wrap: normal;
     max-width: 120px;
-  }
-  .order-list-viewport {
-    height: 800px;
-    width: 360px!important;
   }
   .order-guarantee-text {
     font-size: small!important;

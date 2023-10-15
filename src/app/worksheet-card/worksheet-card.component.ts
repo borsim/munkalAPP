@@ -7,6 +7,7 @@ import { DatabaseService } from '../services/database.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Moment } from 'moment';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FirebaseError } from '@angular/fire/app';
 import moment from 'moment';
 
 @Component({
@@ -37,6 +38,7 @@ export class WorksheetCardComponent implements OnInit {
     this.orderDoc = store.doc<OrderInterface>('Orders/' + this.orderId);
     let orderVC: Observable<OrderInterface> = this.orderDoc.valueChanges();
     this.orderObs = orderVC;
+
 
     orderVC.subscribe((dbOrder) => {
       const nonNullOrder: Order =
@@ -77,7 +79,6 @@ export class WorksheetCardComponent implements OnInit {
         this.qrcodeString = 'https://www.oraszerviz-munkalap.firebaseapp.com/orders/'.concat(this.orderId); 
         this.wsFooterText = this.databaseService.currentUserConfig.value.worksheetCardFooterText;
         this.wsReceiptText = this.databaseService.currentUserConfig.value.worksheetCardReceiptText;
-
         this.afStorage.ref('/config/logo').getDownloadURL().subscribe((url) => {
           let currentImg = document.getElementById('logo-img');
           if (currentImg != null) {
@@ -87,6 +88,7 @@ export class WorksheetCardComponent implements OnInit {
             currentImg.setAttribute('src', url);
           }
         });
+        
     })
   }
 
