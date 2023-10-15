@@ -161,9 +161,9 @@ export interface OrderSortingInterface {
 }
 
 export const sortingStatusSelection: OrderSortingInterface[] = [
-  { value: 'name', viewValue: 'Munkalapnév', icon: "title" },
+  { value: 'name', viewValue: 'Tárgy', icon: "title" },
   { value: 'customerName', viewValue: "Ügyfél", icon: "person"},
-  { value: 'creationTime', viewValue: 'Felvétel ideje', icon: "note_add" },
-  { value: 'lastUpdatedTime', viewValue: 'Legutóbb módosítva', icon: "edit"  },
+  { value: 'creationTime', viewValue: 'Felvétel', icon: "note_add" },
+  { value: 'lastUpdatedTime', viewValue: 'Frissítve', icon: "edit"  },
   { value: 'deadline', viewValue: 'Határidő', icon: "calendar_today" },
 ];

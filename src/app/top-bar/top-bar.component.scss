@@ -111,7 +111,7 @@ header {
   justify-content: left;
 }
 .sorting-radio-label {
-  padding-left: 30px;
+  padding-left: 20px;
   color: #fff;
   justify-content: left;
   text-transform: capitalize;
@@ -123,11 +123,15 @@ header {
 }
 .sorting-radio-button {
   padding-left: 2px;
-  padding-right: 20px;
+  padding-right: 10px;
   color: #fff;
   justify-content: left;
   text-transform: capitalize;
 }
+.mat-radio-label-content {
+  padding-left: 3px!important;
+}
+
 
 .sort-ascending-button {
   width: 40px;
