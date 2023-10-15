@@ -5,7 +5,7 @@
   }
 }
 @page {
-  size: A5 landscape;
+  size: A4 portrait;
   margin-top: 0mm; /* this affects the margin in the printer settings */
   margin-bottom: 0mm;
 }
@@ -18,7 +18,7 @@
 .print-header {
   padding-left: 2px;
   margin-left: 0px;
-  margin-right: 100mm;
+  margin-right: 92mm;
   display: flex;
   margin-bottom: 00px;
   padding-bottom: 0px;
@@ -36,7 +36,7 @@
 }
 .print-footer {
   margin-top: 6px;
-  margin-right: 100mm;
+  margin-right: 92mm;
   justify-content: center;
   text-align: center;
   white-space: pre-line;
@@ -63,7 +63,7 @@
 
 .warranty-body {
   padding-top: 0px;
-  margin-right: 100mm;
+  margin-right: 92mm;
   margin-left: 0px;
   padding-left: 0px;
   display: flex;

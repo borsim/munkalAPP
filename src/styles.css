@@ -167,12 +167,6 @@ app-top-bar h1 {
   .secondary-header {
     display: none!important;
   }
-  .shop-title {
-    display: none;
-  }
-  .shop-subtitle {
-    display: none;
-  }
   .order-status-select {
     width: 100px !important;
     padding-left: 0px;
@@ -199,7 +193,18 @@ app-top-bar h1 {
     margin-right: 0px;
   }
   .sort-ascending-button {
-    margin-left: 10px;
+    margin-left: 10px!important;
+    padding-left: 6px!important;
+    width: 15px!important;
+  }
+  .settings-button {
+    width: 24px!important;
+    padding-left: 0px!important;
+  }
+  .open-search-button {
+    width: 24px!important;
+    padding-left: 0px!important;
+    margin-right: 5px!important;
   }
   .mat-radio-label-content {
     padding-left: 0px !important;
