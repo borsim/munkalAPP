@@ -21,6 +21,7 @@ export class Order implements OrderInterface {
     public creationTime: number = 0,
     public lastUpdatedTime: number = 0,
     public returnedTime: number = 0,
+    public guaranteeStartTime: number = 0,
     public guaranteeEndTime: number = 0,
     public advancePayment: number = 0,
     public notes: string = '',
@@ -34,7 +35,7 @@ export class Order implements OrderInterface {
       description: this.description, originalState: this.originalState, orderStatus: this.orderStatus,
       icon: this.icon, customerName: this.customerName, telephoneNumber: this.telephoneNumber, email: this.email,
       task: this.task, deadline: this.deadline, creationTime: this.creationTime, lastUpdatedTime: this.lastUpdatedTime, 
-      returnedTime: this.returnedTime, guaranteeEndTime: this.guaranteeEndTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks,
+      returnedTime: this.returnedTime, guaranteeStartTime: this.guaranteeStartTime, guaranteeEndTime: this.guaranteeEndTime, advancePayment: this.advancePayment, notes: this.notes, doneTasks: this.doneTasks,
       guarantee: this.guarantee, handoverState: this.handoverState, photoIds: this.photoIds}
     return oi;
   }
@@ -99,9 +100,10 @@ export class Order implements OrderInterface {
         this.doneTasks = this.task;
       }
     }
-    if (newStatus === 'done' || this.guarantee != 0) {
+    if (newStatus === 'done' && this.guarantee != 0 && this.guaranteeStartTime == 0) {
       let currentTime = moment().endOf('day');
       this.guaranteeEndTime = (moment(currentTime).add(this.guarantee, 'M')).valueOf();
+      this.guaranteeStartTime = currentTime.valueOf();
     }
     this._orderStatus = newStatus;
   }
@@ -129,6 +131,7 @@ export interface OrderInterface {
   creationTime: number;
   lastUpdatedTime: number;
   returnedTime: number;
+  guaranteeStartTime: number;
   guaranteeEndTime: number;
   advancePayment: number;
   notes: string;

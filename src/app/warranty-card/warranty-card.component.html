@@ -52,7 +52,7 @@
                     Garancia:
                 </div>
                 <div class="warranty-info-item-value">
-                    {{order.guarantee}} hónap
+                    {{order.guarantee}} hónap{{warrantyEndText != '' ? ', ' + warrantyEndText + '-ig' : ''}}
                 </div>
             </div>
             <hr class="solid">

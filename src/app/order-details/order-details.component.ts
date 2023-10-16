@@ -71,6 +71,7 @@ export class OrderDetailsComponent implements OnInit {
                   dbOrder!.creationTime,
                   dbOrder!.lastUpdatedTime,
                   dbOrder!.returnedTime,
+                  dbOrder!.guaranteeStartTime,
                   dbOrder!.guaranteeEndTime,
                   dbOrder!.advancePayment,
                   dbOrder!.notes,

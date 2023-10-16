@@ -23,6 +23,7 @@ export class WarrantyCardComponent implements OnInit {
   timeSnapshot: Moment = moment();
   datetimeText = '';
   dateText = '';
+  warrantyEndText = '';
   wcFooterText: string = '';
 
 
@@ -59,6 +60,7 @@ export class WarrantyCardComponent implements OnInit {
               dbOrder!.creationTime,
               dbOrder!.lastUpdatedTime,
               dbOrder!.returnedTime,
+              dbOrder!.guaranteeStartTime,
               dbOrder!.guaranteeEndTime,
               dbOrder!.advancePayment,
               dbOrder!.notes,
@@ -71,8 +73,10 @@ export class WarrantyCardComponent implements OnInit {
         this.order = nonNullOrder;
 
         this.timeSnapshot = moment();
-        this.datetimeText = this.timeSnapshot.format('YYYY-MM-DD HH:mm');
-        this.dateText = this.timeSnapshot.format('YYYY-MM-DD');
+        this.datetimeText = this.timeSnapshot.format('YYYY/MM/DD HH:mm');
+        this.dateText = this.timeSnapshot.format('YYYY/MM/DD');
+        console.log(this.order.guaranteeEndTime);
+        this.warrantyEndText = this.order.guaranteeEndTime != 0 ? moment(this.order.guaranteeEndTime).format('YYYY/MM/DD') : '';
         this.wcFooterText = this.databaseService.currentUserConfig.value.warrantyCardFooterText;
 
         this.afStorage.ref('/config/logo').getDownloadURL().subscribe((url) => {

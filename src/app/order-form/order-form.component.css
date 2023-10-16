@@ -18,6 +18,10 @@ input[type="text"][disabled] {
   margin-right: 0;
   font-size: large;
 }
+.guarantee-note-text {
+  font-size: smaller;
+}
+
 .form-group {
     padding-top: 0;
     padding-bottom: 0;

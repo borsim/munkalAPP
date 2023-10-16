@@ -10,6 +10,8 @@ import { v4 as uuid } from 'uuid';
 import { filter, switchMap } from 'rxjs';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import {WebcamImage} from 'ngx-webcam';
+import { Moment } from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'order-form',
@@ -67,8 +69,13 @@ export class OrderFormComponent {
   }
 
   onSubmit() {
-    console.log("form submitted");
+    console.log("Form submitted");
     this.submitted = true;
+    // Calc warranty end time on save if both start and duration are defined
+    if (this.model.guaranteeStartTime != 0 && this.model.guarantee != 0) {
+      this.model.guaranteeEndTime = moment(this.model.guaranteeStartTime).add(this.model.guarantee, 'M').valueOf();
+    }
+
     if (this.submitBehaviour === 'new') {
       this.dbs.addOrderToDb(this.model, this.authservice.currentUser, this.dbs.globalUserConfig.value.nextOrderSerialNumber);
       let newSerial = this.dbs.globalUserConfig.value;
@@ -82,6 +89,13 @@ export class OrderFormComponent {
   deadlineChanged(dl: any) {
     if (dl) this.model.deadline = dl.valueOf();
   }
+
+  warrantyStartChanged(ws: any) {
+    if (ws) {
+      this.model.guaranteeStartTime = ws.valueOf();
+    } 
+  }
+
 
   newOrder() {
     this.model = new Order();
