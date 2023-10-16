@@ -13,6 +13,14 @@ input[type="text"][disabled] {
   align-self:flex-end;
   text-align: right;
 }
+.back-link-button {
+  height: 50px;
+  background-color: white;
+  color: #1976d2;
+  border: 5px solid #1976d2;
+  font-size: large;
+  vertical-align: middle;
+}
 
 .form-group {
   padding-top: 0;

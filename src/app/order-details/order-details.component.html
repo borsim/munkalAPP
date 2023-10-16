@@ -45,7 +45,11 @@
       </div>
 
       <h3 class="back-link only-desktop midsize-screen">
-        <a [routerLink]="['/']" > Vissza </a>
+        <a [routerLink]="['/']" >
+          <button color="accent" type="button" class="back-link-button">
+            Vissza 
+          </button>
+        </a>
       </h3>
       <button
           (click)="deleteOrder()"
@@ -60,7 +64,11 @@
     <mat-divider class="divider"></mat-divider>
     <order-form [order]="order" [readonly]="disableEditing" [confirmButtonsHidden]="true" [submitBehaviour]="submitBehaviour" id="orderForm"> </order-form>
     <h3>
-      <a [routerLink]="['/']" class="back-link-mobile only-mobile"> Vissza </a>
+      <a [routerLink]="['/']" class="back-link-mobile only-mobile">
+        <button color="accent" type="button" class="back-link-button">
+          Vissza 
+        </button>
+      </a>
     </h3>
     <div class="only-mobile">
       <button
