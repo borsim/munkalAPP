@@ -30,6 +30,7 @@
               [(ngModel)]="model.name"
               name="name"
               #name="ngModel"
+              autocomplete="off"
               [disabled]="readonly"
             />
             <!-- <div
@@ -47,10 +48,9 @@
             <input matInput
               type="text"
               class="form-control"
-              id="name"
+              id="customerName"
               [(ngModel)]="model.customerName"
               name="customerName"
-              #name="ngModel"
               [disabled]="readonly"
             />
           </div>
@@ -58,7 +58,7 @@
         <br>
           <mat-form-field appearance="fill">
           <div class="form-group">
-            <label for="description">Telefon</label>
+            <label for="telephoneNumber">Telefon</label>
             <input matInput
               type="text"
               class="form-control"
@@ -73,13 +73,14 @@
         <br>
           <mat-form-field appearance="fill">
           <div class="form-group">
-            <label for="description">Email</label>
+            <label for="email">Email</label>
             <input matInput
               type="text"
               class="form-control"
               id="email"
               [(ngModel)]="model.email"
               name="email"
+              autocomplete="email"
               [disabled]="readonly"
             />
           </div>
@@ -104,7 +105,7 @@
         <br>
           <mat-form-field appearance="fill">
           <div class="form-group">
-            <label for="description">Feladatok</label>
+            <label for="task">Feladatok</label>
             <textarea matInput
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
@@ -121,7 +122,7 @@
           <br>
           <mat-form-field appearance="fill">
             <label for="deadline">Határidő</label>
-            <input matInput [matDatepicker]="picker" (dateChange)="deadlineChanged($event.value)" placeholder="{{model.deadline | date: 'yyyy/MM/dd'}}" [disabled]="readonly"/>
+            <input id="deadline" matInput [matDatepicker]="picker" (dateChange)="deadlineChanged($event.value)" placeholder="{{model.deadline | date: 'yyyy/MM/dd'}}" [disabled]="readonly"/>
             <!-- <mat-hint>YYYY/MM/DD</mat-hint> -->
             <mat-datepicker-toggle
               matSuffix
@@ -133,7 +134,7 @@
           <br>
           <mat-form-field appearance="fill">
           <div class="form-group">
-            <label for="description">Ár</label>
+            <label for="price">Ár</label>
             <input matInput
               type="number"
               class="form-control"
@@ -147,7 +148,7 @@
         <br>
         <mat-form-field appearance="fill">
           <div class="form-group">
-            <label for="description">Előleg</label>
+            <label for="advancePayment">Előleg</label>
             <input matInput
               type="number"
               class="form-control"
@@ -162,7 +163,7 @@
         <div [hidden]="!(openTab == 1)">
           <mat-form-field [style.width.%]="110" appearance="fill">
             <div class="form-group">
-              <label for="orderStatus">Státusz</label>
+              <mat-label for="orderStatus">Státusz</mat-label>
               <mat-select
                 class="order-status-select"
                 id="orderStatus"
@@ -215,7 +216,7 @@
           <br>
           <mat-form-field appearance="fill">
             <div class="form-group">
-              <label for="description">Átvételi állapot</label>
+              <label for="originalState">Átvételi állapot</label>
               <input matInput
                 type="text"
                 class="form-control"
@@ -229,7 +230,7 @@
           <br>
           <mat-form-field appearance="fill">
             <div class="form-group">
-              <label for="description">Megjegyzések</label>
+              <label for="notes">Megjegyzések</label>
               <textarea matInput
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
@@ -246,7 +247,7 @@
           <br>
           <mat-form-field appearance="fill">
             <div class="form-group">
-              <label for="description">Elvégzett munkák</label>
+              <label for="doneTasks">Elvégzett munkák</label>
               <textarea matInput
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
@@ -262,7 +263,7 @@
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
-            <label for="description">Garancia</label>
+            <label for="guarantee">Garancia</label>
             <div class="form-group guarantee-form">
               <input matInput
               type="number"
@@ -277,7 +278,7 @@
           <br>
           <mat-form-field appearance="fill">
             <label for="guaranteeStart">Garancia kezdete</label>
-            <input matInput [matDatepicker]="picker2" (dateChange)="warrantyStartChanged($event.value)" placeholder="{{model.guaranteeStartTime != 0 ? (model.guaranteeStartTime | date: 'yyyy/MM/dd') : 'Garanciajegy nyomtatásakor'}}" [disabled]="readonly"/>
+            <input id="guaranteeStart" matInput [matDatepicker]="picker2" (dateChange)="warrantyStartChanged($event.value)" placeholder="{{model.guaranteeStartTime != 0 ? (model.guaranteeStartTime | date: 'yyyy/MM/dd') : 'Garanciajegy nyomtatásakor'}}" [disabled]="readonly"/>
             <mat-datepicker-toggle
               matSuffix
               [for]="picker2"
@@ -307,12 +308,13 @@
           </mat-form-field>
         </div>
         <div [hidden]="!(openTab == 2)">
-          <label for="file">Fotó feltöltése:</label>
-          <input type="file" class="photo-upload-input" (change)="uploadSelectedImage($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
+          <label for="fileUpload">Fotó feltöltése:</label>
+          <input id="fileUpload" type="file" class="photo-upload-input" (change)="uploadSelectedImage($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
           <label for="file-camera">Fotó készítése:</label>
           <button
             (click)="toggleWebcamActive(false); webcamActive = !webcamActive"
             type="button"
+            id="file-camera"
             class="webcam-active-button"
           >
             <div class="only-mobile" *ngIf="webcamActive">

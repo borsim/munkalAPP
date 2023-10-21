@@ -21,8 +21,8 @@
       </div>
       <!-- <mat-slide-toggle class="filter-done-toggle" (change)="changeToggleValue($event)" aria-label="Kész"><div class="slide-toggle-label">Kész</div></mat-slide-toggle> -->
       <mat-form-field class="order-status-filter" style="width: 20px;">
-        <mat-label class="white-text">Státusz filter</mat-label>
-        <mat-select multiple class="order-status-select top-bar-status-select" panelClass="order-status-panel" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
+        <mat-label for="order-status-filter" class="white-text">Státusz filter</mat-label>
+        <mat-select id="order-status-filter"multiple class="order-status-select top-bar-status-select" panelClass="order-status-panel" [(ngModel)]="filterStatuses" (selectionChange)="changeFilterValue($event)">
           <mat-option *ngFor="let o of orderStatusValues" class="order-status-option" [value]="o.value">
             <div [ngClass]="{
               'statusRed' : o.value == 'canceled',
@@ -46,7 +46,7 @@
         </mat-select>
       </mat-form-field>
 
-      <label id="sorting-radio-group" class="sorting-radio-group only-desktop"><h2 class="sorting-radio-label">Rendezés:</h2></label>
+      <a id="sorting-radio-group" class="sorting-radio-group only-desktop"><h2 class="sorting-radio-label">Rendezés:</h2></a>
       <mat-radio-group
         aria-labelledby="Rendezés"
         class="sorting-radio"
@@ -95,6 +95,7 @@
         placeholder="Keresés"
         [(ngModel)]="searchText"
         (keyup)="updateSBServiceData()"
+        id="searchBox"
         #searchbar
       />
       <button mat-button mat-icon-button (click)="searchClose()">
@@ -139,6 +140,7 @@
           type="text"
           placeholder="Keresés"
           [(ngModel)]="searchText"
+          id="searchBoxMobile"
           (keyup)="updateSBServiceData()"
           #searchbar
         />
