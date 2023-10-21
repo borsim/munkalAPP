@@ -9,6 +9,8 @@ const firebaseConfig = {
     appId: '1:2130836140:web:1fb76877d4c195602efd09',
     measurementId: 'G-55ZRJL2CJN',
   };
+
+
 import { getFunctions, httpsCallable } from "firebase/functions";
 const app = firebase.initializeApp(firebaseConfig);
 export const functions = getFunctions(app, 'europe-west1');

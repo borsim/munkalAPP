@@ -1,5 +1,5 @@
 import { Router } from "@angular/router";
-import { Injectable,  } from '@angular/core';
+import { Injectable, HostListener  } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,14 @@ export class PrintService {
       setTimeout(() => {
         window.print();
         this.isPrinting = false;
-        this.router.navigate([{ outlets: { print: null }}]);
       });
     }
+  }
+
+  @HostListener("window:afterprint", [])
+  onWindowAfterPrint() {
+    setTimeout(() => {
+          this.router.navigate([{ outlets: { print: null }}]);
+    }, 10);
   }
 }

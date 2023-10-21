@@ -13,7 +13,7 @@ import * as nodemailer from "nodemailer";
 import {setGlobalOptions} from "firebase-functions/v2/options";
 
 admin.initializeApp();
-setGlobalOptions({region: "europe-west1"});
+setGlobalOptions({region: "europe-west1", maxInstances: 10});
 
 
 // create reusable transporter object using the gmail SMTP transport
