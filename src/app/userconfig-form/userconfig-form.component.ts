@@ -36,12 +36,14 @@ export class UserconfigFormComponent {
 
   toggleEditing(submitType: string) {
     if (this.readonly) {
-      if (submitType === 'global') {
+      /*if (submitType === 'global') {
         this.model.id = 'global';
         this.model.nextOrderSerialNumber = this.dbs.globalUserConfig.value.nextOrderSerialNumber;
       } else {
         this.model.id = this.authservice.currentUser;
-      }
+      }*/
+      this.model.id = 'global';
+      this.model.nextOrderSerialNumber = this.dbs.globalUserConfig.value.nextOrderSerialNumber;
       this.onSubmit();
       this.submitted = false;
     }
@@ -73,6 +75,8 @@ export class UserconfigFormComponent {
   onSubmit() {
     console.log("new userconfig submitted");
     this.submitted = true;
+    this.dbs.updateUserconfigInDb(this.model);
+    this.model.id = this.authservice.currentUser;
     this.dbs.updateUserconfigInDb(this.model);
   }
 

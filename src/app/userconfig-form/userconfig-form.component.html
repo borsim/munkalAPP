@@ -2,14 +2,23 @@
   <h1 class="settings-title">Beállítások</h1>
 </div>
 <h3 style="padding-left: 50px;">
+  
+</h3>
+<div class="button-navigation-container">
+  <button
+    (click)="readonly = !readonly; toggleEditing('global')"
+    type="button"
+    class="details-button-single"
+  >
+    {{ readonly ? 'Szerkesztés' : 'Mentés'}}
+  </button>
+  
   <a [routerLink]="['/']" class="back-link" style="padding-left:0px;">
     <button color="accent" type="button" class="back-link-button">
       Vissza 
     </button>
   </a>
-</h3>
-<div class="button-navigation-container">
-  <button
+  <!-- <button
     (click)="readonly = !readonly; toggleEditing('local')"
     type="button"
     class="details-button-single"
@@ -23,17 +32,21 @@
     [hidden]="readonly"
   >
     {{ readonly ? 'Szerkesztés' : 'Mentés alapértelmezettnek'}}
-  </button>
+  </button> -->
 </div>
 <div class="container">
   <div class="form-container">
     <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
       <button type="submit" disabled style="display: none" aria-hidden="true"></button>
-
+        <h2>Személyes beállítások</h2>
         <div class="form-group show-other-toggle">
           <mat-slide-toggle [(ngModel)]="model.showOtherOrders" name="showOtherOrders" [disabled]="readonly">Más felhasználók munkalapjainak mutatása</mat-slide-toggle>
         </div>
-
+        <br>
+        <mat-divider class="divider"></mat-divider>
+        <br>
+        <h2>Általános beállítások</h2>
+        <br>
         <mat-form-field appearance="fill">
           <div class="form-group">
             <label for="description">Óraszerviz neve</label>
@@ -168,7 +181,7 @@
           </div>
         </mat-form-field>
 
-      <label for="file">Logó feltöltése (minden felhasználónak):</label>
+      <label for="file">Logó feltöltése:</label>
       <input type="file" class="photo-upload-input" (change)="uploadLogo($event)" accept=".png,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.webp" />
       <div class="photo-upload-progress" *ngIf="uploadProgress | async">
         <progress max="100" [value]="uploadProgress | async"></progress>

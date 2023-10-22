@@ -96,7 +96,7 @@ export class DatabaseService {
       const nonNullUC: Userconfig =
       dbconfig !== null ? new Userconfig(
         dbconfig!.id,
-        dbconfig!.showOtherOrders,
+        true,
         dbconfig!.warrantyCardFooterText,
         dbconfig!.worksheetCardFooterText,
         dbconfig!.worksheetCardReceiptText,
@@ -121,7 +121,17 @@ export class DatabaseService {
           dbconfig !== null ? new Userconfig(
             (dbconfig!.id == null ? this.globalUserConfig.value.id : dbconfig!.id),
             (dbconfig!.showOtherOrders == null ? this.globalUserConfig.value.showOtherOrders : dbconfig!.showOtherOrders),
-            (dbconfig!.warrantyCardFooterText == null ? this.globalUserConfig.value.warrantyCardFooterText : dbconfig!.warrantyCardFooterText),
+            this.globalUserConfig.value.warrantyCardFooterText,
+            this.globalUserConfig.value.worksheetCardFooterText,
+            this.globalUserConfig.value.worksheetCardReceiptText,
+            this.globalUserConfig.value.companyNameTop,
+            this.globalUserConfig.value.companyNameBottom,
+            this.globalUserConfig.value.nextOrderSerialNumber,
+            this.globalUserConfig.value.smsNotificationMessage,
+            this.globalUserConfig.value.emailNotificationMessage,
+            this.globalUserConfig.value.emailSubject,
+            // took out specific user configs for all these, was too confusing for users
+            /*(dbconfig!.warrantyCardFooterText == null ? this.globalUserConfig.value.warrantyCardFooterText : dbconfig!.warrantyCardFooterText),
             (dbconfig!.worksheetCardFooterText == null ? this.globalUserConfig.value.worksheetCardFooterText : dbconfig!.worksheetCardFooterText),
             (dbconfig!.worksheetCardReceiptText == null ? this.globalUserConfig.value.worksheetCardReceiptText : dbconfig!.worksheetCardReceiptText),
             (dbconfig!.companyNameTop == null ? this.globalUserConfig.value.companyNameTop : dbconfig!.companyNameTop),
@@ -129,7 +139,7 @@ export class DatabaseService {
             this.globalUserConfig.value.nextOrderSerialNumber,
             (dbconfig!.smsNotificationMessage == null ? this.globalUserConfig.value.smsNotificationMessage : dbconfig!.smsNotificationMessage),
             (dbconfig!.emailNotificationMessage == null ? this.globalUserConfig.value.emailNotificationMessage : dbconfig!.emailNotificationMessage),
-            (dbconfig!.emailSubject == null ? this.globalUserConfig.value.emailSubject : dbconfig!.emailSubject),
+            (dbconfig!.emailSubject == null ? this.globalUserConfig.value.emailSubject : dbconfig!.emailSubject),*/
           ) : new Userconfig();
           this.currentUserConfig.next(nonNullUC);
         })
