@@ -77,7 +77,7 @@ export class WorksheetCardComponent implements OnInit {
         this.timeSnapshot = moment();
         this.datetimeText = this.timeSnapshot.format('YYYY/MM/DD HH:mm');
         this.dateText = this.timeSnapshot.format('YYYY/MM/DD');
-        this.qrcodeString = 'https://www.oraszerviz-munkalap.firebaseapp.com/orders/'.concat(this.orderId); 
+        this.qrcodeString = 'https://oraszerviz-munkalap.firebaseapp.com/orders/'.concat(this.orderId); 
         this.wsFooterText = this.databaseService.currentUserConfig.value.worksheetCardFooterText;
         this.wsReceiptText = this.databaseService.currentUserConfig.value.worksheetCardReceiptText;
         this.afStorage.ref('/config/logo').getDownloadURL().subscribe((url) => {
